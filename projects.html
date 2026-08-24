@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mostafa Hamada — Portfolio</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0B0B0F;--bg2:#101014;--card:#151519;--card-h:#1a1a20;
+  --surface:#1C1C24;--border:#252530;--border-h:rgba(20,184,166,.3);
+  --accent:#14B8A6;--accent-h:#0FA898;--accent-glow:rgba(20,184,166,.12);
+  --accent-glow2:rgba(20,184,166,.22);
+  --text:#FFFFFF;--text2:#B0B0BE;--text3:#74748A;
+  --r:20px;--rs:12px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+/* ─── NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,15,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-.3px}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text2);transition:color .25s}
+.nav-links a:hover{color:var(--accent)}
+@media(max-width:600px){.nav{padding:0 16px}.nav-links{gap:20px}.nav-links a{font-size:13px}}
+
+/* ─── SECTION SHARED ─── */
+.section{max-width:1200px;margin:0 auto;padding:100px 24px 60px}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:16px}
+.section-label::before,.section-label::after{content:'';width:20px;height:1px;background:var(--accent);opacity:.4}
+.section-title{font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.15;margin-bottom:14px}
+
+/* ─── ABOUT ME ─── */
+#about{padding-top:120px}
+.about-grid{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start}
+.about-photo-wrap{position:relative}
+.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);border:2px solid var(--border)}
+.about-photo-glow{position:absolute;inset:-2px;border-radius:var(--r);background:linear-gradient(135deg,var(--accent-glow2),transparent 60%);z-index:-1;filter:blur(24px)}
+.about-name{font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:4px}
+.about-role{font-size:17px;color:var(--accent);font-weight:600;margin-bottom:20px}
+.about-bio{font-size:16px;color:var(--text2);line-height:1.75;margin-bottom:28px}
+.about-info-row{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:32px}
+.about-info{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.about-info svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2;flex-shrink:0}
+.about-info a{color:var(--text2);transition:color .2s}
+.about-info a:hover{color:var(--accent)}
+
+/* Skills */
+.skills-section{margin-top:40px}
+.skills-section h3{font-size:20px;font-weight:700;margin-bottom:20px}
+.skills-categories{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.skill-cat{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);transition:border-color .3s}
+.skill-cat:hover{border-color:var(--border-h)}
+.skill-cat-title{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px}
+.skill-tag{font-size:13px;color:var(--text2);background:var(--bg);padding:6px 14px;border-radius:20px;border:1px solid var(--border);transition:border-color .2s,color .2s}
+.skill-tag:hover{border-color:var(--accent);color:var(--text)}
+@media(max-width:768px){
+  .about-grid{grid-template-columns:1fr;gap:36px;text-align:center}
+  .about-photo{max-width:240px;margin:0 auto}
+  .about-info-row{justify-content:center}
+  .skills-categories{grid-template-columns:1fr}
+}
+
+/* ─── PROJECTS ─── */
+#projects .section-header{text-align:center;margin-bottom:56px}
+.section-subtitle{font-size:16px;color:var(--text2);max-width:540px;margin:0 auto}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px}
+
+/* Card */
+.project-card{background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--border);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;display:flex;flex-direction:column;cursor:default}
+.project-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.45);border-color:var(--border-h)}
+.card-img-wrap{position:relative;width:100%;padding-top:56%;overflow:hidden}
+.card-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.project-card:hover .card-img-wrap img{transform:scale(1.05)}
+.card-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,var(--card),transparent);pointer-events:none}
+.card-icon{position:absolute;bottom:-22px;left:24px;z-index:2;width:48px;height:48px;background:var(--bg);border:2px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:border-color .3s,box-shadow .3s}
+.project-card:hover .card-icon{border-color:var(--accent);box-shadow:0 0 18px var(--accent-glow)}
+.card-icon svg{width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card-body{padding:34px 24px 24px;flex:1;display:flex;flex-direction:column}
+.card-role{font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.card-title{font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.3}
+.card-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:18px;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.card-tag{font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-glow);padding:4px 11px;border-radius:16px}
+.card-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--text);background:var(--accent);border:none;padding:12px 24px;border-radius:50px;cursor:pointer;transition:background .25s,transform .25s,box-shadow .25s;align-self:flex-start}
+.card-btn:hover{background:var(--accent-h);transform:translateX(3px);box-shadow:0 4px 20px rgba(20,184,166,.3)}
+.card-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform .25s}
+.card-btn:hover svg{transform:translateX(3px)}
+
+/* Placeholder card */
+.card-placeholder{position:relative}
+.card-placeholder .card-img-wrap{background:linear-gradient(135deg,#1a1a25 0%,#12121a 100%)}
+.card-placeholder .card-img-wrap::before{content:'';position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.015) 20px,rgba(255,255,255,.015) 40px)}
+.coming-badge{position:absolute;top:16px;right:16px;z-index:3;font-size:11px;font-weight:600;color:var(--text3);background:rgba(0,0,0,.6);border:1px solid var(--border);padding:6px 14px;border-radius:20px;backdrop-filter:blur(8px)}
+.card-placeholder .card-btn{background:var(--surface);color:var(--text3);cursor:default;pointer-events:none}
+
+/* ─── CASE STUDY OVERLAY ─── */
+.cs-overlay{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto;overflow-x:hidden;transform:translateY(100%);opacity:0;visibility:hidden;transition:transform .5s var(--ease),opacity .4s ease}
+.cs-overlay.active{transform:translateY(0);opacity:1;visibility:visible}
+.cs-overlay.closing{transform:translateY(100%);opacity:0}
+.cs-bar{position:sticky;top:0;z-index:10;padding:14px 24px;background:rgba(11,11,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.cs-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text2);background:none;border:1px solid var(--border);padding:9px 18px;border-radius:50px;cursor:pointer;transition:all .25s}
+.cs-back:hover{color:var(--text);border-color:var(--accent);background:var(--accent-glow)}
+.cs-back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.cs-inner{max-width:920px;margin:0 auto;padding:48px 24px 100px}
+
+/* Hero */
+.cs-label{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:14px}
+.cs-title{font-size:clamp(28px,4.5vw,42px);font-weight:700;line-height:1.2;margin-bottom:8px}
+.cs-role-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--accent);background:var(--accent-glow);padding:6px 16px;border-radius:20px;margin-bottom:18px}
+.cs-desc{font-size:17px;color:var(--text2);line-height:1.7;max-width:680px}
+.cs-hero-img{margin-top:36px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+.cs-hero-img img{width:100%}
+
+/* Sections */
+.cs-sec{margin-top:52px}
+.cs-sec-title{font-size:22px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.cs-sec-title::before{content:'';width:3px;height:22px;background:var(--accent);border-radius:2px}
+.cs-text{font-size:15px;color:var(--text2);line-height:1.75}
+
+/* Features */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.feat{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;background:var(--surface);border-radius:var(--rs);border:1px solid var(--border);transition:border-color .25s}
+.feat:hover{border-color:var(--border-h)}
+.feat-dot{width:7px;height:7px;min-width:7px;background:var(--accent);border-radius:50%;margin-top:6px}
+.feat span{font-size:14px;color:var(--text2);line-height:1.5}
+
+/* Tech */
+.tech-row{display:flex;flex-wrap:wrap;gap:10px}
+.tech{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;font-size:13px;font-weight:500;transition:border-color .25s,box-shadow .25s}
+.tech:hover{border-color:var(--accent);box-shadow:0 0 14px var(--accent-glow)}
+.tech i{width:5px;height:5px;background:var(--accent);border-radius:50%;display:inline-block}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.gal-item{border-radius:var(--rs);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.gal-item:hover{transform:scale(1.02);box-shadow:0 10px 36px rgba(0,0,0,.4)}
+.gal-item img{transition:transform .4s ease}
+.gal-item:hover img{transform:scale(1.03)}
+.gal-cap{padding:10px 14px;font-size:12px;font-weight:500;color:var(--text3);background:var(--surface);border-top:1px solid var(--border)}
+
+/* Links */
+.cs-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.cs-link{display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;transition:all .25s}
+.cs-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.cs-link-p{background:var(--accent);color:var(--text)}
+.cs-link-p:hover{background:var(--accent-h);box-shadow:0 6px 20px rgba(20,184,166,.3)}
+.cs-link-s{background:transparent;color:var(--text);border:1px solid var(--border)}
+.cs-link-s:hover{border-color:var(--accent);background:var(--accent-glow)}
+
+/* Rules */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.rule{padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);text-align:center}
+.rule b{display:block;font-size:28px;color:var(--accent);margin-bottom:6px}
+.rule strong{display:block;font-size:14px;margin-bottom:4px}
+.rule small{font-size:12px;color:var(--text3)}
+
+/* Flow */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
+.flow-s{padding:7px 16px;background:var(--surface);border:1px solid var(--border);border-radius:50px;font-size:12px;font-weight:500;color:var(--text2)}
+.flow-a{color:var(--accent);font-weight:700;font-size:16px}
+
+/* Divider */
+.cs-div{height:1px;background:var(--border);margin:48px 0}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s;cursor:zoom-out}
+.lb.active{opacity:1;visibility:visible}
+.lb img{max-width:92vw;max-height:92vh;border-radius:var(--rs);box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.lb-x{position:fixed;top:16px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lb-x:hover{background:rgba(255,255,255,.2)}
+
+/* Footer */
+.footer{text-align:center;padding:40px 24px 48px;border-top:1px solid var(--border);margin-top:60px}
+.footer p{font-size:13px;color:var(--text3)}
+
+/* Responsive */
+@media(max-width:768px){
+  .section{padding:80px 16px 40px}
+  .projects-grid{grid-template-columns:1fr;gap:20px}
+  .cs-inner{padding:32px 16px 64px}
+  .gal{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .feat-grid{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .cs-links{flex-direction:column}
+  .flow{justify-content:center}
+}
+@media(max-width:420px){
+  .projects-grid{grid-template-columns:1fr}
+  .card-body{padding:30px 18px 20px}
+  .gal{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ NAV ══════ -->
+<nav class="nav">
+  <div class="nav-logo">Mostafa<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+  </div>
+</nav>
+
+<!-- ══════ ABOUT ME ══════ -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <img src="profile-photo.jpg" alt="Mostafa Hamada" class="about-photo">
+      <div class="about-photo-glow"></div>
+    </div>
+    <div>
+      <div class="section-label">About Me</div>
+      <h1 class="about-name">Mostafa Hamada</h1>
+      <p class="about-role">Developer &middot; CEO &amp; Founder of Memora</p>
+      <p class="about-bio">I'm a 3rd-year Artificial Intelligence student at Misr University for Science and Technology (MUST). I build web applications, dashboards, online stores, and digital products. I'm also the founder of Memora, a digital wedding invitation platform where I personally design and create the invitation products.</p>
+
+      <div class="about-info-row">
+        <div class="about-info">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          <a href="mailto:7mda74610@gmail.com">7mda74610@gmail.com</a>
+        </div>
+        <div class="about-info">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          01099885633
+        </div>
+        <div class="about-info">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5"/></svg>
+          3rd Year AI — MUST
+        </div>
+      </div>
+
+      <div class="skills-section">
+        <h3>Technical Skills</h3>
+        <div class="skills-categories">
+          <div class="skill-cat">
+            <div class="skill-cat-title">Development</div>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Responsive Design</span>
+              <span class="skill-tag">Frontend</span>
+              <span class="skill-tag">Full-Stack</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title">Backend / Database</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">Auth</span>
+              <span class="skill-tag">Database Integration</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title">Tools &amp; Platforms</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">Vercel</span>
+              <span class="skill-tag">Shopify</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title">Programming</div>
+            <div class="skill-tags">
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">SQL</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title">Other</div>
+            <div class="skill-tags">
+              <span class="skill-tag">AI</span>
+              <span class="skill-tag">Data Analysis</span>
+              <span class="skill-tag">UI/UX</span>
+              <span class="skill-tag">API Integration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PROJECTS ══════ -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Projects &amp; Case Studies</h2>
+    <p class="section-subtitle">Real-world applications I've designed, developed, and shipped — from digital platforms to business tools.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- 1 ─ Memora Store -->
+    <div class="project-card">
+      <div class="card-img-wrap">
+        <img src="Memora/Store/Home.jpeg" alt="Memora Store" loading="lazy">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">CEO &amp; Founder &middot; Developer</div>
+        <h3 class="card-title">Memora Store</h3>
+        <p class="card-desc">A digital wedding invitation platform and online store I founded — customers explore products, preview live demos, and order through a structured flow.</p>
+        <div class="card-tags">
+          <span class="card-tag">HTML / CSS / JS</span>
+          <span class="card-tag">Supabase</span>
+          <span class="card-tag">Vercel</span>
+        </div>
+        <button class="card-btn" onclick="openCS('memora-store')">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 2 ─ Memora Admin -->
+    <div class="project-card">
+      <div class="card-img-wrap">
+        <img src="Memora/Admin/Dashboard.png" alt="Memora Admin Dashboard" loading="lazy">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Developer</div>
+        <h3 class="card-title">Memora Admin Dashboard</h3>
+        <p class="card-desc">The admin system I built to manage the Memora business — order analytics, product and bundle management, and direct customer communication.</p>
+        <div class="card-tags">
+          <span class="card-tag">HTML / CSS / JS</span>
+          <span class="card-tag">Supabase</span>
+          <span class="card-tag">Vercel</span>
+        </div>
+        <button class="card-btn" onclick="openCS('memora-admin')">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 3 ─ RingRoad CRM -->
+    <div class="project-card">
+      <div class="card-img-wrap">
+        <img src="CRM/Dashboard.png" alt="RingRoad CRM" loading="lazy">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Developer</div>
+        <h3 class="card-title">RingRoad CRM</h3>
+        <p class="card-desc">A complete CRM system for managing clients, tracking interactions, and organizing real estate customer information from a centralized dashboard.</p>
+        <div class="card-tags">
+          <span class="card-tag">CRM</span>
+          <span class="card-tag">Dashboard</span>
+          <span class="card-tag">Real Estate</span>
+        </div>
+        <button class="card-btn" onclick="openCS('crm')">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 4 ─ RingRoad Client View -->
+    <div class="project-card">
+      <div class="card-img-wrap">
+        <img src="RingRoad/Compare.png" alt="RingRoad Client View" loading="lazy">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Developer</div>
+        <h3 class="card-title">RingRoad Client View</h3>
+        <p class="card-desc">A dedicated client-facing interface where each client can access their own information, browse properties, compare listings, and follow their activity.</p>
+        <div class="card-tags">
+          <span class="card-tag">Client Portal</span>
+          <span class="card-tag">Real Estate</span>
+        </div>
+        <button class="card-btn" onclick="openCS('client-view')">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 5 ─ RingRoad Attendance -->
+    <div class="project-card">
+      <div class="card-img-wrap">
+        <img src="Attendance/Home.png" alt="RingRoad Attendance" loading="lazy">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Developer</div>
+        <h3 class="card-title">RingRoad Attendance</h3>
+        <p class="card-desc">A web-based attendance system with location-based clock in/out, leave management, and an admin dashboard for monitoring workforce activity.</p>
+        <div class="card-tags">
+          <span class="card-tag">HTML / CSS / JS</span>
+          <span class="card-tag">Supabase</span>
+          <span class="card-tag">Vercel</span>
+        </div>
+        <button class="card-btn" onclick="openCS('attendance')">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 6 ─ AION Website (placeholder) -->
+    <div class="project-card card-placeholder">
+      <div class="card-img-wrap">
+        <span class="coming-badge">Coming Soon</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Developer</div>
+        <h3 class="card-title">AION Website</h3>
+        <p class="card-desc">Project details coming soon.</p>
+        <div class="card-tags"><span class="card-tag">Web Development</span></div>
+        <button class="card-btn">Coming Soon</button>
+      </div>
+    </div>
+
+    <!-- 7 ─ AION Store (placeholder) -->
+    <div class="project-card card-placeholder">
+      <div class="card-img-wrap">
+        <span class="coming-badge">Coming Soon</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Developer</div>
+        <h3 class="card-title">AION Store</h3>
+        <p class="card-desc">Project details coming soon.</p>
+        <div class="card-tags"><span class="card-tag">E-Commerce</span></div>
+        <button class="card-btn">Coming Soon</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════ CASE STUDY: MEMORA STORE ══════════════ -->
+<div class="cs-overlay" id="cs-memora-store">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('memora-store')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">Memora Store</h1>
+  <div class="cs-role-badge">CEO &amp; Founder &middot; Developer</div>
+  <p class="cs-desc">Memora is my own digital wedding invitation platform and online store. I founded and developed it from the ground up — I also personally design and create the wedding invitation products offered through the platform.</p>
+  <div class="cs-hero-img"><img src="Memora/Store/Home.jpeg" alt="Memora Store Home" loading="lazy"></div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">What I Built</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-dot"></div><span>E-commerce Store</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Products &amp; Bundles System</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Customer Ordering Flow</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>InstaPay Payment Link</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Generated WhatsApp Order Links</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Live Invitation Demos</span></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Customer Flow</h2>
+    <div class="flow">
+      <span class="flow-s">Browse</span><span class="flow-a">&rarr;</span>
+      <span class="flow-s">Choose Product / Bundle</span><span class="flow-a">&rarr;</span>
+      <span class="flow-s">Live Demo</span><span class="flow-a">&rarr;</span>
+      <span class="flow-s">Start Your Order</span><span class="flow-a">&rarr;</span>
+      <span class="flow-s">Enter Details</span><span class="flow-a">&rarr;</span>
+      <span class="flow-s">Payment</span><span class="flow-a">&rarr;</span>
+      <span class="flow-s">Order</span>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Screenshots</h2>
+    <div class="gal">
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Home.jpeg" alt="Home" loading="lazy"><div class="gal-cap">Store Home</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Products.jpeg" alt="Products" loading="lazy"><div class="gal-cap">Products</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Bundles.jpeg" alt="Bundles" loading="lazy"><div class="gal-cap">Bundles</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%201.jpeg" alt="Order Step 1" loading="lazy"><div class="gal-cap">Order — Step 1</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%202.jpeg" alt="Order Step 2" loading="lazy"><div class="gal-cap">Order — Step 2</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%203.jpeg" alt="Order Step 3" loading="lazy"><div class="gal-cap">Order — Step 3</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%204.jpeg" alt="Order Step 4" loading="lazy"><div class="gal-cap">Order — Step 4</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%205.jpeg" alt="Order Step 5" loading="lazy"><div class="gal-cap">Order — Step 5</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20final%20step.jpeg" alt="Final Step" loading="lazy"><div class="gal-cap">Order — Final Step</div></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Tech Stack</h2>
+    <div class="tech-row">
+      <span class="tech"><i></i>HTML</span><span class="tech"><i></i>CSS</span><span class="tech"><i></i>JavaScript</span><span class="tech"><i></i>Supabase</span><span class="tech"><i></i>Vercel</span>
+    </div>
+  </div>
+
+  <div class="cs-div"></div>
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Links</h2>
+    <div class="cs-links">
+      <a href="https://memora-store.vercel.app/" target="_blank" rel="noopener" class="cs-link cs-link-p"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Store</a>
+      <a href="https://github.com/Mostafahamada-cpu/MemoraStore" target="_blank" rel="noopener" class="cs-link cs-link-s"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════ CASE STUDY: MEMORA ADMIN ══════════════ -->
+<div class="cs-overlay" id="cs-memora-admin">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('memora-admin')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">Memora Admin Dashboard</h1>
+  <div class="cs-role-badge">Developer</div>
+  <p class="cs-desc">I built the admin dashboard to manage the entire Memora business — from tracking orders and analyzing sales to managing products, bundles, and customer communication.</p>
+  <div class="cs-hero-img"><img src="Memora/Admin/Dashboard.png" alt="Memora Admin Dashboard" loading="lazy"></div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">What I Built</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-dot"></div><span>Admin Dashboard</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Order Analytics &amp; Management</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Product &amp; Bundle Management</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Price Management</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Customer Order Details</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>WhatsApp Direct Message Integration</span></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">About the Dashboard</h2>
+    <p class="cs-text">The admin dashboard allows me to analyze orders, manage products and bundles, update prices, and review customer order details. Each order includes a direct message button that opens a WhatsApp conversation with the customer for fast and personal communication.</p>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Screenshots</h2>
+    <div class="gal">
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Dashboard.png" alt="Dashboard" loading="lazy"><div class="gal-cap">Dashboard</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Products.png" alt="Products" loading="lazy"><div class="gal-cap">Products</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Bundles.png" alt="Bundles" loading="lazy"><div class="gal-cap">Bundles</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Orders.png" alt="Orders" loading="lazy"><div class="gal-cap">Orders</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/OrderDetails.png" alt="Order Details" loading="lazy"><div class="gal-cap">Order Details</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Analytics.png" alt="Analytics" loading="lazy"><div class="gal-cap">Analytics</div></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Tech Stack</h2>
+    <div class="tech-row">
+      <span class="tech"><i></i>HTML</span><span class="tech"><i></i>CSS</span><span class="tech"><i></i>JavaScript</span><span class="tech"><i></i>Supabase</span><span class="tech"><i></i>Vercel</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════ CASE STUDY: RINGROAD CRM ══════════════ -->
+<div class="cs-overlay" id="cs-crm">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('crm')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">RingRoad CRM</h1>
+  <div class="cs-role-badge">Developer</div>
+  <p class="cs-desc">I developed a complete CRM system designed to help the business manage clients, track interactions, and organize customer information in one place.</p>
+  <div class="cs-hero-img"><img src="CRM/Dashboard.png" alt="CRM Dashboard" loading="lazy"></div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Key Features</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-dot"></div><span>Manage and organize all clients</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>View client details and contact information</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Track client status and activity</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Add, edit, and manage client records</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Search and filter clients easily</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Centralized dashboard for all customer data</span></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Goal</h2>
+    <p class="cs-text">I aimed to create a simple yet powerful CRM experience for the business, making it easy to manage all client interactions, track deals, monitor follow-ups, and view analytics from a single interface.</p>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Screenshots</h2>
+    <div class="gal">
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Dashboard.png" alt="Dashboard" loading="lazy"><div class="gal-cap">Dashboard</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Properties.png" alt="Properties" loading="lazy"><div class="gal-cap">Properties</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Clients.png" alt="Clients" loading="lazy"><div class="gal-cap">Clients</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Deals.png" alt="Deals" loading="lazy"><div class="gal-cap">Deals</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Follow-Ups.png" alt="Follow-Ups" loading="lazy"><div class="gal-cap">Follow-Ups</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Sold.png" alt="Sold" loading="lazy"><div class="gal-cap">Sold</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Calendar.png" alt="Calendar" loading="lazy"><div class="gal-cap">Calendar</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/TeleSales.png" alt="TeleSales" loading="lazy"><div class="gal-cap">TeleSales</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Analytics.png" alt="Analytics" loading="lazy"><div class="gal-cap">Analytics</div></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════ CASE STUDY: CLIENT VIEW ══════════════ -->
+<div class="cs-overlay" id="cs-client-view">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('client-view')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">RingRoad Client View</h1>
+  <div class="cs-role-badge">Developer</div>
+  <p class="cs-desc">I built a dedicated client-facing interface that allows each client to access their own information, browse properties, compare listings, and follow their requests or activities.</p>
+  <div class="cs-hero-img"><img src="RingRoad/Compare.png" alt="Client View Compare" loading="lazy"></div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Key Features</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-dot"></div><span>Personalized client profile</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>View current status and updates</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Access relevant information and services</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Property comparison tool</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Simple and responsive interface</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Clear communication between the business and the client</span></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Goal</h2>
+    <p class="cs-text">I designed this interface to give clients a clean and easy-to-use platform where they can browse property listings, compare options side by side, view property details and videos, and stay updated on their activity — all without needing to contact the business directly.</p>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Screenshots</h2>
+    <div class="gal">
+      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/HomePage.png" alt="Home Page" loading="lazy"><div class="gal-cap">Home Page</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/Compare.png" alt="Compare" loading="lazy"><div class="gal-cap">Property Comparison</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/PropertyDetails.png" alt="Property Details" loading="lazy"><div class="gal-cap">Property Details</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/Video.png" alt="Video" loading="lazy"><div class="gal-cap">Property Video</div></div>
+    </div>
+  </div>
+
+  <div class="cs-div"></div>
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Links</h2>
+    <div class="cs-links">
+      <a href="https://ring-road-client.vercel.app/" target="_blank" rel="noopener" class="cs-link cs-link-p"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Client View</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════ CASE STUDY: ATTENDANCE ══════════════ -->
+<div class="cs-overlay" id="cs-attendance">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('attendance')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">RingRoad Attendance</h1>
+  <div class="cs-role-badge">Developer</div>
+  <p class="cs-desc">I developed a web-based attendance management system designed for companies to manage employee attendance, working hours, leave requests, and attendance reports in one place.</p>
+  <div class="cs-hero-img"><img src="Attendance/DashBoard.png" alt="Attendance Dashboard" loading="lazy"></div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Overview</h2>
+    <p class="cs-text">I built the system so agents can clock in and clock out manually while the system verifies their location. Employees can only register attendance when they are within a 150-meter radius of the company. Agents can also manage their leave requests, check their remaining leave balance, and request changes to their scheduled leave days based on the company's approval rules. Administrators have access to attendance data, employee management, leave requests, notifications, and reports.</p>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Key Features</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-dot"></div><span>Secure authentication for agents and administrators</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Location-based Clock In and Clock Out</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>150-meter company radius verification</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Working hours calculation</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Real-time attendance status</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Leave request management</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Remaining leave balance tracking</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Notification system</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Admin dashboard with reports</span></div>
+      <div class="feat"><div class="feat-dot"></div><span>Employee and attendance management</span></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Leave Management Rules</h2>
+    <p class="cs-text" style="margin-bottom:16px">I implemented leave-day change rules to maintain a controlled and transparent process:</p>
+    <div class="rules">
+      <div class="rule"><b>1st</b><strong>First Change</strong><small>No approval needed</small></div>
+      <div class="rule"><b>2nd</b><strong>Second Change</strong><small>Requires admin approval</small></div>
+      <div class="rule"><b>3rd</b><strong>Third Change</strong><small>Not allowed</small></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Screenshots</h2>
+    <div class="gal">
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Home.png" alt="Home" loading="lazy"><div class="gal-cap">Home</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Days.png" alt="Days" loading="lazy"><div class="gal-cap">Days</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Alerts.png" alt="Alerts" loading="lazy"><div class="gal-cap">Alerts</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/DashBoard.png" alt="Dashboard" loading="lazy"><div class="gal-cap">Dashboard</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Employees.png" alt="Employees" loading="lazy"><div class="gal-cap">Employees</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Employee%202.png" alt="Employee Detail" loading="lazy"><div class="gal-cap">Employee Detail</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Requests.png" alt="Requests" loading="lazy"><div class="gal-cap">Requests</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Balances.png" alt="Balances" loading="lazy"><div class="gal-cap">Balances</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/ChangeWeekEnd.png" alt="Change Weekend" loading="lazy"><div class="gal-cap">Change Weekend</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/ChoseWeekDay.png" alt="Choose Weekday" loading="lazy"><div class="gal-cap">Choose Weekday</div></div>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Tech Stack</h2>
+    <div class="tech-row">
+      <span class="tech"><i></i>HTML</span><span class="tech"><i></i>CSS</span><span class="tech"><i></i>JavaScript</span><span class="tech"><i></i>Supabase</span><span class="tech"><i></i>Supabase Auth</span><span class="tech"><i></i>Vercel</span>
+    </div>
+  </div>
+
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Project Highlights</h2>
+    <p class="cs-text">The main challenge I faced was combining attendance tracking with location verification and business rules. I built the system to validate the employee's location before allowing Clock In or Clock Out and to provide clear feedback about the operation. The project also includes a complete leave-management workflow and an administrative dashboard for monitoring attendance and employee activity.</p>
+  </div>
+
+  <div class="cs-div"></div>
+  <div class="cs-sec">
+    <h2 class="cs-sec-title">Links</h2>
+    <div class="cs-links">
+      <a href="https://github.com/Mostafahamada-cpu/Attendance" target="_blank" rel="noopener" class="cs-link cs-link-s"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════ CASE STUDY: AION WEBSITE ══════════════ -->
+<div class="cs-overlay" id="cs-aion-website">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('aion-website')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">AION Website</h1>
+  <div class="cs-role-badge">Developer</div>
+  <p class="cs-desc">Project details and case study content coming soon.</p>
+</div>
+</div>
+
+
+<!-- ══════════════ CASE STUDY: AION STORE ══════════════ -->
+<div class="cs-overlay" id="cs-aion-store">
+<div class="cs-bar"><button class="cs-back" onclick="closeCS('aion-store')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<div class="cs-inner">
+  <div class="cs-label">Case Study</div>
+  <h1 class="cs-title">AION Store</h1>
+  <div class="cs-role-badge">Developer</div>
+  <p class="cs-desc">Project details and case study content coming soon.</p>
+</div>
+</div>
+
+
+<!-- ══════ LIGHTBOX ══════ -->
+<div class="lb" id="lb" onclick="closeLB()">
+  <button class="lb-x" onclick="closeLB()">&times;</button>
+  <img src="" alt="Full view" id="lb-img">
+</div>
+
+<!-- ══════ FOOTER ══════ -->
+<div class="footer">
+  <p>&copy; 2026 Mostafa Hamada. All rights reserved.</p>
+</div>
+
+<script>
+function openCS(id){var o=document.getElementById('cs-'+id);o.classList.remove('closing');o.classList.add('active');document.body.style.overflow='hidden';o.scrollTop=0}
+function closeCS(id){var o=document.getElementById('cs-'+id);o.classList.add('closing');setTimeout(function(){o.classList.remove('active','closing');document.body.style.overflow=''},500)}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.cs-overlay.active').forEach(function(el){closeCS(el.id.replace('cs-',''))});closeLB()}})
+function openLB(el){var s=el.querySelector('img').src;var lb=document.getElementById('lb');document.getElementById('lb-img').src=s;lb.classList.add('active')}
+function closeLB(){document.getElementById('lb').classList.remove('active')}
+
+// Entrance animation
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.08});
+document.querySelectorAll('.project-card,.skill-cat').forEach(function(el,i){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s ease '+(i*.08)+'s, transform .5s ease '+(i*.08)+'s';obs.observe(el)});
+</script>
+</body>
+</html>

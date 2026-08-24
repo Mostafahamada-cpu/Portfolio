@@ -1,0 +1,26 @@
+## CRM & Client View
+
+A complete CRM system designed to help businesses manage clients, track interactions, and organize customer information in one place.
+
+### CRM Dashboard
+
+* Manage and organize all clients.
+* View client details and contact information.
+* Track client status and activity.
+* Add, edit, and manage client records.
+* Search and filter clients easily.
+* View important customer data from a centralized dashboard.
+
+### Client View
+
+A dedicated client-facing interface that allows each client to access their own information and follow their requests or activities.
+
+* Personalized client profile.
+* View current status and updates.
+* Access relevant information and services.
+* Simple and responsive interface.
+* Clear communication between the business and the client.
+
+### Goal
+
+The goal was to create a simple CRM experience for the business while providing clients with a clean and easy-to-use interface.

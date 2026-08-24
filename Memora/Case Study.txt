@@ -1,0 +1,42 @@
+# Memora
+
+**Digital Wedding Invitation Platform**
+
+Memora is a digital wedding invitation platform and online store that allows customers to explore products and bundles, preview live demos, and place orders through a structured ordering flow.
+
+### What I Built
+
+* E-commerce Store
+* Products & Bundles System
+* Customer Ordering Flow
+* InstaPay Payment Link
+* Generated WhatsApp Order Links
+* Admin Dashboard
+* Order Analytics & Management
+* Product & Bundle Management
+* Live Invitation Demos
+
+### Customer Flow
+
+**Browse → Choose Product/Bundle → Live Demo → Start Your Order → Enter Details → Payment → Order**
+
+### Admin Dashboard
+
+The admin dashboard allows the business to analyze orders, manage products and bundles, update prices, and review customer order details.
+
+Each order also includes a direct message button that opens a WhatsApp conversation with the customer.
+
+### Tech Stack
+
+**HTML · CSS · JavaScript · Supabase · Vercel**
+
+### Role
+
+**Founder & Developer**
+
+Designed and developed the Memora platform from the ground up, including the storefront, ordering system, admin dashboard, and digital invitation experiences.
+
+### Links
+
+**Live Store:** https://memora-store.vercel.app/
+**GitHub:** https://github.com/Mostafahamada-cpu/MemoraStore

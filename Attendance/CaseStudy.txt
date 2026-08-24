@@ -1,0 +1,54 @@
+# Attendance Management System
+
+A web-based attendance management system designed for companies to manage employee attendance, working hours, leave requests, and attendance reports in one place.
+
+## Overview
+
+The system allows agents to clock in and clock out manually while verifying their location. Employees can only register attendance when they are within a 150-meter radius of the company.
+
+Agents can also manage their leave requests, check their remaining leave balance, and request changes to their scheduled leave days based on the company's approval rules.
+
+Administrators have access to attendance data, employee management, leave requests, notifications, and reports to monitor workforce attendance and working hours.
+
+## Key Features
+
+* Secure authentication for agents and administrators
+* Location-based Clock In and Clock Out
+* 150-meter company radius verification
+* Working hours calculation
+* Real-time attendance status
+* Leave request management
+* Remaining leave balance tracking
+* Leave day change requests with approval rules
+* Notification system
+* Admin dashboard
+* Attendance and working-hours reports
+* Employee and attendance management
+* Success and error feedback for attendance actions
+
+## Leave Management
+
+The system manages leave-day changes according to company rules:
+
+* First change can be made without approval.
+* Second change requires administrator approval.
+* Third change is not allowed.
+
+This helps maintain a controlled and transparent leave management process.
+
+## Technologies
+
+**Frontend:** HTML, CSS, JavaScript
+**Backend & Database:** Supabase
+**Authentication:** Supabase Auth
+**Deployment:** Vercel
+
+## Project Highlights
+
+The main challenge was combining attendance tracking with location verification and business rules. The system validates the employee's location before allowing Clock In or Clock Out and provides clear feedback about the operation.
+
+The project also includes a complete leave-management workflow and an administrative dashboard for monitoring attendance and employee activity.
+
+## Links
+
+**GitHub:** https://github.com/Mostafahamada-cpu/Attendance
