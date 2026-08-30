@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Attendance">
+  <title>Attendance</title>
+  <!-- dial: the full shift -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#BFDBFE" stroke-width="7"/>
+  <!-- progress arc: hours logged -->
+  <path d="M36.2 10.4A22 22 0 1 0 53.6 27.8" fill="none" stroke="#2563EB" stroke-width="7" stroke-linecap="round"/>
+  <!-- check clocking through the gap -->
+  <path d="M19 31L26 38L48.5 15.5" fill="none" stroke="#2563EB" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
