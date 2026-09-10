@@ -901,9 +901,19 @@ An attendance system evolved into a complete workforce-management platform by co
     const lines = String(raw).replace(/\r\n/g, '\n').split('\n');
     const out = [];
     let fragmentMode = false;
+    let inCodeBlock = false;
 
     for (const original of lines) {
       const line = original.trim();
+      if (/^```/.test(line)) {
+        inCodeBlock = !inCodeBlock;
+        out.push(original);
+        continue;
+      }
+      if (inCodeBlock) {
+        out.push(original);
+        continue;
+      }
       if (!line) {
         fragmentMode = false;
         out.push('');
@@ -954,6 +964,7 @@ An attendance system evolved into a complete workforce-management platform by co
     let paragraph = [];
     let listType = null;
     let listItems = [];
+    let codeLines = null;
 
     function flushParagraph() {
       if (!paragraph.length) return;
@@ -969,7 +980,24 @@ An attendance system evolved into a complete workforce-management platform by co
       listType = null;
     }
 
+    function flushCode() {
+      if (codeLines === null) return;
+      blocks.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+      codeLines = null;
+    }
+
     for (const line of lines) {
+      if (/^```/.test(line.trim())) {
+        flushParagraph();
+        flushList();
+        if (codeLines === null) codeLines = [];
+        else flushCode();
+        continue;
+      }
+      if (codeLines !== null) {
+        codeLines.push(line);
+        continue;
+      }
       if (!line.trim()) {
         flushParagraph();
         flushList();
@@ -1016,6 +1044,7 @@ An attendance system evolved into a complete workforce-management platform by co
 
     flushParagraph();
     flushList();
+    flushCode();
     return blocks.join('\n');
   }
 
@@ -1066,10 +1095,10 @@ An attendance system evolved into a complete workforce-management platform by co
     const tech = (project.tech || extractTech(project.content)).slice(0, 4);
     return `
       <article class="project-showcase" style="--brand-glow:${project.accent}">
-        <div class="project-showcase-media">${sliderMarkup(project)}</div>
+        <div class="project-showcase-media">${projectCoverMarkup(project)}</div>
         <div class="project-showcase-copy">
           <span class="project-number">${String(index + 1).padStart(2, '0')}</span>
-          <span class="project-category-label">${escapeHtml(category.title)}</span>
+          ${project.label ? `<span class="project-category-label">${escapeHtml(project.label)}</span>` : ''}
           <h3 class="project-showcase-title">${escapeHtml(project.title)}</h3>
           <p class="project-showcase-intro">${escapeHtml(project.intro)}</p>
           ${tech.length ? `<div class="project-showcase-tags">${tech.map(item => `<span class="project-showcase-tag">${escapeHtml(item)}</span>`).join('')}</div>` : ''}
@@ -1082,6 +1111,12 @@ An attendance system evolved into a complete workforce-management platform by co
   function projectMarkup() {
     let index = 0;
     return categories.flatMap(category => (category.projects || []).map(project => projectCard(project, index++, category))).join('');
+  }
+
+  function projectCoverMarkup(project) {
+    const image = project.cover || project.images?.[0];
+    if (!image) return '';
+    return `<div class="project-cover"><img src="${pathToUrl(image)}" alt="${escapeHtml(project.title)} project preview" loading="lazy" decoding="async"></div>`;
   }
 
   function sliderMarkup(project) {
@@ -1129,6 +1164,13 @@ An attendance system evolved into a complete workforce-management platform by co
       </div>
     ` : '';
 
+    const galleries = project.galleries?.length
+      ? project.galleries.map((gallery, index) => `
+          <section class="case-gallery-section">
+            <h2 class="cs-sec-title">${escapeHtml(gallery.title)}</h2>
+            ${sliderMarkup({ ...project, id: `${project.id}-${index}`, images: gallery.images })}
+          </section>`).join('')
+      : sliderMarkup(project);
     return `
       <div class="project-header">
         <div class="project-kicker">${escapeHtml(project.folder)}</div>
@@ -1136,7 +1178,7 @@ An attendance system evolved into a complete workforce-management platform by co
         <div class="cs-role-badge">${escapeHtml(project.initials)} Project</div>
         <p class="project-intro">${escapeHtml(intro)}</p>
       </div>
-      ${sliderMarkup(project)}
+      ${galleries}
       <div class="markdown-content">
         ${article}
       </div>
@@ -1237,7 +1279,7 @@ An attendance system evolved into a complete workforce-management platform by co
     featuredOverlay.classList.add('active');
     featuredOverlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    setupSlider(featuredOverlayInner.querySelector('[data-project-slider]'));
+    featuredOverlayInner.querySelectorAll('[data-project-slider]').forEach(setupSlider);
   }
 
   function closeProject() {

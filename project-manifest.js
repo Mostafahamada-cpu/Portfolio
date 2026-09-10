@@ -13,8 +13,14 @@ window.portfolioProjectManifest = {
           intro: 'A digital wedding invitation platform and online store built as a real product/business, combining the storefront and admin workflow into one system.',
           accent: 'rgba(212,175,55,.1)',
           initials: 'M',
+          label: 'My Own Business',
+          cover: 'Memora/Logo.jpeg',
           tech: ['HTML', 'CSS', 'JavaScript', 'Supabase', 'Vercel'],
           images: projectAssets.memora || [],
+          galleries: [
+            { title: 'Store / Customer Experience', images: (projectAssets.memora || []).filter(image => image.startsWith('Memora/Store/')) },
+            { title: 'Admin Dashboard', images: (projectAssets.memora || []).filter(image => image.startsWith('Memora/Admin/')) }
+          ],
           content: `# Memora
 
 **Digital Wedding Invitation Platform**
@@ -65,6 +71,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           intro: 'A complete business CRM for managing clients, properties, deals, follow-ups, and sales analytics.',
           accent: 'rgba(230,126,34,.1)',
           initials: 'C',
+          cover: 'CRM/Dashboard.png',
           tech: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
           images: projectAssets.crm || [],
           existingOverlayId: 'crm'
@@ -76,6 +83,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           intro: 'A workforce-management system with GPS attendance, leave rules, payroll support, permissions, and role-based business logic.',
           accent: 'rgba(37,99,235,.1)',
           initials: 'A',
+          cover: 'Attendance/Home.png',
           tech: ['HTML', 'CSS', 'JavaScript', 'Supabase', 'Supabase Auth', 'Vercel'],
           images: projectAssets['attendance-app'] || [],
           existingOverlayId: 'attendance'
@@ -87,6 +95,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           intro: 'A client-facing property interface for browsing listings, comparing options, and viewing property details with video walkthroughs.',
           accent: 'rgba(230,126,34,.1)',
           initials: 'CV',
+          cover: 'RingRoad/Logo.jpeg',
           tech: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
           images: projectAssets.clientview || [],
           existingOverlayId: 'client-view'
@@ -98,8 +107,13 @@ Designed and developed the Memora platform from the ground up, including the sto
           intro: 'A connected e-commerce system that combines the storefront and admin dashboard into one business workflow.',
           accent: 'rgba(20,184,166,.1)',
           initials: 'SP',
+          cover: 'StancePro/Store/Home.png',
           tech: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firebase Storage', 'Vercel'],
           images: projectAssets.stancepro || [],
+          galleries: [
+            { title: 'Store', images: (projectAssets.stancepro || []).filter(image => image.startsWith('StancePro/Store/')) },
+            { title: 'Admin Dashboard', images: (projectAssets.stancepro || []).filter(image => image.startsWith('StancePro/Admin/')) }
+          ],
           content: `# StancePro
 
 A connected e-commerce platform for a car accessories business.
@@ -143,6 +157,8 @@ https://stance-pro.vercel.app/`
           intro: 'A personal finance app built around structured transaction handling, multiple accounts, and real spending categories.',
           accent: 'rgba(59,130,246,.1)',
           initials: 'MT',
+          label: 'Personal',
+          cover: 'MoneyTracker/DashBoard.png',
           tech: ['HTML', 'CSS', 'JavaScript', 'Supabase'],
           images: projectAssets['money-tracker'] || [],
           content: `# Money Tracker
@@ -215,6 +231,8 @@ I designed and developed Money Tracker, including the transaction model, financi
           intro: 'A focused productivity app for creating, reviewing, and completing tasks without unnecessary interface noise.',
           accent: 'rgba(20,184,166,.1)',
           initials: 'TD',
+          label: 'Personal',
+          cover: 'ToDoList/Home BrightMode.png',
           tech: ['HTML', 'CSS', 'JavaScript'],
           images: projectAssets['to-do'] || [],
           content: `# To-Do
@@ -264,6 +282,7 @@ I designed and developed the To-Do application, focusing on both the user experi
           intro: 'A website for AION Innovations, currently in progress.',
           accent: 'rgba(99,102,241,.08)',
           initials: 'AW',
+          cover: 'AION(Wuillt)/aion-logo.png',
           tech: ['Web Development'],
           images: projectAssets['aion-web'] || [],
           status: 'Coming Soon',
@@ -280,6 +299,7 @@ Project details and case study content coming soon.`
           intro: 'An e-commerce storefront for AION smart home and automation products, currently in progress.',
           accent: 'rgba(99,102,241,.08)',
           initials: 'AS',
+          cover: 'AION(Wuillt)/aion-logo.png',
           tech: ['E-Commerce'],
           images: projectAssets['aion-store'] || [],
           status: 'Coming Soon',
