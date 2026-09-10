@@ -109,6 +109,59 @@ button{font-family:inherit}
 .coming-badge{position:absolute;top:12px;right:12px;z-index:3;font-size:11px;font-weight:600;color:var(--text3);background:rgba(0,0,0,.6);border:1px solid var(--border);padding:5px 12px;border-radius:20px;backdrop-filter:blur(8px)}
 .card-placeholder .card-btn{background:var(--surface);color:var(--text3);cursor:default;pointer-events:none}
 
+/* Featured projects */
+.featured-projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.featured-project-card{background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 35%),var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:18px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
+.featured-project-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.35);border-color:var(--border-h)}
+.featured-project-top{display:flex;flex-direction:column;gap:10px}
+.featured-project-badge{display:inline-flex;align-items:center;align-self:flex-start;padding:7px 12px;border-radius:999px;background:var(--accent-glow);border:1px solid rgba(20,184,166,.14);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase}
+.featured-project-title{font-size:24px;font-weight:700;line-height:1.2}
+.featured-project-intro{font-size:14px;color:var(--text2);line-height:1.75}
+.featured-project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.featured-project-tag{font-size:11px;font-weight:600;color:var(--text2);background:var(--surface);border:1px solid var(--border);padding:6px 12px;border-radius:999px}
+.featured-project-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+
+/* Featured project overlay */
+.featured-overlay{position:fixed;inset:0;z-index:1500;background:var(--bg);overflow-y:auto;overflow-x:hidden;transform:translateY(100%);opacity:0;visibility:hidden;transition:transform .5s var(--ease),opacity .4s ease}
+.featured-overlay.active{transform:translateY(0);opacity:1;visibility:visible}
+.featured-overlay.closing{transform:translateY(100%);opacity:0}
+.featured-overlay .cs-inner{max-width:1080px}
+.project-header{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.project-kicker{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px}
+.project-intro{font-size:17px;color:var(--text2);line-height:1.7;max-width:760px}
+.project-slider{position:relative;border-radius:var(--r);border:1px solid var(--border);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 50%),var(--card)}
+.project-slider-frame{overflow:hidden}
+.project-slider-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;user-select:none}
+.project-slider-track::-webkit-scrollbar{display:none}
+.project-slider-track.dragging{cursor:grabbing}
+.project-slide{flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;min-height:min(68vw,640px);padding:18px;background:#0D0D12}
+.project-slide img{width:100%;height:100%;object-fit:contain;border-radius:calc(var(--r) - 4px)}
+.project-slider-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}
+.project-slider-btn{pointer-events:auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:rgba(10,10,14,.72);color:var(--text);display:inline-flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);cursor:pointer;transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease)}
+.project-slider-btn:hover{transform:scale(1.05);border-color:var(--accent);background:rgba(20,184,166,.14)}
+.project-slider-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4}
+.project-slider-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding-top:16px}
+.project-slider-dot{width:8px;height:8px;border:none;border-radius:999px;background:var(--border);cursor:pointer;transition:width .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
+.project-slider-dot.active{width:26px;background:var(--accent)}
+.project-slider-dot:hover{transform:scale(1.1)}
+.project-slider.single .project-slider-nav,.project-slider.single .project-slider-dots{display:none}
+.project-slider.empty{display:none}
+.markdown-content{margin-top:44px}
+.markdown-content h2{font-size:22px;font-weight:700;margin:42px 0 16px;display:flex;align-items:center;gap:10px}
+.markdown-content h2::before{content:'';width:3px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
+.markdown-content h3{font-size:18px;font-weight:700;margin:28px 0 12px}
+.markdown-content p{font-size:15px;color:var(--text2);line-height:1.8;margin:0 0 16px}
+.markdown-content ul,.markdown-content ol{margin:0 0 16px 20px;padding-left:18px;color:var(--text2)}
+.markdown-content li{margin:8px 0;line-height:1.7}
+.markdown-content strong{color:var(--text)}
+.markdown-content a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.markdown-content code{padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid var(--border);font-size:12px}
+.markdown-content hr{border:none;height:1px;background:var(--border);margin:30px 0}
+.markdown-content blockquote{margin:0 0 16px;padding:14px 16px;border-left:3px solid var(--accent);background:rgba(20,184,166,.06);border-radius:0 12px 12px 0;color:var(--text2)}
+.markdown-content .project-link-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.markdown-content .project-link-row a{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:var(--surface);border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:13px;font-weight:600}
+.markdown-content .project-link-row a:hover{border-color:var(--accent);background:var(--accent-glow)}
+
 /* ─── CASE STUDY OVERLAY ─── */
 .cs-overlay{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto;overflow-x:hidden;transform:translateY(100%);opacity:0;visibility:hidden;transition:transform .5s var(--ease),opacity .4s ease}
 .cs-overlay.active{transform:translateY(0);opacity:1;visibility:visible}
@@ -472,6 +525,21 @@ button{font-family:inherit}
 
   </div>
 </section>
+
+<!-- ══════ FEATURED PROJECTS ══════ -->
+<section class="section" id="featured-projects">
+  <div class="section-header">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-subtitle">Automatically assembled from the project folders, screenshots, and case-study files.</p>
+  </div>
+  <div class="featured-projects-grid" id="featured-projects-grid"></div>
+</section>
+
+<div class="featured-overlay" id="featured-overlay" aria-hidden="true">
+  <div class="cs-bar"><button class="cs-back" id="featured-close" type="button"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+  <div class="cs-inner" id="featured-overlay-inner"></div>
+</div>
 
 
 <!-- ══════════════════════════════════════════════════════════ -->
@@ -1126,10 +1194,12 @@ button{font-family:inherit}
   <p>&copy; 2026 Mostafa Hamada. All rights reserved.</p>
 </div>
 
+<script src="featured-projects.js"></script>
+
 <script>
 function openCS(id){var o=document.getElementById('cs-'+id);o.classList.remove('closing');o.classList.add('active');document.body.style.overflow='hidden';o.scrollTop=0}
 function closeCS(id){var o=document.getElementById('cs-'+id);o.classList.add('closing');setTimeout(function(){o.classList.remove('active','closing');document.body.style.overflow=''},500)}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.cs-overlay.active').forEach(function(el){closeCS(el.id.replace('cs-',''))});closeLB()}})
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.cs-overlay.active').forEach(function(el){closeCS(el.id.replace('cs-',''))});var featured=document.getElementById('featured-overlay');if(featured&&featured.classList.contains('active')){featured.classList.add('closing');setTimeout(function(){featured.classList.remove('active','closing');document.body.style.overflow=''},500)}closeLB()}})
 function openLB(el){var s=el.querySelector('img').src;var lb=document.getElementById('lb');document.getElementById('lb-img').src=s;lb.classList.add('active')}
 function closeLB(){document.getElementById('lb').classList.remove('active')}
 

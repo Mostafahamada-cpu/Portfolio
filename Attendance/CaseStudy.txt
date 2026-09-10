@@ -1,54 +1,360 @@
 # Attendance Management System
 
-A web-based attendance management system designed for companies to manage employee attendance, working hours, leave requests, and attendance reports in one place.
+A web-based attendance and workforce management system designed for companies to manage employee attendance, working hours, leave requests, salary rules, permissions, and payroll in one place.
 
 ## Overview
 
-The system allows agents to clock in and clock out manually while verifying their location. Employees can only register attendance when they are within a 150-meter radius of the company.
+The Attendance Management System provides employees and administrators with a centralized platform for managing daily attendance and workforce-related operations.
 
-Agents can also manage their leave requests, check their remaining leave balance, and request changes to their scheduled leave days based on the company's approval rules.
+Employees can clock in and clock out manually while the system verifies their physical location. Attendance can only be registered when the employee is within a 150-meter radius of the company.
 
-Administrators have access to attendance data, employee management, leave requests, notifications, and reports to monitor workforce attendance and working hours.
+The system also provides leave management, attendance status, working-hours calculation, notifications, and administrative reporting.
 
-## Key Features
+As the project evolved, I expanded the system with additional workforce-management functionality, including salary rules, shift management, payroll, employee permissions, and role-based business rules.
 
-* Secure authentication for agents and administrators
-* Location-based Clock In and Clock Out
-* 150-meter company radius verification
-* Working hours calculation
-* Real-time attendance status
-* Leave request management
-* Remaining leave balance tracking
-* Leave day change requests with approval rules
-* Notification system
+---
+
+## Core Attendance System
+
+The original system focuses on making employee attendance more controlled and reliable while reducing the need for manual attendance tracking.
+
+### Location-Based Clock In / Clock Out
+
+Employees can register their attendance through the application.
+
+Before allowing the operation, the system verifies the employee's location.
+
+The employee must be within a **150-meter radius of the company** to successfully clock in or clock out.
+
+This helps prevent attendance registration from outside the workplace.
+
+### Working Hours Calculation
+
+The system calculates employee working hours based on their attendance records.
+
+This provides administrators with a clearer view of employee attendance and working time.
+
+### Real-Time Attendance Status
+
+Employees can see their current attendance state through the application.
+
+The interface provides immediate feedback after attendance actions so users know whether the operation was successful or rejected.
+
+### Attendance Feedback
+
+Attendance actions provide clear success and error feedback.
+
+For example, the system can inform the employee when an attendance action cannot be completed because the location requirements are not satisfied.
+
+---
+
+# Leave Management
+
+The system includes a structured leave-management workflow.
+
+Employees can:
+
+* Submit leave requests
+* Check their remaining leave balance
+* Manage scheduled leave information
+* Request changes to previously scheduled leave days
+
+## Leave Day Change Rules
+
+Leave-day changes follow defined company rules.
+
+The system currently applies the following workflow:
+
+* The **first change** can be made without administrator approval.
+* The **second change** requires administrator approval.
+* The **third change** is not allowed.
+
+This prevents unlimited changes and creates a controlled and transparent leave-management process.
+
+---
+
+# Notification System
+
+The application includes notifications to keep users informed about important actions and requests.
+
+Notifications can be used around attendance and leave-management workflows so employees and administrators can stay aware of changes that require their attention.
+
+---
+
+# Admin Dashboard
+
+Administrators have access to a dedicated dashboard for managing and monitoring the workforce.
+
+The administrative side of the system provides access to:
+
+* Employee management
+* Attendance information
+* Leave requests
+* Notifications
+* Working-hours information
+* Attendance reports
+* Employee activity
+
+This gives administrators a centralized view instead of requiring them to manage attendance information manually.
+
+---
+
+# Employee Management
+
+The system allows administrators to manage employee information and attendance-related data.
+
+Employee information can also be used by the system when applying workforce rules such as shifts, salary configuration, permissions, and weekend schedules.
+
+---
+
+# New Workforce Management Features
+
+As part of the latest development phase, I expanded the system beyond basic attendance management and introduced additional business logic for salaries, shifts, permissions, and payroll.
+
+These additions turn the application into a more complete workforce-management system.
+
+---
+
+## Salary Rules
+
+I introduced a salary-rules system to define salary-related configurations for employees.
+
+The current salary rules include configurations for different roles, including:
+
+* Sales
+* Developers
+
+This creates a structured foundation for connecting employee information with payroll calculations.
+
+---
+
+## Shift Management
+
+The system supports multiple employee working schedules.
+
+Current shift configurations include:
+
+* **9:00 AM – 5:00 PM**
+* **10:00 AM – 6:00 PM**
+* **11:00 AM – 7:00 PM**
+
+This allows employees with different schedules to use the same attendance system while following the appropriate working-hours rules.
+
+---
+
+## Grace Period
+
+A **15-minute grace period** was added to the attendance rules.
+
+This allows the system to account for the company's defined tolerance when evaluating employee arrival times.
+
+Instead of applying the same interpretation to every arrival, attendance calculations can take the configured grace period into account.
+
+---
+
+# Role-Based Weekend Rules
+
+Different employee roles can follow different weekend schedules.
+
+The current rules include:
+
+### Developers and Engineers
+
+Friday and Saturday are treated as weekend days.
+
+### Sales
+
+Sales employees have one weekend day between Friday and Saturday.
+
+This required the attendance system to consider the employee's role and assigned schedule when applying working-day rules.
+
+---
+
+# Payroll
+
+A payroll section was added to connect employee information and attendance-related rules with salary management.
+
+The overall workflow can be represented as:
+
+**Employee → Shift → Attendance → Salary Rules → Payroll**
+
+This creates a stronger relationship between the employee's working schedule, attendance records, and salary-related information.
+
+---
+
+# Employee Permissions
+
+I added a permissions system for employees to manage their monthly permission requests.
+
+Employees can request permissions within a defined monthly limit, while approval requirements can change depending on how many requests have already been used.
+
+This introduces another layer of business logic into the workforce-management system.
+
+---
+
+# Role-Based Access
+
+Because the application handles employee, attendance, leave, and payroll-related information, different users require different levels of access.
+
+The system separates employee functionality from administrative functionality so users only interact with the features relevant to their role.
+
+---
+
+# Authentication
+
+The application provides secure authentication for both employees and administrators.
+
+Authentication is handled using **Supabase Auth**, while user access is controlled according to the application's role and permissions model.
+
+---
+
+# Technical Implementation
+
+## Frontend
+
+**HTML, CSS, JavaScript**
+
+The frontend provides the employee-facing attendance experience as well as the administrative dashboard.
+
+## Backend & Database
+
+**Supabase**
+
+Supabase is used as the backend and database layer for storing and managing:
+
+* Employees
+* Attendance records
+* Leave requests
+* Permissions
+* Salary-related data
+* Payroll information
+* Notifications
+
+## Authentication
+
+**Supabase Auth**
+
+Authentication is used to securely manage employee and administrator accounts.
+
+## Deployment
+
+**Vercel**
+
+The application is deployed through Vercel for production hosting.
+
+---
+
+# Technical Highlights
+
+## Location Verification
+
+One of the main technical challenges was combining attendance actions with physical location verification.
+
+Before registering a clock-in or clock-out action, the system checks whether the employee is within the defined company radius.
+
+This creates an additional validation layer around attendance records.
+
+## Business Rules
+
+Another major part of the project was implementing company-specific business rules.
+
+These rules include:
+
+* Leave-change limits
+* Approval requirements
+* Salary rules
+* Grace periods
+* Different shifts
+* Role-specific weekend schedules
+* Monthly permission limits
+
+Rather than treating attendance as simple clock-in/clock-out records, the system applies these rules to represent how the company actually operates.
+
+## Extending an Existing System
+
+A major part of the latest development phase was extending an existing application without replacing its original attendance functionality.
+
+The new features had to work together with the existing:
+
+* Authentication
+* Attendance
+* Employee management
+* Leave management
 * Admin dashboard
-* Attendance and working-hours reports
-* Employee and attendance management
-* Success and error feedback for attendance actions
+* Database structure
 
-## Leave Management
+This required introducing new functionality while keeping the existing workflows consistent.
 
-The system manages leave-day changes according to company rules:
+---
 
-* First change can be made without approval.
-* Second change requires administrator approval.
-* Third change is not allowed.
+# Project Challenges
 
-This helps maintain a controlled and transparent leave management process.
+The main challenge was combining several business processes into one system.
 
-## Technologies
+Attendance alone is relatively straightforward, but real workforce management requires relationships between multiple areas:
 
-**Frontend:** HTML, CSS, JavaScript
-**Backend & Database:** Supabase
-**Authentication:** Supabase Auth
-**Deployment:** Vercel
+**Employees → Roles → Shifts → Attendance → Leave → Permissions → Salary Rules → Payroll**
 
-## Project Highlights
+Each new feature therefore needed to work with the existing employee and attendance data.
 
-The main challenge was combining attendance tracking with location verification and business rules. The system validates the employee's location before allowing Clock In or Clock Out and provides clear feedback about the operation.
+Another challenge was implementing location verification while providing immediate and understandable feedback to employees when an attendance action succeeds or fails.
 
-The project also includes a complete leave-management workflow and an administrative dashboard for monitoring attendance and employee activity.
+---
 
-## Links
+# Results
 
-**GitHub:** https://github.com/Mostafahamada-cpu/Attendance
+The project evolved from a basic attendance-management application into a broader workforce-management platform.
+
+The final system combines:
+
+* Location-based attendance
+* Working-hours tracking
+* Leave management
+* Leave-change approval rules
+* Notifications
+* Employee management
+* Attendance reports
+* Salary rules
+* Shift management
+* Grace periods
+* Role-based weekend rules
+* Employee permissions
+* Payroll functionality
+* Administrative management
+
+This provides both employees and administrators with a centralized system for managing attendance and related workforce operations.
+
+---
+
+# My Role
+
+I worked on the design and development of the Attendance Management System and its continued expansion.
+
+My work included implementing attendance workflows, location verification, leave management, administrative functionality, database-related features, and the newer salary, payroll, permissions, shift, and business-rule functionality.
+
+---
+
+# Technologies
+
+* HTML
+* CSS
+* JavaScript
+* Supabase
+* Supabase Auth
+* Vercel
+
+---
+
+## Portfolio Summary
+
+### Short Description
+
+A web-based attendance and workforce management system with location-based attendance, leave management, employee administration, salary rules, payroll, permissions, shifts, and role-based business logic.
+
+### One-Line Highlight
+
+An attendance system evolved into a complete workforce-management platform by combining location verification with real-world HR and payroll business rules.
+
+### Tech Stack
+
+**HTML · CSS · JavaScript · Supabase · Supabase Auth · Vercel**

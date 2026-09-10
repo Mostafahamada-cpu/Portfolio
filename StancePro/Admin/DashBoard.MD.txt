@@ -1,0 +1,79 @@
+Overview
+
+StancePro Admin is the management dashboard behind the StancePro Store.
+
+While the storefront is designed for customers, the Admin Dashboard was built to give the business owner a central place to manage products, inventory, images, and orders.
+
+The Problem
+
+Managing an online store manually becomes difficult as the number of products and orders increases.
+
+The business needs a way to manage its data without directly modifying the database or source code.
+
+The Solution
+
+I built a dedicated admin dashboard connected to the same backend used by the storefront.
+
+This creates a complete system:
+
+Customer → StancePro Store → Database → Admin Dashboard
+
+The admin can manage the information that customers see on the storefront.
+
+Product Management
+
+The dashboard allows the administrator to manage products through the UI.
+
+This includes functionality such as:
+
+Adding products
+Editing products
+Updating product information
+Managing product images
+Updating quantities
+Managing stock
+Removing products
+Image Management
+
+Products can have multiple images, which are stored using the application's storage system.
+
+This means product content can be managed without modifying the website manually.
+
+Order Management
+
+The Admin Dashboard provides access to customer orders.
+
+Instead of receiving disconnected messages, the business can access structured order information through the dashboard.
+
+The admin can review the relevant order and payment information and process it accordingly.
+
+Database Integration
+
+The Admin Dashboard and Store use the same backend data.
+
+For example:
+
+Admin updates product → Firebase → Store displays updated product
+
+And:
+
+Customer creates order → Firebase → Admin sees order
+
+This creates a connected business workflow rather than two separate applications.
+
+Technical Highlights
+
+One of the main technical aspects of the project was designing the relationship between:
+
+Products
+Images
+Stock
+Orders
+Customer information
+Payment information
+
+The dashboard provides a UI layer on top of this data so the business can manage it without technical knowledge.
+
+My Role
+
+I designed and developed the StancePro Admin Dashboard and connected it to the storefront and backend infrastructure.

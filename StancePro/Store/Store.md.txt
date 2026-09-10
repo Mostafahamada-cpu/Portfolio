@@ -1,0 +1,96 @@
+Overview
+
+StancePro Store is a custom e-commerce platform built for a car accessories business. The goal was to create a complete online shopping experience where customers can browse products, view product details, place orders, provide payment proof, and communicate their order information directly to the business.
+
+Instead of building only a product showcase, I designed the project around the complete purchasing workflow.
+
+The Problem
+
+Small online businesses often depend heavily on social media and manual messaging to manage product sales. This can make it difficult to:
+
+Organize products
+Display product information clearly
+Track customer orders
+Manage inventory
+Collect payment proof
+Keep order information organized
+
+The goal was to create a dedicated storefront that could centralize this process.
+
+The Solution
+
+I built a responsive e-commerce storefront connected to a backend database.
+
+Customers can browse available products, open individual product pages, review product information, and start an order directly from the website.
+
+The ordering process was designed around the actual business workflow:
+
+Browse Products → Product Details → Start Order → Enter Customer Information → Payment → Upload Payment Proof → Confirm Order
+
+Key Features
+Product Catalog
+
+Products are displayed dynamically rather than being hard-coded into individual pages.
+
+Each product can contain information such as:
+
+Product name
+Price
+Description
+Images
+Available quantity
+Stock information
+Product Details
+
+Customers can open a product and view more information before deciding to order.
+
+The product page focuses on presenting the important information clearly while keeping the purchasing action accessible.
+
+Order System
+
+Customers can start an order directly from the storefront.
+
+The system collects the information required to process the order and associates it with the selected product.
+
+InstaPay Payment Flow
+
+The current payment workflow uses InstaPay.
+
+After making the payment, the customer can provide payment proof through the ordering process.
+
+Payment Screenshot
+
+Customers can upload a screenshot as proof of payment.
+
+This gives the business a way to manually verify the transaction before processing the order.
+
+WhatsApp Integration
+
+After the order information is prepared, the system can send the relevant order information through WhatsApp.
+
+This connects the website's ordering workflow with the business's existing communication process.
+
+Technical Implementation
+
+The project uses:
+
+Frontend web technologies
+Firebase
+Firebase database services
+Firebase Storage for product images
+Vercel for deployment
+
+Firebase provides the persistent data layer for products and orders while Storage handles uploaded images.
+
+Why I Built It This Way
+
+The goal wasn't to build an overly complicated payment infrastructure.
+
+Instead, I designed the system around the actual business process and connected the website to the tools the business already uses.
+
+This made the application simpler to operate while still providing a structured e-commerce experience.
+
+My Role
+
+I designed and developed the StancePro Store, including the storefront experience, product system, ordering workflow, payment-proof flow, and backend integration.
+Link:https://stance-pro.vercel.app/

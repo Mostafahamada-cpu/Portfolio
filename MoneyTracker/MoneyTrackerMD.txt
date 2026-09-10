@@ -1,0 +1,104 @@
+Overview
+
+Money Tracker is a personal finance application designed to help users track income, expenses, transfers, accounts, and spending categories in one place.
+
+The project goes beyond simply recording expenses by introducing a structured transaction model and support for multiple accounts.
+
+The Problem
+
+Basic expense trackers often treat every transaction as simply "money spent."
+
+That approach doesn't accurately represent real personal finances.
+
+For example, moving money from a bank card to cash isn't an expense. It is a transfer between accounts.
+
+The application was designed around this distinction.
+
+The Solution
+
+I created a transaction-based financial system where each transaction contains structured information.
+
+Transactions can be categorized as:
+
+Expense
+Income
+Transfer
+
+This allows the application to represent real financial activity more accurately.
+
+Accounts
+
+The application supports different accounts, such as:
+
+Cash
+Card
+
+This allows users to track not only how much money they have, but also where that money is located.
+
+For example:
+
+Card → Cash
+
+can be recorded as a transfer rather than incorrectly appearing as an expense.
+
+Categories
+
+Transactions can be organized into categories such as:
+
+Car
+Fuel
+Transport
+Family
+
+This makes it possible to understand spending patterns instead of simply looking at a long list of transactions.
+
+Date-Based Tracking
+
+Each transaction is associated with a date.
+
+This provides a foundation for reviewing financial activity over different periods and understanding when money was earned, spent, or transferred.
+
+Validation
+
+I also implemented a dedicated validation layer for transaction data.
+
+This ensures that incorrect or incomplete information is caught before it is stored.
+
+This is important because financial applications depend heavily on data consistency.
+
+Notion Integration
+
+One of the most interesting parts of the project was making the application suitable for use inside Notion.
+
+Instead of requiring users to leave their workspace and open a separate application, the Money Tracker can be used as an embedded application.
+
+This required working with:
+
+iframe embedding
+Security headers
+frame-ancestors
+Notion compatibility
+Embedded/compact UI behavior
+Technical Concept
+
+The overall experience becomes:
+
+Notion Workspace → Embedded Money Tracker → Application → Database
+
+This makes the application part of the user's existing productivity workflow rather than a completely separate tool.
+
+Technical Highlights
+
+The project demonstrates work with:
+
+Transaction modeling
+Data validation
+Multiple account types
+Expense/income/transfer logic
+Database-backed data
+Embedded application architecture
+Responsive UI
+Notion compatibility
+My Role
+
+I designed and developed Money Tracker, including the transaction model, financial workflows, validation, interface, and embedded application experience.

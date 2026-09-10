@@ -1,0 +1,61 @@
+Overview
+
+To-Do is a productivity application designed to help users organize and manage their daily tasks through a clean and focused interface.
+
+The main objective was to make task management simple while still providing the structure needed to keep track of ongoing work.
+
+The Problem
+
+Managing tasks through scattered notes or multiple applications can make it difficult to understand what needs to be done.
+
+A good task management application needs to make the following actions quick:
+
+Creating a task
+Reviewing tasks
+Updating tasks
+Completing tasks
+Organizing ongoing work
+The Solution
+
+I built a task management interface focused on reducing unnecessary interaction.
+
+The user can manage tasks from a centralized workspace instead of relying on separate notes or lists.
+
+Key Features
+Task Creation
+
+Users can create new tasks and provide the necessary information.
+
+The interface is designed to make adding a task a quick action rather than a complicated process.
+
+Task Management
+
+Tasks can be updated as their state changes.
+
+This allows the user to keep the list relevant instead of maintaining static information.
+
+Task Organization
+
+The interface provides a structured way to review tasks and distinguish between work that still needs attention and work that has already been completed.
+
+UX Approach
+
+The design focuses on keeping the application centered around the tasks themselves.
+
+Rather than filling the interface with unnecessary elements, the goal was to create a clean productivity environment where the user can immediately understand what is happening.
+
+Technical Focus
+
+From a development perspective, the project demonstrates work with:
+
+UI components
+Application state
+User interactions
+Forms
+Validation
+Task data
+CRUD operations
+Responsive interface behavior
+My Role
+
+I designed and developed the To-Do application, focusing on both the user experience and the underlying task-management functionality.
