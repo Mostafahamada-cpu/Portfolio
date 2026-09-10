@@ -1062,34 +1062,26 @@ An attendance system evolved into a complete workforce-management platform by co
     return collected.join(' ');
   }
 
-  function projectCard(project) {
+  function projectCard(project, index, category) {
     const tech = (project.tech || extractTech(project.content)).slice(0, 4);
     return `
-      <article class="featured-project-card" style="--brand-glow:${project.accent}">
-        <div class="featured-project-top">
-          <div class="featured-project-badge">${escapeHtml(project.folder)}</div>
-          <h3 class="featured-project-title">${escapeHtml(project.title)}</h3>
-          <p class="featured-project-intro">${escapeHtml(project.intro)}</p>
-        </div>
-        ${tech.length ? `<div class="featured-project-tags">${tech.map(item => `<span class="featured-project-tag">${escapeHtml(item)}</span>`).join('')}</div>` : ''}
-        <div class="featured-project-actions">
-          <button class="card-btn" type="button" data-open-project="${escapeHtml(project.id)}">${escapeHtml(project.buttonLabel || 'View case study')} <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      <article class="project-showcase" style="--brand-glow:${project.accent}">
+        <div class="project-showcase-media">${sliderMarkup(project)}</div>
+        <div class="project-showcase-copy">
+          <span class="project-number">${String(index + 1).padStart(2, '0')}</span>
+          <span class="project-category-label">${escapeHtml(category.title)}</span>
+          <h3 class="project-showcase-title">${escapeHtml(project.title)}</h3>
+          <p class="project-showcase-intro">${escapeHtml(project.intro)}</p>
+          ${tech.length ? `<div class="project-showcase-tags">${tech.map(item => `<span class="project-showcase-tag">${escapeHtml(item)}</span>`).join('')}</div>` : ''}
+          ${project.status ? `<span class="project-status">${escapeHtml(project.status)}</span>` : `<button class="card-btn" type="button" data-open-project="${escapeHtml(project.id)}">${escapeHtml(project.buttonLabel || 'View Case Study')} <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>`}
         </div>
       </article>
     `;
   }
 
-  function categoryMarkup(category) {
-    const cards = (category.projects || []).map(projectCard).join('');
-    return `
-      <section class="project-category">
-        <div class="project-category-head">
-          <h3 class="project-category-title">${escapeHtml(category.title)}</h3>
-          ${category.note ? `<span class="project-category-note">${escapeHtml(category.note)}</span>` : ''}
-        </div>
-        <div class="featured-projects-grid">${cards}</div>
-      </section>
-    `;
+  function projectMarkup() {
+    let index = 0;
+    return categories.flatMap(category => (category.projects || []).map(project => projectCard(project, index++, category))).join('');
   }
 
   function sliderMarkup(project) {
@@ -1260,7 +1252,10 @@ An attendance system evolved into a complete workforce-management platform by co
   }
 
   function init() {
-    if (featuredGrid) featuredGrid.innerHTML = categories.map(categoryMarkup).join('');
+    if (featuredGrid) {
+      featuredGrid.innerHTML = projectMarkup();
+      featuredGrid.querySelectorAll('[data-project-slider]').forEach(setupSlider);
+    }
 
     featuredGrid?.addEventListener('click', event => {
       const button = event.target.closest('[data-open-project]');

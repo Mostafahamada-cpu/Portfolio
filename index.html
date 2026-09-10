@@ -110,6 +110,14 @@ button{font-family:inherit}
 .card-placeholder .card-btn{background:var(--surface);color:var(--text3);cursor:default;pointer-events:none}
 
 /* Featured projects */
+.editorial-projects{display:flex;flex-direction:column;gap:36px}
+.project-showcase{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(260px,.72fr);gap:clamp(22px,4vw,58px);align-items:center;padding:clamp(20px,3vw,34px);border:1px solid var(--border);border-radius:calc(var(--r) + 4px);background:linear-gradient(135deg,var(--brand-glow,rgba(20,184,166,.05)),transparent 48%),var(--card);overflow:hidden;transition:border-color .3s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
+.project-showcase:hover{transform:translateY(-3px);border-color:var(--border-h);box-shadow:0 20px 58px rgba(0,0,0,.28)}
+.project-showcase:first-child{grid-template-columns:minmax(0,1.75fr) minmax(280px,.8fr);padding:clamp(22px,3.5vw,42px)}
+.project-showcase-media{min-width:0;order:1}.project-showcase-copy{display:flex;flex-direction:column;align-items:flex-start;gap:16px;order:2}
+.project-number{font-size:12px;font-weight:700;letter-spacing:2.4px;color:var(--accent);font-variant-numeric:tabular-nums}
+.project-category-label{font-size:11px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;color:var(--text3)}
+.project-showcase-title{font-size:clamp(28px,3.3vw,43px);line-height:1.06;letter-spacing:-1.2px}.project-showcase-intro{font-size:15px;line-height:1.8;color:var(--text2);margin:0}.project-showcase-tags{display:flex;flex-wrap:wrap;gap:7px}.project-showcase-tag{font-size:11px;font-weight:600;color:var(--text2);background:var(--surface);border:1px solid var(--border);padding:6px 10px;border-radius:999px}.project-status{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);padding:7px 11px;border-radius:999px}.project-showcase .project-slider{width:100%;margin:0}.project-showcase .project-slide{min-height:clamp(250px,43vw,550px);padding:12px}.project-showcase .project-slider-dots{padding:12px 0 0}.project-showcase .project-slider-btn{width:38px;height:38px}
 .project-categories{display:flex;flex-direction:column;gap:36px}
 .project-category{display:flex;flex-direction:column;gap:16px}
 .project-category-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -268,6 +276,7 @@ button{font-family:inherit}
   .cs-links{flex-direction:column}
   .cs-highlight{grid-template-columns:1fr}
   .flow{justify-content:center}
+  .project-showcase,.project-showcase:first-child{grid-template-columns:1fr;gap:24px;padding:18px}.project-showcase-media{order:2}.project-showcase-copy{order:1}.project-showcase .project-slide{min-height:58vw;padding:8px}.project-showcase .project-slider-nav{padding:0 8px}
 }
 @media(max-width:420px){
   .projects-grid{grid-template-columns:1fr}
@@ -284,7 +293,7 @@ button{font-family:inherit}
   <div class="nav-logo">Mostafa<span>.</span></div>
   <div class="nav-links">
     <a href="#about">About</a>
-    <a href="#featured-projects">Projects</a>
+    <a href="#projects">Projects</a>
   </div>
 </nav>
 
@@ -323,7 +332,7 @@ button{font-family:inherit}
         </div>
         <div class="about-info">
           <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67H9.33V9h3.42v1.56h.05c.48-.9 1.64-1.86 3.37-1.86 3.6 0 4.27 2.37 4.27 5.45v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-          <a href="https://www.linkedin.com/in/mostafa-hamada-0519173a6" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/mostafa-hamada-0519173a" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
 
@@ -384,13 +393,13 @@ button{font-family:inherit}
 </section>
 
 <!-- ══════ FEATURED PROJECTS ══════ -->
-<section class="section" id="featured-projects">
+<section class="section" id="projects">
   <div class="section-header">
     <div class="section-label">Case Studies</div>
-    <h2 class="section-title">Featured Projects</h2>
-    <p class="section-subtitle">Automatically assembled from the project folders, screenshots, and case-study files.</p>
+    <h2 class="section-title">Projects &amp; Products</h2>
+    <p class="section-subtitle">Selected product, client, and personal work — each presented as a focused case study.</p>
   </div>
-  <div class="featured-projects-grid" id="featured-projects-grid"></div>
+  <div class="editorial-projects" id="featured-projects-grid"></div>
 </section>
 
 <div class="featured-overlay" id="featured-overlay" aria-hidden="true">
@@ -399,7 +408,7 @@ button{font-family:inherit}
 </div>
 
 <!-- ══════ PROJECTS ══════ -->
-<section class="section" id="projects">
+<section class="section" id="legacy-projects" hidden>
   <div class="section-header">
     <div class="section-label">Portfolio</div>
     <h2 class="section-title">Projects &amp; Products</h2>
@@ -1209,6 +1218,7 @@ button{font-family:inherit}
   <p>&copy; 2026 Mostafa Hamada. All rights reserved.</p>
 </div>
 
+<script src="project-assets.generated.js"></script>
 <script src="project-manifest.js"></script>
 <script src="featured-projects.js"></script>
 
@@ -1221,7 +1231,7 @@ function closeLB(){document.getElementById('lb').classList.remove('active')}
 
 // Entrance animation
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.08});
-document.querySelectorAll('.project-card,.skill-cat').forEach(function(el,i){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s ease '+(i*.08)+'s, transform .5s ease '+(i*.08)+'s';obs.observe(el)});
+document.querySelectorAll('.project-showcase,.project-card,.skill-cat').forEach(function(el,i){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s ease '+(i*.08)+'s, transform .5s ease '+(i*.08)+'s';obs.observe(el)});
 </script>
 </body>
 </html>

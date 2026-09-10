@@ -1,3 +1,4 @@
+const projectAssets = window.portfolioProjectAssets || {};
 window.portfolioProjectManifest = {
   categories: [
     {
@@ -13,23 +14,7 @@ window.portfolioProjectManifest = {
           accent: 'rgba(212,175,55,.1)',
           initials: 'M',
           tech: ['HTML', 'CSS', 'JavaScript', 'Supabase', 'Vercel'],
-          images: [
-            'Memora/Store/Home.jpeg',
-            'Memora/Store/Products.jpeg',
-            'Memora/Store/Bundles.jpeg',
-            'Memora/Store/Order step 1.jpeg',
-            'Memora/Store/Order step 2.jpeg',
-            'Memora/Store/Order step 3.jpeg',
-            'Memora/Store/Order step 4.jpeg',
-            'Memora/Store/Order step 5.jpeg',
-            'Memora/Store/Order final step.jpeg',
-            'Memora/Admin/Dashboard.png',
-            'Memora/Admin/Products.png',
-            'Memora/Admin/Bundles.png',
-            'Memora/Admin/Orders.png',
-            'Memora/Admin/OrderDetails.png',
-            'Memora/Admin/Analytics.png'
-          ],
+          images: projectAssets.memora || [],
           content: `# Memora
 
 **Digital Wedding Invitation Platform**
@@ -81,6 +66,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           accent: 'rgba(230,126,34,.1)',
           initials: 'C',
           tech: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
+          images: projectAssets.crm || [],
           existingOverlayId: 'crm'
         },
         {
@@ -91,6 +77,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           accent: 'rgba(37,99,235,.1)',
           initials: 'A',
           tech: ['HTML', 'CSS', 'JavaScript', 'Supabase', 'Supabase Auth', 'Vercel'],
+          images: projectAssets['attendance-app'] || [],
           existingOverlayId: 'attendance'
         },
         {
@@ -101,6 +88,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           accent: 'rgba(230,126,34,.1)',
           initials: 'CV',
           tech: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
+          images: projectAssets.clientview || [],
           existingOverlayId: 'client-view'
         },
         {
@@ -111,19 +99,7 @@ Designed and developed the Memora platform from the ground up, including the sto
           accent: 'rgba(20,184,166,.1)',
           initials: 'SP',
           tech: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firebase Storage', 'Vercel'],
-          images: [
-            'StancePro/Store/Home.png',
-            'StancePro/Store/Categories.png',
-            'StancePro/Store/Cart.png',
-            'StancePro/Store/CheckOut.png',
-            'StancePro/Store/Payment.png',
-            'StancePro/Store/OrderConfirmation1.png',
-            'StancePro/Store/OrderConfirmation2.png',
-            'StancePro/Admin/DashBoard.png',
-            'StancePro/Admin/AddProducts.png',
-            'StancePro/Admin/Products.png',
-            'StancePro/Admin/Orders.png'
-          ],
+          images: projectAssets.stancepro || [],
           content: `# StancePro
 
 A connected e-commerce platform for a car accessories business.
@@ -168,12 +144,7 @@ https://stance-pro.vercel.app/`
           accent: 'rgba(59,130,246,.1)',
           initials: 'MT',
           tech: ['HTML', 'CSS', 'JavaScript', 'Supabase'],
-          images: [
-            'MoneyTracker/DashBoard.png',
-            'MoneyTracker/Budget.png',
-            'MoneyTracker/BuyingList.png',
-            'MoneyTracker/Charts.png'
-          ],
+          images: projectAssets['money-tracker'] || [],
           content: `# Money Tracker
 
 Money Tracker is a personal finance application designed to help users track income, expenses, transfers, accounts, and spending categories in one place.
@@ -245,11 +216,7 @@ I designed and developed Money Tracker, including the transaction model, financi
           accent: 'rgba(20,184,166,.1)',
           initials: 'TD',
           tech: ['HTML', 'CSS', 'JavaScript'],
-          images: [
-            'ToDoList/Home BrightMode.png',
-            'ToDoList/Home DarkMode.png',
-            'ToDoList/Categories.png'
-          ],
+          images: projectAssets['to-do'] || [],
           content: `# To-Do
 
 To-Do is a productivity application designed to help users organize and manage their daily tasks through a clean and focused interface.
@@ -293,12 +260,13 @@ I designed and developed the To-Do application, focusing on both the user experi
         {
           id: 'aion-web',
           title: 'AION Web',
-          folder: 'AION(Wuillt) / WebSite',
-          intro: 'A website for AION Innovations, presented as an embedded project in the portfolio.',
+          folder: 'AION',
+          intro: 'A website for AION Innovations, currently in progress.',
           accent: 'rgba(99,102,241,.08)',
           initials: 'AW',
           tech: ['Web Development'],
-          images: ['AION(Wuillt)/aion-logo.png'],
+          images: projectAssets['aion-web'] || [],
+          status: 'Coming Soon',
           content: `# AION Web
 
 A website for AION Innovations.
@@ -308,12 +276,13 @@ Project details and case study content coming soon.`
         {
           id: 'aion-store',
           title: 'AION Store',
-          folder: 'AION(Wuillt) / Store',
-          intro: 'An e-commerce storefront for AION smart products, shown as an embedded project in the portfolio.',
+          folder: 'AION',
+          intro: 'An e-commerce storefront for AION smart home and automation products, currently in progress.',
           accent: 'rgba(99,102,241,.08)',
           initials: 'AS',
           tech: ['E-Commerce'],
-          images: ['AION(Wuillt)/aion-logo.png'],
+          images: projectAssets['aion-store'] || [],
+          status: 'Coming Soon',
           content: `# AION Store
 
 An e-commerce storefront for AION smart home and automation products.
