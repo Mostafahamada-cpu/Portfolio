@@ -1,1326 +1,542 @@
+/*
+ * Projects experience.
+ *
+ * One implementation, reused by every project:
+ *   ProjectSection -> ProjectCard -> ProjectCover
+ *   CaseStudy      -> case-study blocks -> ProjectGallery -> Slider
+ *
+ * Data comes from `project-manifest.js` (copy) and
+ * `project-assets.generated.js` (images, produced from the real folders).
+ */
 (() => {
-  const defaultProjects = [
-    {
-      id: 'stancepro-store',
-      title: 'StancePro Store',
-      folder: 'StancePro / Store',
-      intro: 'A responsive e-commerce storefront for a car accessories business, designed around the full browse-to-order workflow.',
-      accent: 'rgba(212,175,55,.1)',
-      initials: 'SP',
-      images: [
-        'StancePro/Store/Home.png',
-        'StancePro/Store/Feutared Products.png',
-        'StancePro/Store/Categories.png',
-        'StancePro/Store/Cart.png',
-        'StancePro/Store/CheckOut.png',
-        'StancePro/Store/Payment.png',
-        'StancePro/Store/OrderConfirmation1.png',
-        'StancePro/Store/OrderConfirmation2.png',
-        'StancePro/Store/Footer.png'
-      ],
-      content: `Overview
+  'use strict';
 
-StancePro Store is a custom e-commerce platform built for a car accessories business. The goal was to create a complete online shopping experience where customers can browse products, view product details, place orders, provide payment proof, and communicate their order information directly to the business.
+  const manifest = window.portfolioProjectManifest || { projects: [] };
+  const projects = manifest.projects || [];
 
-Instead of building only a product showcase, I designed the project around the complete purchasing workflow.
+  const grid = document.getElementById('featured-projects-grid');
+  const overlay = document.getElementById('featured-overlay');
+  const overlayInner = document.getElementById('featured-overlay-inner');
+  const overlayClose = document.getElementById('featured-close');
+  const overlayTitle = document.getElementById('featured-overlay-title');
 
-The Problem
+  const CLOSE_MS = 420;
+  let lastTrigger = null;
+  let openId = null;
+  let closeTimer = null;
 
-Small online businesses often depend heavily on social media and manual messaging to manage product sales. This can make it difficult to:
+  /* ───────────────────────────── helpers ───────────────────────────── */
 
-Organize products
-Display product information clearly
-Track customer orders
-Manage inventory
-Collect payment proof
-Keep order information organized
-
-The goal was to create a dedicated storefront that could centralize this process.
-
-The Solution
-
-I built a responsive e-commerce storefront connected to a backend database.
-
-Customers can browse available products, open individual product pages, review product information, and start an order directly from the website.
-
-The ordering process was designed around the actual business workflow:
-
-Browse Products → Product Details → Start Order → Enter Customer Information → Payment → Upload Payment Proof → Confirm Order
-
-Key Features
-Product Catalog
-
-Products are displayed dynamically rather than being hard-coded into individual pages.
-
-Each product can contain information such as:
-
-Product name
-Price
-Description
-Images
-Available quantity
-Stock information
-
-Product Details
-
-Customers can open a product and view more information before deciding to order.
-
-The product page focuses on presenting the important information clearly while keeping the purchasing action accessible.
-
-Order System
-
-Customers can start an order directly from the storefront.
-
-The system collects the information required to process the order and associates it with the selected product.
-
-InstaPay Payment Flow
-
-The current payment workflow uses InstaPay.
-
-After making the payment, the customer can provide payment proof through the ordering process.
-
-Payment Screenshot
-
-Customers can upload a screenshot as proof of payment.
-
-This gives the business a way to manually verify the transaction before processing the order.
-
-WhatsApp Integration
-
-After the order information is prepared, the system can send the relevant order information through WhatsApp.
-
-This connects the website's ordering workflow with the business's existing communication process.
-
-Technical Implementation
-
-The project uses:
-
-Frontend web technologies
-Firebase
-Firebase database services
-Firebase Storage for product images
-Vercel for deployment
-
-Firebase provides the persistent data layer for products and orders while Storage handles uploaded images.
-
-Why I Built It This Way
-
-The goal wasn't to build an overly complicated payment infrastructure.
-
-Instead, I designed the system around the actual business process and connected the website to the tools the business already uses.
-
-This made the application simpler to operate while still providing a structured e-commerce experience.
-
-My Role
-
-I designed and developed the StancePro Store, including the storefront experience, product system, ordering workflow, payment-proof flow, and backend integration.
-Link:https://stance-pro.vercel.app/`
-    },
-    {
-      id: 'stancepro-admin',
-      title: 'StancePro Admin',
-      folder: 'StancePro / Admin',
-      intro: 'An admin dashboard for managing products, inventory, images, and orders behind the storefront.',
-      accent: 'rgba(212,175,55,.1)',
-      initials: 'SA',
-      images: [
-        'StancePro/Admin/DashBoard.png',
-        'StancePro/Admin/AddProducts.png',
-        'StancePro/Admin/Products.png',
-        'StancePro/Admin/Orders.png'
-      ],
-      content: `Overview
-
-StancePro Admin is the management dashboard behind the StancePro Store.
-
-While the storefront is designed for customers, the Admin Dashboard was built to give the business owner a central place to manage products, inventory, images, and orders.
-
-The Problem
-
-Managing an online store manually becomes difficult as the number of products and orders increases.
-
-The business needs a way to manage its data without directly modifying the database or source code.
-
-The Solution
-
-I built a dedicated admin dashboard connected to the same backend used by the storefront.
-
-This creates a complete system:
-
-Customer → StancePro Store → Database → Admin Dashboard
-
-The admin can manage the information that customers see on the storefront.
-
-Product Management
-
-The dashboard allows the administrator to manage products through the UI.
-
-This includes functionality such as:
-
-Adding products
-Editing products
-Updating product information
-Managing product images
-Updating quantities
-Managing stock
-Removing products
-
-Image Management
-
-Products can have multiple images, which are stored using the application's storage system.
-
-This means product content can be managed without modifying the website manually.
-
-Order Management
-
-The Admin Dashboard provides access to customer orders.
-
-Instead of receiving disconnected messages, the business can access structured order information through the dashboard.
-
-The admin can review the relevant order and payment information and process it accordingly.
-
-Database Integration
-
-The Admin Dashboard and Store use the same backend data.
-
-For example:
-
-Admin updates product → Firebase → Store displays updated product
-
-And:
-
-Customer creates order → Firebase → Admin sees order
-
-This creates a connected business workflow rather than two separate applications.
-
-Technical Highlights
-
-One of the main technical aspects of the project was designing the relationship between:
-
-Products
-Images
-Stock
-Orders
-Customer information
-Payment information
-
-The dashboard provides a UI layer on top of this data so the business can manage it without technical knowledge.
-
-My Role
-
-I designed and developed the StancePro Admin Dashboard and connected it to the storefront and backend infrastructure.`
-    },
-    {
-      id: 'to-do',
-      title: 'To-Do',
-      folder: 'ToDoList',
-      intro: 'A focused productivity app for creating, reviewing, and completing tasks without unnecessary interface noise.',
-      accent: 'rgba(20,184,166,.1)',
-      initials: 'TD',
-      images: [
-        'ToDoList/Home BrightMode.png',
-        'ToDoList/Home DarkMode.png',
-        'ToDoList/Categories.png'
-      ],
-      content: `Overview
-
-To-Do is a productivity application designed to help users organize and manage their daily tasks through a clean and focused interface.
-
-The main objective was to make task management simple while still providing the structure needed to keep track of ongoing work.
-
-The Problem
-
-Managing tasks through scattered notes or multiple applications can make it difficult to understand what needs to be done.
-
-A good task management application needs to make the following actions quick:
-
-Creating a task
-Reviewing tasks
-Updating tasks
-Completing tasks
-Organizing ongoing work
-
-The Solution
-
-I built a task management interface focused on reducing unnecessary interaction.
-
-The user can manage tasks from a centralized workspace instead of relying on separate notes or lists.
-
-Key Features
-
-Task Creation
-
-Users can create new tasks and provide the necessary information.
-
-The interface is designed to make adding a task a quick action rather than a complicated process.
-
-Task Management
-
-Tasks can be updated as their state changes.
-
-This allows the user to keep the list relevant instead of maintaining static information.
-
-Task Organization
-
-The interface provides a structured way to review tasks and distinguish between work that still needs attention and work that has already been completed.
-
-UX Approach
-
-The design focuses on keeping the application centered around the tasks themselves.
-
-Rather than filling the interface with unnecessary elements, the goal was to create a clean productivity environment where the user can immediately understand what is happening.
-
-Technical Focus
-
-From a development perspective, the project demonstrates work with:
-
-UI components
-Application state
-User interactions
-Forms
-Validation
-Task data
-CRUD operations
-Responsive interface behavior
-
-My Role
-
-I designed and developed the To-Do application, focusing on both the user experience and the underlying task-management functionality.`
-    },
-    {
-      id: 'money-tracker',
-      title: 'Money Tracker',
-      folder: 'MoneyTracker',
-      intro: 'A personal finance app built around structured transaction handling, multiple accounts, and real spending categories.',
-      accent: 'rgba(59,130,246,.1)',
-      initials: 'MT',
-      images: [
-        'MoneyTracker/DashBoard.png',
-        'MoneyTracker/Budget.png',
-        'MoneyTracker/BuyingList.png',
-        'MoneyTracker/Charts.png'
-      ],
-      content: `Overview
-
-Money Tracker is a personal finance application designed to help users track income, expenses, transfers, accounts, and spending categories in one place.
-
-The project goes beyond simply recording expenses by introducing a structured transaction model and support for multiple accounts.
-
-The Problem
-
-Basic expense trackers often treat every transaction as simply "money spent."
-
-That approach doesn't accurately represent real personal finances.
-
-For example, moving money from a bank card to cash isn't an expense. It is a transfer between accounts.
-
-The application was designed around this distinction.
-
-The Solution
-
-I created a transaction-based financial system where each transaction contains structured information.
-
-Transactions can be categorized as:
-
-Expense
-Income
-Transfer
-
-This allows the application to represent real financial activity more accurately.
-
-Accounts
-
-The application supports different accounts, such as:
-
-Cash
-Card
-
-This allows users to track not only how much money they have, but also where that money is located.
-
-For example:
-
-Card → Cash
-
-can be recorded as a transfer rather than incorrectly appearing as an expense.
-
-Categories
-
-Transactions can be organized into categories such as:
-
-Car
-Fuel
-Transport
-Family
-
-This makes it possible to understand spending patterns instead of simply looking at a long list of transactions.
-
-Date-Based Tracking
-
-Each transaction is associated with a date.
-
-This provides a foundation for reviewing financial activity over different periods and understanding when money was earned, spent, or transferred.
-
-Validation
-
-I also implemented a dedicated validation layer for transaction data.
-
-This ensures that incorrect or incomplete information is caught before it is stored.
-
-This is important because financial applications depend heavily on data consistency.
-
-Notion Integration
-
-One of the most interesting parts of the project was making the application suitable for use inside Notion.
-
-Instead of requiring users to leave their workspace and open a separate application, the Money Tracker can be used as an embedded application.
-
-This required working with:
-
-iframe embedding
-Security headers
-frame-ancestors
-Notion compatibility
-Embedded/compact UI behavior
-
-Technical Concept
-
-The overall experience becomes:
-
-Notion Workspace → Embedded Money Tracker → Application → Database
-
-This makes the application part of the user's existing productivity workflow rather than a completely separate tool.
-
-Technical Highlights
-
-The project demonstrates work with:
-
-Transaction modeling
-Data validation
-Multiple account types
-Expense/income/transfer logic
-Database-backed data
-Embedded application architecture
-Responsive UI
-Notion compatibility
-
-My Role
-
-I designed and developed Money Tracker, including the transaction model, financial workflows, validation, interface, and embedded application experience.`
-    },
-    {
-      id: 'attendance-new-features',
-      title: 'Attendance App — New Features',
-      folder: 'Attendance',
-      intro: 'A workforce-management system that extends the original attendance app with leave rules, payroll support, permissions, and role-based business logic.',
-      accent: 'rgba(37,99,235,.1)',
-      initials: 'AA',
-      images: [
-        'Attendance/Home.png',
-        'Attendance/Days.png',
-        'Attendance/Alerts.png',
-        'Attendance/DashBoard.png',
-        'Attendance/Employees.png',
-        'Attendance/Employee 2.png',
-        'Attendance/Requests.png',
-        'Attendance/Balances.png',
-        'Attendance/ChangeWeekEnd.png',
-        'Attendance/ChoseWeekDay.png',
-        'Attendance/Deductions and attendance history.png',
-        'Attendance/LeavePermission.png',
-        'Attendance/Permissions.png',
-        'Attendance/Salary.png',
-        'Attendance/Salary&Rules.png',
-        'Attendance/Analysis.png'
-      ],
-      content: `# Attendance Management System
-
-A web-based attendance and workforce management system designed for companies to manage employee attendance, working hours, leave requests, salary rules, permissions, and payroll in one place.
-
-## Overview
-
-The Attendance Management System provides employees and administrators with a centralized platform for managing daily attendance and workforce-related operations.
-
-Employees can clock in and clock out manually while the system verifies their physical location. Attendance can only be registered when the employee is within a 150-meter radius of the company.
-
-The system also provides leave management, attendance status, working-hours calculation, notifications, and administrative reporting.
-
-As the project evolved, I expanded the system with additional workforce-management functionality, including salary rules, shift management, payroll, employee permissions, and role-based business rules.
-
----
-
-## Core Attendance System
-
-The original system focuses on making employee attendance more controlled and reliable while reducing the need for manual attendance tracking.
-
-### Location-Based Clock In / Clock Out
-
-Employees can register their attendance through the application.
-
-Before allowing the operation, the system verifies the employee's location.
-
-The employee must be within a **150-meter radius of the company** to successfully clock in or clock out.
-
-This helps prevent attendance registration from outside the workplace.
-
-### Working Hours Calculation
-
-The system calculates employee working hours based on their attendance records.
-
-This provides administrators with a clearer view of employee attendance and working time.
-
-### Real-Time Attendance Status
-
-Employees can see their current attendance state through the application.
-
-The interface provides immediate feedback after attendance actions so users know whether the operation was successful or rejected.
-
-### Attendance Feedback
-
-Attendance actions provide clear success and error feedback.
-
-For example, the system can inform the employee when an attendance action cannot be completed because the location requirements are not satisfied.
-
----
-
-# Leave Management
-
-The system includes a structured leave-management workflow.
-
-Employees can:
-
-* Submit leave requests
-* Check their remaining leave balance
-* Manage scheduled leave information
-* Request changes to previously scheduled leave days
-
-## Leave Day Change Rules
-
-Leave-day changes follow defined company rules.
-
-The system currently applies the following workflow:
-
-* The **first change** can be made without administrator approval.
-* The **second change** requires administrator approval.
-* The **third change** is not allowed.
-
-This prevents unlimited changes and creates a controlled and transparent leave-management process.
-
----
-
-# Notification System
-
-The application includes notifications to keep users informed about important actions and requests.
-
-Notifications can be used around attendance and leave-management workflows so employees and administrators can stay aware of changes that require their attention.
-
----
-
-# Admin Dashboard
-
-Administrators have access to a dedicated dashboard for managing and monitoring the workforce.
-
-The administrative side of the system provides access to:
-
-* Employee management
-* Attendance information
-* Leave requests
-* Notifications
-* Working-hours information
-* Attendance reports
-* Employee activity
-
-This gives administrators a centralized view instead of requiring them to manage attendance information manually.
-
----
-
-# Employee Management
-
-The system allows administrators to manage employee information and attendance-related data.
-
-Employee information can also be used by the system when applying workforce rules such as shifts, salary configuration, permissions, and weekend schedules.
-
----
-
-# New Workforce Management Features
-
-As part of the latest development phase, I expanded the system beyond basic attendance management and introduced additional business logic for salaries, shifts, permissions, and payroll.
-
-These additions turn the application into a more complete workforce-management system.
-
----
-
-## Salary Rules
-
-I introduced a salary-rules system to define salary-related configurations for employees.
-
-The current salary rules include configurations for different roles, including:
-
-* Sales
-* Developers
-
-This creates a structured foundation for connecting employee information with payroll calculations.
-
----
-
-## Shift Management
-
-The system supports multiple employee working schedules.
-
-Current shift configurations include:
-
-* **9:00 AM – 5:00 PM**
-* **10:00 AM – 6:00 PM**
-* **11:00 AM – 7:00 PM**
-
-This allows employees with different schedules to use the same attendance system while following the appropriate working-hours rules.
-
----
-
-## Grace Period
-
-A **15-minute grace period** was added to the attendance rules.
-
-This allows the system to account for the company's defined tolerance when evaluating employee arrival times.
-
-Instead of applying the same interpretation to every arrival, attendance calculations can take the configured grace period into account.
-
----
-
-# Role-Based Weekend Rules
-
-Different employee roles can follow different weekend schedules.
-
-The current rules include:
-
-### Developers and Engineers
-
-Friday and Saturday are treated as weekend days.
-
-### Sales
-
-Sales employees have one weekend day between Friday and Saturday.
-
-This required the attendance system to consider the employee's role and assigned schedule when applying working-day rules.
-
----
-
-# Payroll
-
-A payroll section was added to connect employee information and attendance-related rules with salary management.
-
-The overall workflow can be represented as:
-
-**Employee → Shift → Attendance → Salary Rules → Payroll**
-
-This creates a stronger relationship between the employee's working schedule, attendance records, and salary-related information.
-
----
-
-# Employee Permissions
-
-I added a permissions system for employees to manage their monthly permission requests.
-
-Employees can request permissions within a defined monthly limit, while approval requirements can change depending on how many requests have already been used.
-
-This introduces another layer of business logic into the workforce-management system.
-
----
-
-# Role-Based Access
-
-Because the application handles employee, attendance, leave, and payroll-related information, different users require different levels of access.
-
-The system separates employee functionality from administrative functionality so users only interact with the features relevant to their role.
-
----
-
-# Authentication
-
-The application provides secure authentication for both employees and administrators.
-
-Authentication is handled using **Supabase Auth**, while user access is controlled according to the application's role and permissions model.
-
----
-
-# Technical Implementation
-
-## Frontend
-
-**HTML, CSS, JavaScript**
-
-The frontend provides the employee-facing attendance experience as well as the administrative dashboard.
-
-## Backend & Database
-
-**Supabase**
-
-Supabase is used as the backend and database layer for storing and managing:
-
-* Employees
-* Attendance records
-* Leave requests
-* Permissions
-* Salary-related data
-* Payroll information
-* Notifications
-
-## Authentication
-
-**Supabase Auth**
-
-Authentication is used to securely manage employee and administrator accounts.
-
-## Deployment
-
-**Vercel**
-
-The application is deployed through Vercel for production hosting.
-
----
-
-# Technical Highlights
-
-## Location Verification
-
-One of the main technical challenges was combining attendance actions with physical location verification.
-
-Before registering a clock-in or clock-out action, the system checks whether the employee is within the defined company radius.
-
-This creates an additional validation layer around attendance records.
-
-## Business Rules
-
-Another major part of the project was implementing company-specific business rules.
-
-These rules include:
-
-* Leave-change limits
-* Approval requirements
-* Salary rules
-* Grace periods
-* Different shifts
-* Role-specific weekend schedules
-* Monthly permission limits
-
-Rather than treating attendance as simple clock-in/clock-out records, the system applies these rules to represent how the company actually operates.
-
-## Extending an Existing System
-
-A major part of the latest development phase was extending an existing application without replacing its original attendance functionality.
-
-The new features had to work together with the existing:
-
-* Authentication
-* Attendance
-* Employee management
-* Leave management
-* Admin dashboard
-* Database structure
-
-This required introducing new functionality while keeping the existing workflows consistent.
-
----
-
-# Project Challenges
-
-The main challenge was combining several business processes into one system.
-
-Attendance alone is relatively straightforward, but real workforce management requires relationships between multiple areas:
-
-**Employees → Roles → Shifts → Attendance → Leave → Permissions → Salary Rules → Payroll**
-
-Each new feature therefore needed to work with the existing employee and attendance data.
-
-Another challenge was implementing location verification while providing immediate and understandable feedback to employees when an attendance action succeeds or fails.
-
----
-
-# Results
-
-The project evolved from a basic attendance-management application into a broader workforce-management platform.
-
-The final system combines:
-
-* Location-based attendance
-* Working-hours tracking
-* Leave management
-* Leave-change approval rules
-* Notifications
-* Employee management
-* Attendance reports
-* Salary rules
-* Shift management
-* Grace periods
-* Role-based weekend rules
-* Employee permissions
-* Payroll functionality
-* Administrative management
-
-This provides both employees and administrators with a centralized system for managing attendance and related workforce operations.
-
----
-
-# My Role
-
-I worked on the design and development of the Attendance Management System and its continued expansion.
-
-My work included implementing attendance workflows, location verification, leave management, administrative functionality, database-related features, and the newer salary, payroll, permissions, shift, and business-rule functionality.
-
----
-
-# Technologies
-
-* HTML
-* CSS
-* JavaScript
-* Supabase
-* Supabase Auth
-* Vercel
-
----
-
-## Portfolio Summary
-
-### Short Description
-
-A web-based attendance and workforce management system with location-based attendance, leave management, employee administration, salary rules, payroll, permissions, shifts, and role-based business logic.
-
-### One-Line Highlight
-
-An attendance system evolved into a complete workforce-management platform by combining location verification with real-world HR and payroll business rules.
-
-### Tech Stack
-
-**HTML · CSS · JavaScript · Supabase · Supabase Auth · Vercel**`
-    }
-  ];
-
-  const portfolioManifest = window.portfolioProjectManifest || {
-    categories: [{ id: 'legacy', title: 'Projects', note: 'Legacy portfolio projects', projects: defaultProjects }]
-  };
-  const categories = portfolioManifest.categories || [];
-  const projects = categories.flatMap(category => category.projects || []);
-
-  const featuredOverlay = document.getElementById('featured-overlay');
-  const featuredOverlayInner = document.getElementById('featured-overlay-inner');
-  const featuredGrid = document.getElementById('featured-projects-grid');
-  const featuredClose = document.getElementById('featured-close');
-
-  function pathToUrl(path) {
-    return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
-  }
-
-  function escapeHtml(text) {
-    return String(text)
+  const esc = value =>
+    String(value == null ? '' : value)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
-  }
 
-  function inlineMarkdown(text) {
-    return escapeHtml(text)
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/`([^`]+)`/g, '<code>$1</code>')
-      .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-      .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-  }
+  /* Folder names contain spaces and parentheses — encode per segment. */
+  const src = filePath => String(filePath).split('/').map(encodeURIComponent).join('/');
 
-  function normalizeMarkdown(raw) {
-    const knownMajor = new Set([
-      'overview',
-      'the problem',
-      'the solution',
-      'problem',
-      'solution',
-      'problem & solution',
-      'project overview',
-      'key features',
-      'technical implementation',
-      'technical highlights',
-      'technical details',
-      'technologies',
-      'technologies used',
-      'tech stack',
-      'how it works',
-      'how the system works',
-      'my role',
-      'results',
-      'results / purpose',
-      'project challenges',
-      'challenges',
-      'leave management rules',
-      'accounts',
-      'categories',
-      'validation',
-      'notion integration',
-      'core attendance system',
-      'new workforce management features',
-      'role-based weekend rules',
-      'role-based access',
-      'authentication',
-      'employee management',
-      'salary rules',
-      'shift management',
-      'grace period',
-      'payroll',
-      'employee permissions',
-      'extending an existing system',
-      'portfolio summary',
-      'short description',
-      'one-line highlight'
-    ]);
+  const num = index => String(index + 1).padStart(2, '0');
 
-    const knownMinor = new Set([
-      'product catalog',
-      'product details',
-      'order system',
-      'instapay payment flow',
-      'payment screenshot',
-      'whatsapp integration',
-      'image management',
-      'order management',
-      'database integration',
-      'product management',
-      'task creation',
-      'task management',
-      'task organization',
-      'ux approach',
-      'date-based tracking',
-      'technical focus',
-      'technical concept',
-      'business rules',
-      'location verification',
-      'frontend',
-      'backend & database',
-      'authentication',
-      'deployment'
-    ]);
+  const html = (strings, ...values) => strings.reduce((out, part, i) => out + part + (values[i] ?? ''), '');
 
-    const lines = String(raw).replace(/\r\n/g, '\n').split('\n');
-    const out = [];
-    let fragmentMode = false;
-    let inCodeBlock = false;
+  /* Screens are described by their role, never by their file name. */
+  const screenAlt = (project, index, total) =>
+    `${project.title} interface screenshot ${index + 1} of ${total}`;
 
-    for (const original of lines) {
-      const line = original.trim();
-      if (/^```/.test(line)) {
-        inCodeBlock = !inCodeBlock;
-        out.push(original);
-        continue;
-      }
-      if (inCodeBlock) {
-        out.push(original);
-        continue;
-      }
-      if (!line) {
-        fragmentMode = false;
-        out.push('');
-        continue;
-      }
+  /* ───────────────────────────── slider ───────────────────────────── */
 
-      if (/^#{1,6}\s/.test(line) || /^[-*]\s+/.test(line) || /^\d+\.\s+/.test(line) || /^---+$/.test(line)) {
-        fragmentMode = false;
-        out.push(line);
-        continue;
-      }
+  const ARROW_PREV = '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
+  const ARROW_NEXT = '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>';
+  const DOT_LIMIT = 8;
 
-      const lower = line.toLowerCase();
-      if (knownMajor.has(lower)) {
-        fragmentMode = false;
-        out.push(`## ${line}`);
-        continue;
-      }
+  function Slider(project, images, key, orientation = 'landscape', aspect = null) {
+    const total = images.length;
+    if (!total) return '';
+    const many = total > 1;
+    const useDots = many && total <= DOT_LIMIT;
 
-      if (knownMinor.has(lower)) {
-        fragmentMode = false;
-        out.push(`### ${line}`);
-        continue;
-      }
+    const slides = images
+      .map(
+        (image, index) => html`
+          <figure class="slider-slide">
+            <img
+              src="${src(image.src)}"
+              alt="${esc(screenAlt(project, index, total))}"
+              ${image.w ? `width="${image.w}" height="${image.h}"` : ''}
+              loading="${index === 0 ? 'eager' : 'lazy'}"
+              decoding="async"
+              draggable="false"
+            >
+          </figure>`
+      )
+      .join('');
 
-      if (line.endsWith(':')) {
-        fragmentMode = true;
-        out.push(line);
-        continue;
-      }
+    const dots = useDots
+      ? images
+          .map(
+            (_, index) =>
+              `<button class="slider-dot${index === 0 ? ' is-active' : ''}" type="button" data-dot="${index}" aria-label="Go to screen ${index + 1}"></button>`
+          )
+          .join('')
+      : '';
 
-      if (fragmentMode) {
-        out.push(`- ${line}`);
-        continue;
-      }
-
-      fragmentMode = false;
-      out.push(line);
-    }
-
-    return out.join('\n');
-  }
-
-  function renderMarkdown(raw) {
-    const text = normalizeMarkdown(raw);
-    const lines = text.split('\n');
-    const blocks = [];
-    let paragraph = [];
-    let listType = null;
-    let listItems = [];
-    let codeLines = null;
-
-    function flushParagraph() {
-      if (!paragraph.length) return;
-      blocks.push(`<p>${inlineMarkdown(paragraph.join(' '))}</p>`);
-      paragraph = [];
-    }
-
-    function flushList() {
-      if (!listItems.length) return;
-      const items = listItems.map(item => `<li>${inlineMarkdown(item)}</li>`).join('');
-      blocks.push(listType === 'ol' ? `<ol>${items}</ol>` : `<ul>${items}</ul>`);
-      listItems = [];
-      listType = null;
-    }
-
-    function flushCode() {
-      if (codeLines === null) return;
-      blocks.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
-      codeLines = null;
-    }
-
-    for (const line of lines) {
-      if (/^```/.test(line.trim())) {
-        flushParagraph();
-        flushList();
-        if (codeLines === null) codeLines = [];
-        else flushCode();
-        continue;
-      }
-      if (codeLines !== null) {
-        codeLines.push(line);
-        continue;
-      }
-      if (!line.trim()) {
-        flushParagraph();
-        flushList();
-        continue;
-      }
-
-      if (/^---+$/.test(line.trim())) {
-        flushParagraph();
-        flushList();
-        blocks.push('<hr>');
-        continue;
-      }
-
-      const heading = line.match(/^(#{1,6})\s+(.*)$/);
-      if (heading) {
-        flushParagraph();
-        flushList();
-        const level = heading[1].length;
-        blocks.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
-        continue;
-      }
-
-      const bullet = line.match(/^[-*]\s+(.*)$/);
-      if (bullet) {
-        flushParagraph();
-        if (listType && listType !== 'ul') flushList();
-        listType = 'ul';
-        listItems.push(bullet[1]);
-        continue;
-      }
-
-      const numbered = line.match(/^\d+\.\s+(.*)$/);
-      if (numbered) {
-        flushParagraph();
-        if (listType && listType !== 'ol') flushList();
-        listType = 'ol';
-        listItems.push(numbered[1]);
-        continue;
-      }
-
-      flushList();
-      paragraph.push(line);
-    }
-
-    flushParagraph();
-    flushList();
-    flushCode();
-    return blocks.join('\n');
-  }
-
-  function extractLinks(raw) {
-    const matches = Array.from(new Set((String(raw).match(/https?:\/\/[^\s)]+/g) || [])));
-    return matches.map(url => ({ label: new URL(url).hostname.replace(/^www\./, ''), url }));
-  }
-
-  function extractTech(raw) {
-    const keywords = [
-      'HTML',
-      'CSS',
-      'JavaScript',
-      'Firebase',
-      'Firebase Storage',
-      'Supabase',
-      'Supabase Auth',
-      'Vercel',
-      'MySQL',
-      'SQL',
-      'Python',
-      'C++'
-    ];
-
-    const lower = String(raw).toLowerCase();
-    const result = [];
-    for (const keyword of keywords) {
-      if (lower.includes(keyword.toLowerCase())) result.push(keyword);
-    }
-    return result;
-  }
-
-  function firstParagraph(raw) {
-    const lines = String(raw).replace(/\r\n/g, '\n').split('\n').map(line => line.trim()).filter(Boolean);
-    const startIndex = lines.findIndex(line => !/^#{1,6}\s/.test(line) && !/^[-*]\s+/.test(line) && !/^\d+\.\s+/.test(line));
-    if (startIndex === -1) return '';
-    const collected = [];
-    for (let i = startIndex; i < lines.length; i++) {
-      const line = lines[i];
-      if (/^#{1,6}\s/.test(line) || /^[-*]\s+/.test(line) || /^\d+\.\s+/.test(line) || /^---+$/.test(line)) break;
-      collected.push(line);
-      if (line.endsWith('.')) break;
-    }
-    return collected.join(' ');
-  }
-
-  function projectCard(project, index, category) {
-    const tech = (project.tech || extractTech(project.content)).slice(0, 4);
-    return `
-      <article class="project-showcase" style="--brand-glow:${project.accent}">
-        <div class="project-showcase-media">${projectCoverMarkup(project)}</div>
-        <div class="project-showcase-copy">
-          <span class="project-number">${String(index + 1).padStart(2, '0')}</span>
-          ${project.label ? `<span class="project-category-label">${escapeHtml(project.label)}</span>` : ''}
-          <h3 class="project-showcase-title">${escapeHtml(project.title)}</h3>
-          <p class="project-showcase-intro">${escapeHtml(project.intro)}</p>
-          ${tech.length ? `<div class="project-showcase-tags">${tech.map(item => `<span class="project-showcase-tag">${escapeHtml(item)}</span>`).join('')}</div>` : ''}
-          ${project.status ? `<span class="project-status">${escapeHtml(project.status)}</span>` : `<button class="card-btn" type="button" data-open-project="${escapeHtml(project.id)}">${escapeHtml(project.buttonLabel || 'View Case Study')} <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>`}
-        </div>
-      </article>
-    `;
-  }
-
-  function projectMarkup() {
-    let index = 0;
-    return categories.flatMap(category => (category.projects || []).map(project => projectCard(project, index++, category))).join('');
-  }
-
-  function projectCoverMarkup(project) {
-    const image = project.cover || project.images?.[0];
-    if (!image) return '';
-    return `<div class="project-cover"><img src="${pathToUrl(image)}" alt="${escapeHtml(project.title)} project preview" loading="lazy" decoding="async"></div>`;
-  }
-
-  function sliderMarkup(project) {
-    if (!project.images || !project.images.length) return '';
-    const multiple = project.images.length > 1;
-    const slides = project.images.map((image, index) => `
-      <div class="project-slide">
-        <img src="${pathToUrl(image)}" alt="${escapeHtml(project.title)} screenshot ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async">
-      </div>
-    `).join('');
-    const dots = multiple ? project.images.map((_, index) => `<button class="project-slider-dot${index === 0 ? ' active' : ''}" type="button" data-slider-dot="${index}" aria-label="Go to screenshot ${index + 1}"></button>`).join('') : '';
-    return `
-      <div class="project-slider${multiple ? '' : ' single'}" data-project-slider data-project-id="${escapeHtml(project.id)}">
-        <div class="project-slider-frame">
-          <div class="project-slider-track" tabindex="0" aria-label="${escapeHtml(project.title)} screenshots">
+    return html`
+      <div class="slider${many ? '' : ' is-single'}${orientation === 'portrait' ? ' is-portrait' : ''}" data-slider="${esc(key)}"${aspect ? ` style="--slide-aspect:${aspect}"` : ''}>
+        <div class="slider-stage">
+          <div class="slider-track" tabindex="0" role="group" aria-roledescription="carousel" aria-label="${esc(project.title)} screens">
             ${slides}
           </div>
+          ${many
+            ? html`
+                <div class="slider-nav" aria-hidden="true">
+                  <button class="slider-btn" type="button" data-prev aria-label="Previous screen">${ARROW_PREV}</button>
+                  <button class="slider-btn" type="button" data-next aria-label="Next screen">${ARROW_NEXT}</button>
+                </div>`
+            : ''}
         </div>
-        ${multiple ? `
-          <div class="project-slider-nav" aria-hidden="true">
-            <button class="project-slider-btn" type="button" data-slider-prev aria-label="Previous screenshot"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-            <button class="project-slider-btn" type="button" data-slider-next aria-label="Next screenshot"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-          </div>
-          <div class="project-slider-dots">${dots}</div>
-        ` : ''}
-      </div>
-    `;
+        ${many
+          ? html`
+              <div class="slider-foot">
+                ${useDots ? `<div class="slider-dots">${dots}</div>` : ''}
+                <p class="slider-count" aria-live="polite"><span data-index>1</span> / ${total}</p>
+              </div>`
+          : ''}
+      </div>`;
   }
 
-  function projectOverlayMarkup(project) {
-    const links = extractLinks(project.content);
-    const tech = extractTech(project.content);
-    const intro = firstParagraph(project.content) || project.intro;
-    const article = renderMarkdown(project.content);
-    const techHtml = tech.length ? `
-      <div class="cs-sec">
-        <h2 class="cs-sec-title">Technologies / Tech Stack</h2>
-        <div class="tech-row">${tech.map(item => `<span class="tech"><i></i>${escapeHtml(item)}</span>`).join('')}</div>
-      </div>
-    ` : '';
-    const linkHtml = links.length ? `
-      <div class="cs-sec">
-        <h2 class="cs-sec-title">Project Links</h2>
-        <div class="cs-links">${links.map(link => `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="cs-link cs-link-p"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>${escapeHtml(link.label)}</a>`).join('')}</div>
-      </div>
-    ` : '';
+  function initSlider(root) {
+    const track = root.querySelector('.slider-track');
+    const slides = Array.from(root.querySelectorAll('.slider-slide'));
+    if (!track || slides.length <= 1) return;
 
-    const galleries = project.galleries?.length
-      ? project.galleries.map((gallery, index) => `
-          <section class="case-gallery-section">
-            <h2 class="cs-sec-title">${escapeHtml(gallery.title)}</h2>
-            ${sliderMarkup({ ...project, id: `${project.id}-${index}`, images: gallery.images })}
-          </section>`).join('')
-      : sliderMarkup(project);
-    return `
-      <div class="project-header">
-        <div class="project-kicker">${escapeHtml(project.folder)}</div>
-        <h1 class="cs-title">${escapeHtml(project.title)}</h1>
-        <div class="cs-role-badge">${escapeHtml(project.initials)} Project</div>
-        <p class="project-intro">${escapeHtml(intro)}</p>
-      </div>
-      ${galleries}
-      <div class="markdown-content">
-        ${article}
-      </div>
-      ${techHtml}
-      ${linkHtml}
-    `;
-  }
+    const dots = Array.from(root.querySelectorAll('.slider-dot'));
+    const counter = root.querySelector('[data-index]');
+    const prev = root.querySelector('[data-prev]');
+    const next = root.querySelector('[data-next]');
+    let ticking = false;
 
-  function getSliderElements(slider) {
-    if (!slider) return null;
-    const track = slider.querySelector('.project-slider-track');
-    const slides = Array.from(slider.querySelectorAll('.project-slide'));
-    const dots = Array.from(slider.querySelectorAll('.project-slider-dot'));
-    return { slider, track, slides, dots };
-  }
+    const indexOf = () => Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+    const clamp = value => Math.max(0, Math.min(slides.length - 1, value));
 
-  function updateSliderState(elements) {
-    if (!elements) return;
-    const index = Math.max(0, Math.min(elements.slides.length - 1, Math.round(elements.track.scrollLeft / elements.track.clientWidth)));
-    elements.dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
-  }
+    function sync() {
+      const index = clamp(indexOf());
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+      if (counter) counter.textContent = String(index + 1);
+      if (prev) prev.disabled = index === 0;
+      if (next) next.disabled = index === slides.length - 1;
+    }
 
-  function moveSlider(elements, direction) {
-    if (!elements) return;
-    elements.track.scrollBy({ left: direction * elements.track.clientWidth, behavior: 'smooth' });
-  }
+    function goTo(index, smooth = true) {
+      track.scrollTo({ left: clamp(index) * track.clientWidth, behavior: smooth ? 'smooth' : 'auto' });
+    }
 
-  function setupSlider(slider) {
-    const elements = getSliderElements(slider);
-    if (!elements) return;
-    if (elements.slides.length <= 1) return;
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          sync();
+        });
+      },
+      { passive: true }
+    );
 
-    const prev = slider.querySelector('[data-slider-prev]');
-    const next = slider.querySelector('[data-slider-next]');
+    prev?.addEventListener('click', () => goTo(indexOf() - 1));
+    next?.addEventListener('click', () => goTo(indexOf() + 1));
+    dots.forEach(dot => dot.addEventListener('click', () => goTo(Number(dot.dataset.dot))));
 
-    prev?.addEventListener('click', () => moveSlider(elements, -1));
-    next?.addEventListener('click', () => moveSlider(elements, 1));
-
-    elements.dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const index = Number(dot.dataset.sliderDot || 0);
-        elements.track.scrollTo({ left: index * elements.track.clientWidth, behavior: 'smooth' });
-      });
+    track.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      goTo(indexOf() + (event.key === 'ArrowLeft' ? -1 : 1));
     });
 
+    /* Mouse drag only — touch uses the native scroller so it stays smooth. */
     let dragging = false;
-    let startX = 0;
-    let startScrollLeft = 0;
+    let originX = 0;
+    let originScroll = 0;
+    let moved = 0;
 
-    elements.track.addEventListener('scroll', () => updateSliderState(elements));
-    elements.track.addEventListener('pointerdown', event => {
+    track.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
       dragging = true;
-      startX = event.clientX;
-      startScrollLeft = elements.track.scrollLeft;
-      elements.track.classList.add('dragging');
-      elements.track.setPointerCapture(event.pointerId);
+      moved = 0;
+      originX = event.clientX;
+      originScroll = track.scrollLeft;
+      track.classList.add('is-dragging');
     });
-    elements.track.addEventListener('pointermove', event => {
+
+    track.addEventListener('pointermove', event => {
       if (!dragging) return;
-      const delta = event.clientX - startX;
-      elements.track.scrollLeft = startScrollLeft - delta;
+      const delta = event.clientX - originX;
+      if (Math.abs(delta) > moved) moved = Math.abs(delta);
+      if (moved > 4 && !track.hasPointerCapture(event.pointerId)) track.setPointerCapture(event.pointerId);
+      track.scrollLeft = originScroll - delta;
     });
-    const stopDragging = event => {
+
+    const endDrag = event => {
       if (!dragging) return;
       dragging = false;
-      elements.track.classList.remove('dragging');
-      if (event.pointerId !== undefined && elements.track.hasPointerCapture(event.pointerId)) {
-        elements.track.releasePointerCapture(event.pointerId);
+      track.classList.remove('is-dragging');
+      if (event.pointerId !== undefined && track.hasPointerCapture(event.pointerId)) {
+        track.releasePointerCapture(event.pointerId);
       }
+      if (moved > 4) goTo(indexOf());
     };
-    elements.track.addEventListener('pointerup', stopDragging);
-    elements.track.addEventListener('pointercancel', stopDragging);
-    elements.track.addEventListener('pointerleave', stopDragging);
-    elements.track.addEventListener('keydown', event => {
-      if (event.key === 'ArrowLeft') {
+
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('pointerleave', endDrag);
+
+    /* A drag should never be mistaken for a click into the lightbox. */
+    track.addEventListener('click', event => {
+      if (moved > 4) {
+        event.stopPropagation();
         event.preventDefault();
-        moveSlider(elements, -1);
+        moved = 0;
       }
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        moveSlider(elements, 1);
-      }
+    }, true);
+
+    window.addEventListener('resize', sync, { passive: true });
+    sync();
+  }
+
+  /* ───────────────────────── project section ───────────────────────── */
+
+  /* The project's own logo, on its own background colour. Never stretched or
+     cropped — `object-fit: contain` keeps the artwork's proportions. */
+  function ProjectCover(project) {
+    const image = project.cover;
+    if (!image) return '<div class="project-cover is-empty" aria-hidden="true"></div>';
+    const isBrand = Boolean(project.brand) && image.src === project.brand.src;
+    const isPortrait = Boolean(image.w && image.h) && image.h > image.w;
+    /* A logo with no background of its own is an icon mark, not a lockup —
+       it gets more breathing room so it reads at the same weight. */
+    const isMark = isBrand && !image.plate;
+    const plate = isBrand && image.plate ? ` style="--plate:${esc(image.plate)}"` : '';
+    return html`
+      <div class="project-cover${isBrand ? ' is-brand' : ''}${isMark ? ' is-plain' : ''}${isPortrait ? ' is-portrait' : ''}"${plate}>
+        <img
+          src="${src(image.src)}"
+          alt="${esc(project.title)}${isBrand ? ' logo' : ' preview'}"
+          ${image.w ? `width="${image.w}" height="${image.h}"` : ''}
+          loading="lazy"
+          decoding="async"
+        >
+      </div>`;
+  }
+
+  function ProjectCard(project, index) {
+    const hasCase = Boolean(project.caseStudy);
+    const tech = (project.tech || []).slice(0, 5);
+    const shots = project.images?.length || 0;
+
+    return html`
+      <article class="project${project.emphasis ? ' is-lead' : ''}${hasCase ? '' : ' is-upcoming'}" style="--project-accent:${project.accent || 'rgba(20,184,166,.1)'}">
+        <div class="project-media">${ProjectCover(project)}</div>
+        <div class="project-copy">
+          <div class="project-meta">
+            <span class="project-num">${num(index)}</span>
+            ${project.label ? `<span class="project-label tone-${esc(project.labelTone || 'default')}">${esc(project.label)}</span>` : ''}
+            ${shots > 1 ? `<span class="project-shots">${shots} screens</span>` : ''}
+          </div>
+          <h3 class="project-title">${esc(project.title)}</h3>
+          ${project.tagline ? `<p class="project-tagline">${esc(project.tagline)}</p>` : ''}
+          <p class="project-intro">${esc(project.intro)}</p>
+          ${tech.length ? `<ul class="project-tech">${tech.map(item => `<li>${esc(item)}</li>`).join('')}</ul>` : ''}
+          ${hasCase
+            ? `<button class="project-action" type="button" data-open="${esc(project.id)}">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>`
+            : `<span class="project-soon">${esc(project.status || 'Coming Soon')}</span>`}
+        </div>
+      </article>`;
+  }
+
+  function ProjectSection() {
+    return projects.map((project, index) => ProjectCard(project, index)).join('');
+  }
+
+  /* ───────────────────────── case study blocks ───────────────────────── */
+
+  const paragraphs = body => (Array.isArray(body) ? body : [body]).map(text => `<p>${esc(text)}</p>`).join('');
+
+  const sectionTitle = title => (title ? `<h2 class="cs-sec-title">${esc(title)}</h2>` : '');
+
+  const blockRenderers = {
+    text: block => html`
+      <section class="cs-sec">
+        ${sectionTitle(block.title)}
+        <div class="cs-text">${paragraphs(block.body)}</div>
+      </section>`,
+
+    problem: block => html`
+      <section class="cs-sec">
+        ${sectionTitle(block.title || 'Problem & Solution')}
+        <div class="cs-highlight">
+          <div class="cs-hl-box problem">
+            <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>The Problem</div>
+            <p>${esc(block.problem)}</p>
+          </div>
+          <div class="cs-hl-box solution">
+            <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>The Solution</div>
+            <p>${esc(block.solution)}</p>
+          </div>
+        </div>
+      </section>`,
+
+    features: block => html`
+      <section class="cs-sec">
+        ${sectionTitle(block.title)}
+        <ul class="feat-grid">
+          ${block.items.map(item => `<li class="feat"><span class="feat-dot"></span><span>${esc(item)}</span></li>`).join('')}
+        </ul>
+      </section>`,
+
+    flow: block => html`
+      <section class="cs-sec">
+        ${sectionTitle(block.title)}
+        ${block.intro ? `<p class="cs-text cs-text-lead">${esc(block.intro)}</p>` : ''}
+        ${block.flows
+          .map(
+            flow => html`
+              <div class="flow-group">
+                ${flow.label ? `<p class="flow-label">${esc(flow.label)}</p>` : ''}
+                <div class="flow">
+                  ${flow.steps
+                    .map(step => `<span class="flow-s">${esc(step)}</span>`)
+                    .join('<span class="flow-a" aria-hidden="true">&rarr;</span>')}
+                </div>
+              </div>`
+          )
+          .join('')}
+      </section>`,
+
+    rules: block => html`
+      <section class="cs-sec">
+        ${sectionTitle(block.title)}
+        ${block.intro ? `<p class="cs-text cs-text-lead">${esc(block.intro)}</p>` : ''}
+        <div class="rules">
+          ${block.items
+            .map(
+              item => html`
+                <div class="rule">
+                  <b>${esc(item.value)}</b>
+                  <strong>${esc(item.title)}</strong>
+                  <small>${esc(item.note)}</small>
+                </div>`
+            )
+            .join('')}
+        </div>
+      </section>`,
+
+    gallery: (block, project, index) => html`
+      <section class="cs-sec cs-gallery">
+        ${sectionTitle(block.title)}
+        ${Slider(project, block.images, `${project.id}-${index}`, block.orientation, block.aspect)}
+      </section>`,
+
+    part: block => html`
+      <div class="cs-part">
+        <h2 class="cs-part-title">${esc(block.title)}</h2>
+        ${block.intro ? `<p class="cs-part-intro">${esc(block.intro)}</p>` : ''}
+      </div>`,
+
+    divider: () => '<div class="cs-div"></div>'
+  };
+
+  const LINK_ICONS = {
+    github:
+      '<svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>',
+    primary:
+      '<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'
+  };
+
+  function CaseStudy(project) {
+    const study = project.caseStudy;
+    const blocks = (study.blocks || [])
+      .map((block, index) => {
+        const render = blockRenderers[block.type];
+        return render ? render(block, project, index) : '';
+      })
+      .join('');
+
+    const tech = (project.tech || []).length
+      ? html`
+          <section class="cs-sec">
+            ${sectionTitle('Technologies')}
+            <div class="tech-row">${project.tech.map(item => `<span class="tech"><i></i>${esc(item)}</span>`).join('')}</div>
+          </section>`
+      : '';
+
+    const links = (study.links || []).length
+      ? html`
+          <section class="cs-sec">
+            ${sectionTitle('Project Links')}
+            <div class="cs-links">
+              ${study.links
+                .map(
+                  link => html`
+                    <a class="cs-link ${link.kind === 'primary' ? 'cs-link-p' : 'cs-link-s'}" href="${esc(link.url)}" target="_blank" rel="noopener">
+                      ${LINK_ICONS[link.kind] || LINK_ICONS.primary}${esc(link.label)}
+                    </a>`
+                )
+                .join('')}
+            </div>
+          </section>`
+      : '';
+
+    const index = projects.indexOf(project);
+
+    return html`
+      <article class="cs" style="--project-accent:${project.accent || 'rgba(20,184,166,.1)'}">
+        <header class="cs-head">
+          <div class="cs-head-meta">
+            <span class="project-num">${num(index)}</span>
+            ${project.label ? `<span class="project-label tone-${esc(project.labelTone || 'default')}">${esc(project.label)}</span>` : ''}
+          </div>
+          <h1 class="cs-title">${esc(project.title)}</h1>
+          ${project.tagline ? `<p class="cs-tagline">${esc(project.tagline)}</p>` : ''}
+          ${project.role ? `<p class="cs-role-badge">${esc(project.role)}</p>` : ''}
+          <p class="cs-desc">${esc(study.summary || project.intro)}</p>
+        </header>
+        ${blocks}
+        ${tech}
+        ${links}
+      </article>`;
+  }
+
+  /* ─────────────────────────── open / close ─────────────────────────── */
+
+  function openCase(id, { fromHistory = false } = {}) {
+    if (id === openId) return;
+    const project = projects.find(item => item.id === id);
+    if (!project || !project.caseStudy || !overlay) return;
+
+    /* Reopening during the closing animation must not be wiped by its timer. */
+    clearTimeout(closeTimer);
+    closeTimer = null;
+
+    overlayInner.innerHTML = CaseStudy(project);
+    if (overlayTitle) overlayTitle.textContent = project.title;
+    overlayInner.querySelectorAll('[data-slider]').forEach(initSlider);
+
+    overlay.classList.remove('is-closing');
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.scrollTop = 0;
+    /* Images settling can otherwise let scroll anchoring restore the previous
+       case study's offset — reset again once layout has run. */
+    requestAnimationFrame(() => {
+      if (openId === id) overlay.scrollTop = 0;
     });
+    document.body.classList.add('is-locked');
+    openId = id;
+    overlayClose?.focus({ preventScroll: true });
 
-    updateSliderState(elements);
-    window.addEventListener('resize', () => updateSliderState(elements), { passive: true });
-  }
-
-  function openProject(projectId) {
-    const project = projects.find(item => item.id === projectId);
-    if (!project) return;
-    if (project.existingOverlayId) {
-      if (typeof openCS === 'function') openCS(project.existingOverlayId);
-      return;
+    if (!fromHistory) {
+      try {
+        history.pushState({ caseStudy: id }, '', `#case-${id}`);
+      } catch (error) {
+        /* file:// or blocked history — the overlay still works. */
+      }
     }
-    featuredOverlayInner.innerHTML = projectOverlayMarkup(project);
-    featuredOverlay.classList.remove('closing');
-    featuredOverlay.classList.add('active');
-    featuredOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    featuredOverlayInner.querySelectorAll('[data-project-slider]').forEach(setupSlider);
   }
 
-  function closeProject() {
-    if (!featuredOverlay.classList.contains('active')) return;
-    featuredOverlay.classList.add('closing');
-    setTimeout(() => {
-      featuredOverlay.classList.remove('active', 'closing');
-      featuredOverlay.setAttribute('aria-hidden', 'true');
-      featuredOverlayInner.innerHTML = '';
-      document.body.style.overflow = '';
-    }, 500);
+  function closeCase({ fromHistory = false } = {}) {
+    if (!overlay || !overlay.classList.contains('is-open')) return;
+    overlay.classList.add('is-closing');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-locked');
+    openId = null;
+
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      closeTimer = null;
+      overlay.classList.remove('is-open', 'is-closing');
+      overlayInner.innerHTML = '';
+    }, CLOSE_MS);
+
+    lastTrigger?.focus({ preventScroll: true });
+    lastTrigger = null;
+
+    if (!fromHistory && location.hash.startsWith('#case-')) {
+      try {
+        history.back();
+      } catch (error) {
+        /* ignore */
+      }
+    }
   }
+
+  /* ───────────────────────────── lightbox ───────────────────────────── */
+
+  function openLightbox(image) {
+    const box = document.getElementById('lb');
+    const target = document.getElementById('lb-img');
+    if (!box || !target) return;
+    target.src = image.currentSrc || image.src;
+    target.alt = image.alt || '';
+    box.classList.add('active');
+  }
+
+  /* ─────────────────────────────── init ─────────────────────────────── */
 
   function init() {
-    if (featuredGrid) {
-      featuredGrid.innerHTML = projectMarkup();
-      featuredGrid.querySelectorAll('[data-project-slider]').forEach(setupSlider);
-    }
+    if (!grid) return;
+    grid.innerHTML = ProjectSection();
 
-    featuredGrid?.addEventListener('click', event => {
-      const button = event.target.closest('[data-open-project]');
+    grid.addEventListener('click', event => {
+      const button = event.target.closest('[data-open]');
       if (!button) return;
-      openProject(button.dataset.openProject);
+      lastTrigger = button;
+      openCase(button.dataset.open);
     });
 
-    featuredClose?.addEventListener('click', closeProject);
-    featuredOverlay?.addEventListener('click', event => {
-      if (event.target === featuredOverlay) closeProject();
+    overlayClose?.addEventListener('click', () => closeCase());
+
+    overlayInner?.addEventListener('click', event => {
+      const image = event.target.closest('.slider-slide img');
+      if (image) openLightbox(image);
     });
 
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeProject();
-      if (!featuredOverlay.classList.contains('active')) return;
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        const slider = featuredOverlayInner.querySelector('[data-project-slider]');
-        const elements = getSliderElements(slider);
-        if (!elements || elements.slides.length <= 1) return;
-        event.preventDefault();
-        moveSlider(elements, event.key === 'ArrowLeft' ? -1 : 1);
-      }
+      if (event.key === 'Escape' && openId) closeCase();
     });
+
+    /* The URL is the single source of truth: /#case-memora opens that case
+       study, whether it arrives from a fresh load, a pasted link, or Back. */
+    function syncFromHash() {
+      const match = location.hash.match(/^#case-(.+)$/);
+      const id = match ? decodeURIComponent(match[1]) : null;
+      if (id && id !== openId) openCase(id, { fromHistory: true });
+      else if (!id && openId) closeCase({ fromHistory: true });
+    }
+
+    window.addEventListener('popstate', syncFromHash);
+    window.addEventListener('hashchange', syncFromHash);
+    syncFromHash();
+
+    /* Entrance animation, matched to the rest of the page. */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12 }
+      );
+      grid.querySelectorAll('.project').forEach(card => {
+        card.classList.add('will-reveal');
+        observer.observe(card);
+      });
+    }
   }
 
   if (document.readyState === 'loading') {

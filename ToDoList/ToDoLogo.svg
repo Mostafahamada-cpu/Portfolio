@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="To-Do">
+  <title>To-Do</title>
+  <!-- the list: a board left open at the corner the finished task leaves through -->
+  <path d="M41 9H22A13 13 0 0 0 9 22v20a13 13 0 0 0 13 13h20a13 13 0 0 0 13-13V27"
+        fill="none" stroke="#14B8A6" stroke-width="6" stroke-linecap="round"/>
+  <!-- the task, completed -->
+  <path d="M20 33.5 28.5 42 51 14"
+        fill="none" stroke="#CCFBF1" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

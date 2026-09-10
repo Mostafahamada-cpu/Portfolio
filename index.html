@@ -69,131 +69,121 @@ button{font-family:inherit}
 }
 
 /* ─── PROJECTS ─── */
-#projects .section-header{text-align:center;margin-bottom:56px}
-.section-subtitle{font-size:16px;color:var(--text2);max-width:540px;margin:0 auto}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:28px}
+#projects .section-header{max-width:640px;margin-bottom:clamp(40px,6vw,72px)}
+.section-subtitle{font-size:16px;color:var(--text2);max-width:560px}
 
-/* Card */
-.project-card{background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--border);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;display:flex;flex-direction:column}
-.project-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.45);border-color:var(--border-h)}
+/* Project list — normal projects run full width, upcoming ones pair up */
+.projects-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,4vw,52px)}
+.project{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(18px,2.4vw,28px);border:1px solid var(--border);border-radius:calc(var(--r) + 4px);background:linear-gradient(150deg,var(--project-accent,transparent) 0%,transparent 46%),var(--card);transition:border-color .35s var(--ease),transform .4s var(--ease),box-shadow .4s var(--ease)}
+.project:hover{transform:translateY(-3px);border-color:var(--border-h);box-shadow:0 22px 60px rgba(0,0,0,.3)}
+.project:nth-of-type(even):not(.is-upcoming){grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+.project:nth-of-type(even):not(.is-upcoming) .project-media{order:2}
+.project.is-lead{padding:clamp(22px,3vw,38px);grid-template-columns:minmax(0,1.12fr) minmax(0,1fr)}
+.project.will-reveal{opacity:0;transform:translateY(26px)}
+.project.will-reveal.is-visible{opacity:1;transform:translateY(0);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 
-/* Logo header */
-.card-logo-area{position:relative;padding:36px 24px 28px;display:flex;flex-direction:column;align-items:center;gap:10px;border-bottom:1px solid var(--border);background:linear-gradient(160deg,rgba(255,255,255,.025) 0%,transparent 100%)}
-.card-logo-area::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:220px;height:220px;border-radius:50%;background:var(--brand-glow,rgba(20,184,166,.06));filter:blur(60px);pointer-events:none}
-.card-logo-img{height:64px;width:auto;max-width:180px;object-fit:contain;border-radius:10px;position:relative;z-index:1}
-.card-company-name{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);position:relative;z-index:1}
+/* Cover */
+.project-media{position:relative;min-width:0}
+.project-cover{position:relative;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--border);border-radius:var(--r);background:#0D0D12}
+.project-cover img{width:100%;height:100%;object-fit:contain;padding:14px}
+.project-cover.is-brand{background:var(--plate,#0D0D12)}
+/* A lockup carries its own margins — let it fill the plate. An icon mark does not, so give it room. */
+.project-cover.is-brand img{padding:0;object-fit:contain}
+.project-cover.is-brand.is-plain img{padding:8%}
+.project-cover.is-portrait{aspect-ratio:1/1}
+.project-cover.is-portrait img{padding:12px 0}
+.project-cover.is-empty{background:#0D0D12}
+.project.is-lead .project-cover:not(.is-portrait){aspect-ratio:16/9.4}
+.project-shots{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);white-space:nowrap}
 
-/* Card body */
-.card-body{padding:24px;flex:1;display:flex;flex-direction:column}
-.card-title{font-size:22px;font-weight:700;margin-bottom:10px;line-height:1.3}
-.card-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:18px}
+/* Copy */
+.project-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.project-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:16px;min-height:26px}
+.project-num{font-size:12px;font-weight:700;letter-spacing:2.6px;color:var(--accent);font-variant-numeric:tabular-nums}
+.project-label{font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.project-label.tone-business{color:var(--accent);background:rgba(20,184,166,.13);border:1px solid rgba(20,184,166,.34)}
+.project-label.tone-personal{color:var(--text3);background:var(--surface);border:1px solid var(--border)}
+.project-title{font-size:clamp(26px,3vw,38px);font-weight:700;line-height:1.08;letter-spacing:-1px}
+.project.is-lead .project-title{font-size:clamp(30px,3.7vw,46px)}
+.project-tagline{font-size:12px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-top:10px}
+.project-intro{font-size:15px;line-height:1.8;color:var(--text2);margin-top:14px;max-width:52ch}
+.project-tech{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin-top:20px}
+.project-tech li{font-size:11px;font-weight:600;color:var(--text2);background:var(--surface);border:1px solid var(--border);padding:6px 11px;border-radius:999px}
+.project-action{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:13px;font-weight:600;color:var(--text);background:var(--accent);border:none;padding:12px 24px;border-radius:50px;cursor:pointer;transition:background .25s,box-shadow .25s}
+.project-action:hover{background:var(--accent-h);box-shadow:0 6px 22px rgba(20,184,166,.28)}
+.project-action svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform .25s var(--ease)}
+.project-action:hover svg{transform:translateX(4px)}
+.project-soon{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);padding:11px 20px;border-radius:50px}
+.project-soon::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--text3)}
 
-/* Tech badges */
-.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
-.card-tag{font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-glow);padding:5px 12px;border-radius:16px;border:1px solid rgba(20,184,166,.12);transition:border-color .2s}
-.project-card:hover .card-tag{border-color:rgba(20,184,166,.25)}
+/* Upcoming pair */
+.project.is-upcoming{grid-column:span 1;grid-template-columns:1fr;gap:24px;align-items:stretch}
+.project.is-upcoming:hover{transform:none;box-shadow:none}
+.project.is-upcoming .project-cover:not(.is-portrait){aspect-ratio:16/9}
+.project.is-upcoming .project-title{font-size:clamp(22px,2.2vw,27px)}
+.project.is-upcoming .project-intro{font-size:14px;margin-top:12px}
 
-/* Actions */
-.card-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:4px}
-.card-btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);background:var(--accent);border:none;padding:11px 22px;border-radius:50px;cursor:pointer;transition:background .25s,transform .25s,box-shadow .25s;text-decoration:none}
-.card-btn:hover{background:var(--accent-h);transform:translateX(3px);box-shadow:0 4px 20px rgba(20,184,166,.3)}
-.card-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform .25s}
-.card-btn:hover svg{transform:translateX(3px)}
-.card-btn-s{background:transparent;color:var(--text2);border:1px solid var(--border);text-decoration:none}
-.card-btn-s:hover{border-color:var(--accent);color:var(--text);background:var(--accent-glow);transform:none;box-shadow:none}
-.card-btn-s svg{stroke-width:2}
+/* ─── REUSABLE IMAGE SLIDER ─── */
+.slider{position:relative;width:100%}
+.slider-stage{position:relative;border:1px solid var(--border);border-radius:var(--r);background:#0D0D12;overflow:hidden}
+.slider-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.slider-track::-webkit-scrollbar{display:none}
+.slider-track:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.slider-track.is-dragging{scroll-behavior:auto;cursor:grabbing}
+.slider-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;aspect-ratio:var(--slide-aspect,16/10);max-height:min(62vh,560px);padding:clamp(12px,2vw,22px)}
+.slider-slide img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:10px;cursor:zoom-in;-webkit-user-drag:none;user-select:none}
+.slider-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}
+.slider-btn{pointer-events:auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:rgba(10,10,14,.74);color:var(--text);display:inline-flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;transition:border-color .25s var(--ease),background .25s var(--ease),opacity .25s var(--ease)}
+.slider-btn:hover{border-color:var(--accent);background:rgba(20,184,166,.16)}
+.slider-btn:disabled{opacity:.28;cursor:default}
+.slider-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.4}
+.slider-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;min-height:22px}
+.slider-dots{display:flex;flex-wrap:wrap;gap:7px}
+.slider-dot{width:7px;height:7px;border:none;border-radius:999px;background:var(--border);cursor:pointer;padding:0;transition:width .25s var(--ease),background .25s var(--ease)}
+.slider-dot.is-active{width:24px;background:var(--accent)}
+.slider-count{margin-left:auto;font-size:12px;font-weight:600;color:var(--text3);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.slider.is-single .slider-nav,.slider.is-single .slider-foot{display:none}
+.slider.is-portrait .slider-stage{max-width:min(100%,460px);margin:0 auto}
+.slider.is-portrait .slider-foot{max-width:min(100%,460px);margin:0 auto}
+.slider.is-portrait .slider-slide img{border-radius:14px}
+.project-media .slider-slide{height:auto;aspect-ratio:16/10}
 
-/* Placeholder card */
-.card-placeholder .card-logo-area{background:linear-gradient(135deg,#1a1a25,#12121a)}
-.card-placeholder .card-logo-area::before{display:none}
-.coming-badge{position:absolute;top:12px;right:12px;z-index:3;font-size:11px;font-weight:600;color:var(--text3);background:rgba(0,0,0,.6);border:1px solid var(--border);padding:5px 12px;border-radius:20px;backdrop-filter:blur(8px)}
-.card-placeholder .card-btn{background:var(--surface);color:var(--text3);cursor:default;pointer-events:none}
-
-/* Featured projects */
-.editorial-projects{display:flex;flex-direction:column;gap:36px}
-.project-showcase{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(260px,.72fr);gap:clamp(22px,4vw,58px);align-items:center;padding:clamp(20px,3vw,34px);border:1px solid var(--border);border-radius:calc(var(--r) + 4px);background:linear-gradient(135deg,var(--brand-glow,rgba(20,184,166,.05)),transparent 48%),var(--card);overflow:hidden;transition:border-color .3s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
-.project-showcase:hover{transform:translateY(-3px);border-color:var(--border-h);box-shadow:0 20px 58px rgba(0,0,0,.28)}
-.project-showcase:first-child{grid-template-columns:minmax(0,1.75fr) minmax(280px,.8fr);padding:clamp(22px,3.5vw,42px)}
-.project-showcase-media{min-width:0;order:1}.project-showcase-copy{display:flex;flex-direction:column;align-items:flex-start;gap:16px;order:2}
-.project-number{font-size:12px;font-weight:700;letter-spacing:2.4px;color:var(--accent);font-variant-numeric:tabular-nums}
-.project-category-label{font-size:11px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;color:var(--accent);background:var(--accent-glow);border:1px solid rgba(20,184,166,.16);padding:7px 10px;border-radius:999px}
-.project-showcase-title{font-size:clamp(28px,3.3vw,43px);line-height:1.06;letter-spacing:-1.2px}.project-showcase-intro{font-size:15px;line-height:1.8;color:var(--text2);margin:0}.project-showcase-tags{display:flex;flex-wrap:wrap;gap:7px}.project-showcase-tag{font-size:11px;font-weight:600;color:var(--text2);background:var(--surface);border:1px solid var(--border);padding:6px 10px;border-radius:999px}.project-status{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);padding:7px 11px;border-radius:999px}.project-showcase .project-slider{width:100%;margin:0}.project-showcase .project-slide{min-height:clamp(250px,43vw,550px);padding:12px}.project-showcase .project-slider-dots{padding:12px 0 0}.project-showcase .project-slider-btn{width:38px;height:38px}
-.project-cover{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--border);border-radius:calc(var(--r) - 4px);background:#0D0D12}.project-cover img{display:block;width:100%;height:100%;object-fit:contain;padding:14px}.case-gallery-section{margin:36px 0}.case-gallery-section .cs-sec-title{margin:0 0 16px}
-.project-categories{display:flex;flex-direction:column;gap:36px}
-.project-category{display:flex;flex-direction:column;gap:16px}
-.project-category-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.project-category-title{font-size:20px;font-weight:700;line-height:1.2}
-.project-category-note{font-size:13px;color:var(--text3)}
-.featured-projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.featured-project-card{background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 35%),var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:18px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
-.featured-project-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.35);border-color:var(--border-h)}
-.featured-project-top{display:flex;flex-direction:column;gap:10px}
-.featured-project-badge{display:inline-flex;align-items:center;align-self:flex-start;padding:7px 12px;border-radius:999px;background:var(--accent-glow);border:1px solid rgba(20,184,166,.14);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase}
-.featured-project-title{font-size:24px;font-weight:700;line-height:1.2}
-.featured-project-intro{font-size:14px;color:var(--text2);line-height:1.75}
-.featured-project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.featured-project-tag{font-size:11px;font-weight:600;color:var(--text2);background:var(--surface);border:1px solid var(--border);padding:6px 12px;border-radius:999px}
-.featured-project-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
-
-/* Featured project overlay */
-.featured-overlay{position:fixed;inset:0;z-index:1500;background:var(--bg);overflow-y:auto;overflow-x:hidden;transform:translateY(100%);opacity:0;visibility:hidden;transition:transform .5s var(--ease),opacity .4s ease}
-.featured-overlay.active{transform:translateY(0);opacity:1;visibility:visible}
-.featured-overlay.closing{transform:translateY(100%);opacity:0}
-.featured-overlay .cs-inner{max-width:1080px}
-.project-header{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.project-kicker{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px}
-.project-intro{font-size:17px;color:var(--text2);line-height:1.7;max-width:760px}
-.project-slider{position:relative;border-radius:var(--r);border:1px solid var(--border);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 50%),var(--card)}
-.project-slider-frame{overflow:hidden}
-.project-slider-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;user-select:none}
-.project-slider-track::-webkit-scrollbar{display:none}
-.project-slider-track.dragging{cursor:grabbing}
-.project-slide{flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;min-height:min(68vw,640px);padding:18px;background:#0D0D12}
-.project-slide img{width:100%;height:100%;object-fit:contain;border-radius:calc(var(--r) - 4px)}
-.project-slider-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}
-.project-slider-btn{pointer-events:auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:rgba(10,10,14,.72);color:var(--text);display:inline-flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);cursor:pointer;transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease)}
-.project-slider-btn:hover{transform:scale(1.05);border-color:var(--accent);background:rgba(20,184,166,.14)}
-.project-slider-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4}
-.project-slider-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding-top:16px}
-.project-slider-dot{width:8px;height:8px;border:none;border-radius:999px;background:var(--border);cursor:pointer;transition:width .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
-.project-slider-dot.active{width:26px;background:var(--accent)}
-.project-slider-dot:hover{transform:scale(1.1)}
-.project-slider.single .project-slider-nav,.project-slider.single .project-slider-dots{display:none}
-.project-slider.empty{display:none}
-.markdown-content{margin-top:44px}
-.markdown-content h2{font-size:22px;font-weight:700;margin:42px 0 16px;display:flex;align-items:center;gap:10px}
-.markdown-content h2::before{content:'';width:3px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
-.markdown-content h3{font-size:18px;font-weight:700;margin:28px 0 12px}
-.markdown-content p{font-size:15px;color:var(--text2);line-height:1.8;margin:0 0 16px}
-.markdown-content ul,.markdown-content ol{margin:0 0 16px 20px;padding-left:18px;color:var(--text2)}
-.markdown-content li{margin:8px 0;line-height:1.7}
-.markdown-content strong{color:var(--text)}
-.markdown-content a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-.markdown-content code{padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid var(--border);font-size:12px}
-.markdown-content pre{overflow:auto;margin:0 0 16px;padding:16px;border:1px solid var(--border);border-radius:12px;background:#0D0D12}.markdown-content pre code{padding:0;border:0;background:transparent;font-size:13px;line-height:1.65;color:var(--text2)}
-.markdown-content hr{border:none;height:1px;background:var(--border);margin:30px 0}
-.markdown-content blockquote{margin:0 0 16px;padding:14px 16px;border-left:3px solid var(--accent);background:rgba(20,184,166,.06);border-radius:0 12px 12px 0;color:var(--text2)}
-.markdown-content .project-link-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
-.markdown-content .project-link-row a{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:var(--surface);border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:13px;font-weight:600}
-.markdown-content .project-link-row a:hover{border-color:var(--accent);background:var(--accent-glow)}
+/* ─── CASE STUDY OVERLAY SHELL ─── */
+body.is-locked{overflow:hidden}
+.featured-overlay{position:fixed;inset:0;z-index:1500;background:var(--bg);overflow-y:auto;overflow-x:hidden;overflow-anchor:none;transform:translateY(2.5%);opacity:0;visibility:hidden;transition:transform .45s var(--ease),opacity .35s ease,visibility .45s}
+.featured-overlay.is-open{transform:translateY(0);opacity:1;visibility:visible}
+.featured-overlay.is-closing{transform:translateY(2.5%);opacity:0}
+.featured-overlay .cs-inner{max-width:1000px}
+.cs-head{padding-bottom:8px}
+.cs-head-meta{display:flex;align-items:center;gap:12px;margin-bottom:18px;min-height:26px}
+.cs-tagline{font-size:12px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);margin:10px 0 0}
+.cs-part{margin:clamp(44px,6vw,72px) 0 0;padding-top:clamp(26px,3vw,34px);border-top:1px solid var(--border)}
+.cs-part-title{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.6px}
+.cs-part-intro{font-size:15px;color:var(--text2);line-height:1.75;margin-top:10px;max-width:62ch}
+.cs-part + .cs-sec{margin-top:26px}
+.cs-text p{margin-bottom:14px}
+.cs-text p:last-child{margin-bottom:0}
+.cs-text-lead{margin-bottom:18px}
+.cs-gallery .cs-sec-title{margin-bottom:16px}
+.flow-group{margin-bottom:18px}
+.flow-group:last-child{margin-bottom:0}
+.flow{justify-content:flex-start}
+.flow-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px}
+.feat-grid{list-style:none}
+.feat-dot{display:block}
 
 /* ─── CASE STUDY OVERLAY ─── */
-.cs-overlay{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto;overflow-x:hidden;transform:translateY(100%);opacity:0;visibility:hidden;transition:transform .5s var(--ease),opacity .4s ease}
-.cs-overlay.active{transform:translateY(0);opacity:1;visibility:visible}
-.cs-overlay.closing{transform:translateY(100%);opacity:0}
-.cs-bar{position:sticky;top:0;z-index:10;padding:14px 24px;background:rgba(11,11,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.cs-bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;padding:14px 24px;background:rgba(11,11,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.cs-bar-title{font-size:13px;font-weight:600;color:var(--text3);letter-spacing:1.6px;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cs-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text2);background:none;border:1px solid var(--border);padding:9px 18px;border-radius:50px;cursor:pointer;transition:all .25s}
 .cs-back:hover{color:var(--text);border-color:var(--accent);background:var(--accent-glow)}
 .cs-back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
 .cs-inner{max-width:920px;margin:0 auto;padding:48px 24px 100px}
 
 /* Hero */
-.cs-label{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:14px}
 .cs-title{font-size:clamp(28px,4.5vw,42px);font-weight:700;line-height:1.2;margin-bottom:8px}
 .cs-role-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--accent);background:var(--accent-glow);padding:6px 16px;border-radius:20px;margin-bottom:18px}
 .cs-desc{font-size:17px;color:var(--text2);line-height:1.7;max-width:680px}
-.cs-hero-img{margin-top:36px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
-.cs-hero-img img{width:100%}
 
 /* Sections */
 .cs-sec{margin-top:52px}
@@ -223,14 +213,6 @@ button{font-family:inherit}
 .tech{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;font-size:13px;font-weight:500;transition:border-color .25s,box-shadow .25s}
 .tech:hover{border-color:var(--accent);box-shadow:0 0 14px var(--accent-glow)}
 .tech i{width:5px;height:5px;background:var(--accent);border-radius:50%;display:inline-block}
-
-/* Gallery */
-.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.gal-item{border-radius:var(--rs);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
-.gal-item:hover{transform:scale(1.02);box-shadow:0 10px 36px rgba(0,0,0,.4)}
-.gal-item img{transition:transform .4s ease}
-.gal-item:hover img{transform:scale(1.03)}
-.gal-cap{padding:10px 14px;font-size:12px;font-weight:500;color:var(--text3);background:var(--surface);border-top:1px solid var(--border)}
 
 /* Links */
 .cs-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
@@ -270,21 +252,34 @@ button{font-family:inherit}
 /* Responsive */
 @media(max-width:768px){
   .section{padding:80px 16px 40px}
-  .projects-grid{grid-template-columns:1fr;gap:20px}
   .cs-inner{padding:32px 16px 64px}
-  .gal{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
   .feat-grid{grid-template-columns:1fr}
   .rules{grid-template-columns:1fr}
   .cs-links{flex-direction:column}
   .cs-highlight{grid-template-columns:1fr}
   .flow{justify-content:center}
-  .project-showcase,.project-showcase:first-child{grid-template-columns:1fr;gap:24px;padding:18px}.project-showcase-media{order:2}.project-showcase-copy{order:1}.project-showcase .project-slide{min-height:58vw;padding:8px}.project-showcase .project-slider-nav{padding:0 8px}
+  .cs-bar-title{display:none}
+  .cs-part{margin-top:38px}
 }
-@media(max-width:420px){
-  .projects-grid{grid-template-columns:1fr}
-  .card-body{padding:20px 18px}
-  .card-logo-area{padding:28px 18px 22px}
-  .gal{grid-template-columns:1fr}
+@media(max-width:960px){
+  .projects-list{grid-template-columns:1fr;gap:26px}
+  .project,.project.is-lead,.project.is-upcoming,.project:nth-of-type(even):not(.is-upcoming){grid-column:span 1;grid-template-columns:1fr;gap:22px;padding:16px}
+  .project:nth-of-type(even):not(.is-upcoming) .project-media{order:0}
+  .project-media{order:0}
+  .project-copy{order:1}
+  .project-intro{max-width:none}
+  .slider-slide{max-height:min(56vh,440px)}
+  .project-cover:not(.is-portrait),.project.is-lead .project-cover:not(.is-portrait),.project.is-upcoming .project-cover:not(.is-portrait){aspect-ratio:16/10}
+}
+@media(max-width:600px){
+  .project-title,.project.is-lead .project-title{font-size:clamp(24px,7vw,30px)}
+  .project-intro{font-size:14.5px}
+  .project-action,.project-soon{width:100%;justify-content:center}
+  .slider-slide{max-height:min(52vh,360px);padding:10px}
+  .slider-nav{padding:0 8px}
+  .slider-btn{width:36px;height:36px}
+  .slider-btn svg{width:15px;height:15px}
+  .cs-part-title{font-size:22px}
 }
 </style>
 </head>
@@ -394,820 +389,26 @@ button{font-family:inherit}
   </div>
 </section>
 
-<!-- ══════ FEATURED PROJECTS ══════ -->
+<!-- ══════ PROJECTS ══════ -->
 <section class="section" id="projects">
   <div class="section-header">
-    <div class="section-label">Case Studies</div>
+    <div class="section-label">Selected Work</div>
     <h2 class="section-title">Projects &amp; Products</h2>
-    <p class="section-subtitle">Selected product, client, and personal work — each presented as a focused case study.</p>
+    <p class="section-subtitle">Business platforms, client systems, and personal tools — each one built, shipped, and documented as a case study.</p>
   </div>
-  <div class="editorial-projects" id="featured-projects-grid"></div>
+  <div class="projects-list" id="featured-projects-grid"></div>
 </section>
 
-<div class="featured-overlay" id="featured-overlay" aria-hidden="true">
-  <div class="cs-bar"><button class="cs-back" id="featured-close" type="button"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
+<!-- ══════ CASE STUDY OVERLAY ══════ -->
+<div class="featured-overlay" id="featured-overlay" role="dialog" aria-modal="true" aria-labelledby="featured-overlay-title" aria-hidden="true">
+  <div class="cs-bar">
+    <button class="cs-back" id="featured-close" type="button">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects
+    </button>
+    <span class="cs-bar-title" id="featured-overlay-title"></span>
+  </div>
   <div class="cs-inner" id="featured-overlay-inner"></div>
 </div>
-
-<!-- ══════ PROJECTS ══════ -->
-<section class="section" id="legacy-projects" hidden>
-  <div class="section-header">
-    <div class="section-label">Portfolio</div>
-    <h2 class="section-title">Projects &amp; Products</h2>
-    <p class="section-subtitle">Real-world applications I've designed, developed, and shipped — from digital platforms to business tools.</p>
-  </div>
-
-  <div class="projects-grid">
-
-    <!-- 1 ─ Memora Store -->
-    <div class="project-card" style="--brand-glow:rgba(212,175,55,.1)">
-      <div class="card-logo-area">
-        <img src="Memora/Logo.jpeg" alt="Memora" class="card-logo-img">
-        <div class="card-company-name">Memora</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Memora Store</h3>
-        <p class="card-desc">A digital wedding invitation platform and online store where customers browse, preview live demos, and order custom invitations.</p>
-        <div class="card-tags">
-          <span class="card-tag">HTML</span>
-          <span class="card-tag">CSS</span>
-          <span class="card-tag">JavaScript</span>
-          <span class="card-tag">Supabase</span>
-          <span class="card-tag">Vercel</span>
-        </div>
-        <div class="card-actions">
-          <button class="card-btn" onclick="openCS('memora-store')">Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <a href="https://memora-store.vercel.app/" target="_blank" rel="noopener" class="card-btn card-btn-s">Live Store <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2 ─ Memora Admin -->
-    <div class="project-card" style="--brand-glow:rgba(212,175,55,.1)">
-      <div class="card-logo-area">
-        <img src="Memora/Logo.jpeg" alt="Memora" class="card-logo-img">
-        <div class="card-company-name">Memora</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Memora Admin Dashboard</h3>
-        <p class="card-desc">Admin dashboard for managing orders, products, pricing, analytics, and customer communication.</p>
-        <div class="card-tags">
-          <span class="card-tag">HTML</span>
-          <span class="card-tag">CSS</span>
-          <span class="card-tag">JavaScript</span>
-          <span class="card-tag">Supabase</span>
-          <span class="card-tag">Vercel</span>
-        </div>
-        <div class="card-actions">
-          <button class="card-btn" onclick="openCS('memora-admin')">Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3 ─ RingRoad CRM -->
-    <div class="project-card" style="--brand-glow:rgba(230,126,34,.1)">
-      <div class="card-logo-area">
-        <img src="RingRoad/Logo.jpeg" alt="Ring Road Real Estate" class="card-logo-img">
-        <div class="card-company-name">Ring Road Real Estate</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">RingRoad CRM</h3>
-        <p class="card-desc">A CRM system for managing clients, tracking deals, scheduling follow-ups, and monitoring sales analytics.</p>
-        <div class="card-tags">
-          <span class="card-tag">HTML</span>
-          <span class="card-tag">CSS</span>
-          <span class="card-tag">JavaScript</span>
-          <span class="card-tag">Firebase</span>
-        </div>
-        <div class="card-actions">
-          <button class="card-btn" onclick="openCS('crm')">Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4 ─ RingRoad Client View -->
-    <div class="project-card" style="--brand-glow:rgba(230,126,34,.1)">
-      <div class="card-logo-area">
-        <img src="RingRoad/Logo.jpeg" alt="Ring Road Real Estate" class="card-logo-img">
-        <div class="card-company-name">Ring Road Real Estate</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">RingRoad Client View</h3>
-        <p class="card-desc">A client-facing portal for browsing properties, comparing listings, and viewing details with video walkthroughs.</p>
-        <div class="card-tags">
-          <span class="card-tag">HTML</span>
-          <span class="card-tag">CSS</span>
-          <span class="card-tag">JavaScript</span>
-          <span class="card-tag">Firebase</span>
-        </div>
-        <div class="card-actions">
-          <button class="card-btn" onclick="openCS('client-view')">Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <a href="https://ring-road-client.vercel.app/" target="_blank" rel="noopener" class="card-btn card-btn-s">Live Demo <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5 ─ RingRoad Attendance -->
-    <div class="project-card" style="--brand-glow:rgba(37,99,235,.1)">
-      <div class="card-logo-area">
-        <img src="Attendance/logo-icon.svg" alt="RingRoad Attendance" class="card-logo-img" style="border-radius:0">
-        <div class="card-company-name">Ring Road Real Estate</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">RingRoad Attendance</h3>
-        <p class="card-desc">GPS-based attendance system with location-verified clock in/out, leave management, and workforce reporting.</p>
-        <div class="card-tags">
-          <span class="card-tag">HTML</span>
-          <span class="card-tag">CSS</span>
-          <span class="card-tag">JavaScript</span>
-          <span class="card-tag">Supabase</span>
-          <span class="card-tag">Supabase Auth</span>
-          <span class="card-tag">Vercel</span>
-        </div>
-        <div class="card-actions">
-          <button class="card-btn" onclick="openCS('attendance')">Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <a href="https://github.com/Mostafahamada-cpu/Attendance" target="_blank" rel="noopener" class="card-btn card-btn-s">GitHub <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6 ─ AION Website (placeholder) -->
-    <div class="project-card card-placeholder" style="--brand-glow:rgba(99,102,241,.08)">
-      <div class="card-logo-area">
-        <span class="coming-badge">Coming Soon</span>
-        <img src="AION(Wuillt)/aion-logo.png" alt="AION Innovations" class="card-logo-img">
-        <div class="card-company-name">AION</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">AION Website</h3>
-        <p class="card-desc">Company website for AION Innovations — smart solutions designer and producer.</p>
-        <div class="card-tags"><span class="card-tag">Web Development</span></div>
-        <div class="card-actions">
-          <button class="card-btn">Coming Soon</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7 ─ AION Store (placeholder) -->
-    <div class="project-card card-placeholder" style="--brand-glow:rgba(99,102,241,.08)">
-      <div class="card-logo-area">
-        <span class="coming-badge">Coming Soon</span>
-        <img src="AION(Wuillt)/aion-logo.png" alt="AION Innovations" class="card-logo-img">
-        <div class="card-company-name">AION</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">AION Store</h3>
-        <p class="card-desc">E-commerce store for AION smart home and automation products.</p>
-        <div class="card-tags"><span class="card-tag">E-Commerce</span></div>
-        <div class="card-actions">
-          <button class="card-btn">Coming Soon</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--                  CASE STUDY: MEMORA STORE                 -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-memora-store">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('memora-store')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">Memora Store</h1>
-  <div class="cs-role-badge">CEO &amp; Founder &middot; Full-Stack Developer</div>
-  <p class="cs-desc">Memora is a digital wedding invitation platform and online store that I founded and built from the ground up. I personally design and create all the invitation products offered through the platform.</p>
-  <div class="cs-hero-img"><img src="Memora/Store/Home.jpeg" alt="Memora Store Home" loading="lazy"></div>
-
-  <!-- Project Overview -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Project Overview</h2>
-    <p class="cs-text">Memora is my own business — a digital wedding invitation platform and online store. The platform allows customers to browse a curated collection of wedding invitation products and bundles, preview live interactive demos of each invitation, and place orders through a structured e-commerce flow. I designed the business model, created the invitation products, developed the entire platform, and handle all customer operations.</p>
-  </div>
-
-  <!-- Problem / Solution -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Problem &amp; Solution</h2>
-    <div class="cs-highlight">
-      <div class="cs-hl-box problem">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>The Problem</div>
-        <p>Couples looking for digital wedding invitations face either generic templates that lack personality or expensive custom design services with long turnaround times. There was no unified platform for browsing, previewing live demos, and ordering custom invitations with direct creator communication.</p>
-      </div>
-      <div class="cs-hl-box solution">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>The Solution</div>
-        <p>I built Memora as an end-to-end e-commerce platform for digital wedding invitations. Customers browse products or bundles, see exactly what they're getting through live interactive demos, and complete their order through a guided step-by-step flow with InstaPay payment and WhatsApp communication.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Key Features -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Key Features</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>E-commerce store with individual products and curated bundles</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Live interactive invitation demos customers can preview before purchase</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Structured 7-step ordering flow with input validation</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>InstaPay payment link integration</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Automated WhatsApp order link generation for direct communication</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Product categorization, filtering, and detailed product pages</span></div>
-    </div>
-  </div>
-
-  <!-- How the System Works -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">How the System Works</h2>
-    <p class="cs-text" style="margin-bottom:14px">Customers follow a structured purchasing flow from discovery to order confirmation:</p>
-    <div class="flow">
-      <span class="flow-s">Browse</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Choose Product / Bundle</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Live Demo</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Start Your Order</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Enter Details</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Payment</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Order Confirmed</span>
-    </div>
-  </div>
-
-  <!-- Technologies -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Technologies Used</h2>
-    <div class="tech-row">
-      <span class="tech"><i></i>HTML</span><span class="tech"><i></i>CSS</span><span class="tech"><i></i>JavaScript</span><span class="tech"><i></i>Supabase</span><span class="tech"><i></i>Vercel</span>
-    </div>
-  </div>
-
-  <!-- Technical Details -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Important Technical Details</h2>
-    <p class="cs-text">Supabase serves as the backend database for products, bundles, orders, and customer data. The ordering flow is a multi-step form that validates input at each step and generates a final order record in the database. InstaPay payment links are dynamically generated based on the order total, and WhatsApp links are constructed with pre-filled order details so I can communicate directly with each customer. Live demos load actual invitation templates with sample data so customers see exactly what they'll receive. The platform is deployed on Vercel for fast, reliable hosting with automatic deployments from the repository.</p>
-  </div>
-
-  <!-- Challenges -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Challenges / What I Solved</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Built a complete e-commerce flow as a solo developer — from product display to payment and order management</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Designed a multi-step ordering process that guides customers without overwhelming them</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Integrated third-party communication (WhatsApp) and payment (InstaPay) into a seamless experience</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Created a flexible product/bundle system to handle different invitation types and pricing</span></div>
-    </div>
-  </div>
-
-  <!-- Results -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Results / Purpose</h2>
-    <p class="cs-text">The platform is live and serving real customers, handling the full lifecycle from product browsing to order completion and customer communication. As the founder, I continue to design new invitation products and manage all business operations through the companion admin dashboard.</p>
-  </div>
-
-  <!-- Screenshots -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Screenshots</h2>
-    <div class="gal">
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Home.jpeg" alt="Home" loading="lazy"><div class="gal-cap">Store Home</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Products.jpeg" alt="Products" loading="lazy"><div class="gal-cap">Products</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Bundles.jpeg" alt="Bundles" loading="lazy"><div class="gal-cap">Bundles</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%201.jpeg" alt="Order Step 1" loading="lazy"><div class="gal-cap">Order — Step 1</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%202.jpeg" alt="Order Step 2" loading="lazy"><div class="gal-cap">Order — Step 2</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%203.jpeg" alt="Order Step 3" loading="lazy"><div class="gal-cap">Order — Step 3</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%204.jpeg" alt="Order Step 4" loading="lazy"><div class="gal-cap">Order — Step 4</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20step%205.jpeg" alt="Order Step 5" loading="lazy"><div class="gal-cap">Order — Step 5</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Store/Order%20final%20step.jpeg" alt="Final Step" loading="lazy"><div class="gal-cap">Order — Final Step</div></div>
-    </div>
-  </div>
-
-  <div class="cs-div"></div>
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Links</h2>
-    <div class="cs-links">
-      <a href="https://memora-store.vercel.app/" target="_blank" rel="noopener" class="cs-link cs-link-p"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Store</a>
-      <a href="https://github.com/Mostafahamada-cpu/MemoraStore" target="_blank" rel="noopener" class="cs-link cs-link-s"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--                CASE STUDY: MEMORA ADMIN                   -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-memora-admin">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('memora-admin')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">Memora Admin Dashboard</h1>
-  <div class="cs-role-badge">Full-Stack Developer</div>
-  <p class="cs-desc">The management system I built to run the entire Memora business from a single interface — from tracking orders and analyzing sales to managing products and communicating with customers.</p>
-  <div class="cs-hero-img"><img src="Memora/Admin/Dashboard.png" alt="Memora Admin Dashboard" loading="lazy"></div>
-
-  <!-- Project Overview -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Project Overview</h2>
-    <p class="cs-text">The Memora Admin Dashboard is the backend management system for the Memora business. It provides comprehensive tools for tracking orders, analyzing sales performance, managing products and bundles, adjusting pricing, and communicating directly with customers — all from one centralized interface.</p>
-  </div>
-
-  <!-- Problem / Solution -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Problem &amp; Solution</h2>
-    <div class="cs-highlight">
-      <div class="cs-hl-box problem">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>The Problem</div>
-        <p>As Memora grew, managing orders, products, and customer communication through separate tools became inefficient. I needed a centralized system with real-time visibility into every aspect of the business without switching between multiple platforms.</p>
-      </div>
-      <div class="cs-hl-box solution">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>The Solution</div>
-        <p>I designed and built a custom admin dashboard tailored specifically to Memora's operations. The dashboard consolidates order management, product catalog control, pricing adjustments, sales analytics, and customer communication into one unified interface.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Key Features -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Key Features</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Order analytics and tracking dashboard with real-time data</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Full product management — add, edit, remove products with images</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Bundle creation and management system</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Dynamic pricing control across all products and bundles</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Detailed customer order view with complete order history</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>WhatsApp direct message integration per order for instant communication</span></div>
-    </div>
-  </div>
-
-  <!-- How It Works -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">How the System Works</h2>
-    <p class="cs-text" style="margin-bottom:14px">The admin dashboard provides a complete management workflow:</p>
-    <div class="flow">
-      <span class="flow-s">Dashboard Overview</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Orders</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Products</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Bundles</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Analytics</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Customer Communication</span>
-    </div>
-  </div>
-
-  <!-- Technologies -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Technologies Used</h2>
-    <div class="tech-row">
-      <span class="tech"><i></i>HTML</span><span class="tech"><i></i>CSS</span><span class="tech"><i></i>JavaScript</span><span class="tech"><i></i>Supabase</span><span class="tech"><i></i>Vercel</span>
-    </div>
-  </div>
-
-  <!-- Technical Details -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Important Technical Details</h2>
-    <p class="cs-text">The dashboard uses real-time data synchronization with Supabase so it always reflects the current state of orders and products. Analytics are calculated from order history data, providing insights into revenue trends, popular products, and order patterns. Product management includes full CRUD operations with image handling and pricing. Each customer order record includes a direct WhatsApp link pre-filled with order context for immediate communication. Role-based access ensures only authorized users can manage business data.</p>
-  </div>
-
-  <!-- Challenges -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Challenges / What I Solved</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Designed a dashboard that handles real business complexity while remaining intuitive</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Built analytics calculations that provide meaningful insights from raw order data</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Implemented a flexible product management system supporting individual items and bundles</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Created a unified communication workflow connecting orders to WhatsApp conversations</span></div>
-    </div>
-  </div>
-
-  <!-- Results -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Results / Purpose</h2>
-    <p class="cs-text">The admin dashboard is used daily to manage Memora's business operations — from processing new orders and tracking sales performance to managing the product catalog and communicating directly with customers.</p>
-  </div>
-
-  <!-- Screenshots -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Screenshots</h2>
-    <div class="gal">
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Dashboard.png" alt="Dashboard" loading="lazy"><div class="gal-cap">Dashboard</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Products.png" alt="Products" loading="lazy"><div class="gal-cap">Products</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Bundles.png" alt="Bundles" loading="lazy"><div class="gal-cap">Bundles</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Orders.png" alt="Orders" loading="lazy"><div class="gal-cap">Orders</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/OrderDetails.png" alt="Order Details" loading="lazy"><div class="gal-cap">Order Details</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Memora/Admin/Analytics.png" alt="Analytics" loading="lazy"><div class="gal-cap">Analytics</div></div>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--                 CASE STUDY: RINGROAD CRM                  -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-crm">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('crm')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">RingRoad CRM</h1>
-  <div class="cs-role-badge">Full-Stack Developer</div>
-  <p class="cs-desc">A complete Customer Relationship Management system I built for Ring Road Real Estate to centralize client management, track deals, and streamline sales operations.</p>
-  <div class="cs-hero-img"><img src="CRM/Dashboard.png" alt="CRM Dashboard" loading="lazy"></div>
-
-  <!-- Project Overview -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Project Overview</h2>
-    <p class="cs-text">I developed a complete CRM system for Ring Road Real Estate. The platform provides a centralized hub for managing clients, tracking property deals through a pipeline, scheduling follow-ups with calendar integration, running outbound sales through a TeleSales module, and monitoring overall sales performance through an analytics dashboard.</p>
-  </div>
-
-  <!-- Problem / Solution -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Problem &amp; Solution</h2>
-    <div class="cs-highlight">
-      <div class="cs-hl-box problem">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>The Problem</div>
-        <p>The real estate company's client information was scattered across different tools. Follow-ups were being missed, there was no clear view of the sales pipeline, and management had no centralized way to monitor team performance or deal progress.</p>
-      </div>
-      <div class="cs-hl-box solution">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>The Solution</div>
-        <p>I built a custom CRM designed around real estate workflows — centralizing all client data, tracking deals through pipeline stages, automating follow-up reminders with calendar integration, and providing analytics dashboards for management oversight.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- My Role -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">My Role</h2>
-    <p class="cs-text">I served as the sole developer on this project. I designed the system architecture, built all frontend and backend components, structured the database, and deployed the application. I worked closely with the business team to understand their sales workflow and translated their requirements into a functional CRM system.</p>
-  </div>
-
-  <!-- Key Features -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Key Features</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Client management with status tracking, filtering, and detailed contact records</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Deal pipeline with stage-based progression and status updates</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Follow-up scheduling with calendar integration and reminders</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>TeleSales module for organizing outbound sales workflows</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Property listing management with detailed property records</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Analytics dashboard with performance metrics and reporting</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Sold properties tracking with completion records</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Advanced search and multi-criteria filtering</span></div>
-    </div>
-  </div>
-
-  <!-- How It Works -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">How the System Works</h2>
-    <p class="cs-text" style="margin-bottom:14px">The CRM follows the real estate sales cycle from lead acquisition to closing:</p>
-    <div class="flow">
-      <span class="flow-s">Dashboard</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Clients</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Properties</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Deals</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Follow-Ups</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">TeleSales</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Analytics</span>
-    </div>
-  </div>
-
-  <!-- Technical Details -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Important Technical Details</h2>
-    <p class="cs-text">Client records support status-based filtering to quickly identify prospects, active clients, and closed deals. The deal pipeline tracks each interaction through defined stages with status updates, giving the team visibility into where every deal stands. Calendar integration links follow-ups to specific dates with reminder functionality so no client interaction is missed. The TeleSales module organizes outbound call workflows and tracks outcomes, while the analytics dashboard aggregates data across clients, deals, and sales activity to provide management with actionable insights.</p>
-  </div>
-
-  <!-- Challenges -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Challenges / What I Solved</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Designed a data model flexible enough to represent the full real estate sales cycle</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Built an intuitive interface that sales agents could adopt without extensive training</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Implemented a follow-up system with calendar views that prevents missed client interactions</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Created analytics that give management visibility into individual and team performance</span></div>
-    </div>
-  </div>
-
-  <!-- Results -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Results / Purpose</h2>
-    <p class="cs-text">The CRM is deployed and used by the Ring Road Real Estate team for daily client management and sales operations. It replaced scattered tools with a single unified platform, giving the team a clear view of their pipeline and ensuring consistent follow-up with every client.</p>
-  </div>
-
-  <!-- Screenshots -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Screenshots</h2>
-    <div class="gal">
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Dashboard.png" alt="Dashboard" loading="lazy"><div class="gal-cap">Dashboard</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Properties.png" alt="Properties" loading="lazy"><div class="gal-cap">Properties</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Clients.png" alt="Clients" loading="lazy"><div class="gal-cap">Clients</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Deals.png" alt="Deals" loading="lazy"><div class="gal-cap">Deals</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Follow-Ups.png" alt="Follow-Ups" loading="lazy"><div class="gal-cap">Follow-Ups</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Sold.png" alt="Sold" loading="lazy"><div class="gal-cap">Sold</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Calendar.png" alt="Calendar" loading="lazy"><div class="gal-cap">Calendar</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/TeleSales.png" alt="TeleSales" loading="lazy"><div class="gal-cap">TeleSales</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="CRM/Analytics.png" alt="Analytics" loading="lazy"><div class="gal-cap">Analytics</div></div>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--               CASE STUDY: CLIENT VIEW                     -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-client-view">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('client-view')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">RingRoad Client View</h1>
-  <div class="cs-role-badge">Full-Stack Developer</div>
-  <p class="cs-desc">A dedicated client-facing interface for Ring Road Real Estate where each client can browse properties, compare options side by side, and access their personalized profile.</p>
-  <div class="cs-hero-img"><img src="RingRoad/Compare.png" alt="Client View Compare" loading="lazy"></div>
-
-  <!-- Project Overview -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Project Overview</h2>
-    <p class="cs-text">I built a dedicated client-facing portal for Ring Road Real Estate that gives each client access to their personalized profile, property listings, a side-by-side comparison tool, detailed property pages with video walkthroughs, and activity tracking — all designed to be a self-service experience that reduces the need for constant contact with agents.</p>
-  </div>
-
-  <!-- Problem / Solution -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Problem &amp; Solution</h2>
-    <div class="cs-highlight">
-      <div class="cs-hl-box problem">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>The Problem</div>
-        <p>Clients had to rely on phone calls and meetings with agents to get property information, compare options, or check their status. There was no self-service tool where clients could independently browse properties and evaluate their options at their own pace.</p>
-      </div>
-      <div class="cs-hl-box solution">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>The Solution</div>
-        <p>I created a clean, responsive client portal where each client can log in to view their profile, browse curated property listings, compare properties side by side, watch video walkthroughs, and track their activity — all without needing to contact the business directly.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- My Role -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">My Role</h2>
-    <p class="cs-text">I served as the sole developer. I designed the client experience, built the entire interface, and integrated it with the existing CRM data so that updates made by agents are reflected in the client portal in real time.</p>
-  </div>
-
-  <!-- Key Features -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Key Features</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Personalized client profiles with status updates and activity history</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Property listing browser with detailed property pages</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Side-by-side property comparison tool for evaluating options</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Property video walkthroughs embedded alongside photos and specs</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Responsive design optimized for desktop, tablet, and mobile</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Real-time data sync with the CRM backend</span></div>
-    </div>
-  </div>
-
-  <!-- How It Works -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">How the System Works</h2>
-    <p class="cs-text" style="margin-bottom:14px">Clients navigate a streamlined self-service experience:</p>
-    <div class="flow">
-      <span class="flow-s">Login</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Personal Profile</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Browse Properties</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Compare</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Property Details &amp; Video</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Track Activity</span>
-    </div>
-  </div>
-
-  <!-- Technical Details -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Important Technical Details</h2>
-    <p class="cs-text">The comparison tool allows clients to select multiple properties and view them in a synchronized side-by-side layout, highlighting differences in specifications and pricing. Property detail pages embed video walkthroughs alongside photos and technical specifications. The interface is fully responsive, providing a seamless experience across all device sizes. Client profiles are linked to the CRM backend, so any updates made by agents — status changes, new property recommendations — are reflected in the client's portal in real time.</p>
-  </div>
-
-  <!-- Challenges -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Challenges / What I Solved</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Built a property comparison engine that handles variable data across different property types</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Designed a client-first interface intuitive enough for non-technical users</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Integrated video content alongside property details without degrading page performance</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Connected the portal to the existing CRM backend for synchronized data</span></div>
-    </div>
-  </div>
-
-  <!-- Results -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Results / Purpose</h2>
-    <p class="cs-text">The Client View portal is live, providing Ring Road Real Estate clients with a modern self-service property browsing experience. It reduces the workload on agents by giving clients direct access to property information, comparison tools, and their account status.</p>
-  </div>
-
-  <!-- Screenshots -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Screenshots</h2>
-    <div class="gal">
-      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/HomePage.png" alt="Home Page" loading="lazy"><div class="gal-cap">Home Page</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/Compare.png" alt="Compare" loading="lazy"><div class="gal-cap">Property Comparison</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/PropertyDetails.png" alt="Property Details" loading="lazy"><div class="gal-cap">Property Details</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="RingRoad/Video.png" alt="Video" loading="lazy"><div class="gal-cap">Property Video</div></div>
-    </div>
-  </div>
-
-  <div class="cs-div"></div>
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Links</h2>
-    <div class="cs-links">
-      <a href="https://ring-road-client.vercel.app/" target="_blank" rel="noopener" class="cs-link cs-link-p"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Client View</a>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--              CASE STUDY: ATTENDANCE                        -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-attendance">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('attendance')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">RingRoad Attendance</h1>
-  <div class="cs-role-badge">Full-Stack Developer</div>
-  <p class="cs-desc">A web-based attendance management system I developed for Ring Road Real Estate, featuring GPS-verified clock in/out, a tiered leave management system, and a comprehensive admin dashboard.</p>
-  <div class="cs-hero-img"><img src="Attendance/DashBoard.png" alt="Attendance Dashboard" loading="lazy"></div>
-
-  <!-- Project Overview -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Project Overview</h2>
-    <p class="cs-text">I developed a web-based attendance management system that uses GPS verification to ensure employees can only clock in and out when physically present at the company location. The system includes a complete leave management workflow with tiered approval rules, automatic working hours calculation, a notification system, and a comprehensive admin dashboard for workforce monitoring and reporting.</p>
-  </div>
-
-  <!-- Problem / Solution -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Problem &amp; Solution</h2>
-    <div class="cs-highlight">
-      <div class="cs-hl-box problem">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>The Problem</div>
-        <p>The company needed a reliable way to verify employee attendance at the office — not just trust-based manual check-ins. They also needed structured leave management with clear rules around schedule changes, and administrators needed real-time visibility into workforce data.</p>
-      </div>
-      <div class="cs-hl-box solution">
-        <div class="cs-hl-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>The Solution</div>
-        <p>I built a system that uses the browser's Geolocation API to verify the employee's physical location before allowing clock in or clock out — enforcing a 150-meter radius boundary. The system also includes leave balance tracking, a request workflow with tiered approval rules, and a full admin dashboard with reports.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- My Role -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">My Role</h2>
-    <p class="cs-text">I served as the sole developer. I designed the location verification logic, built the complete attendance and leave management systems, implemented the authentication flow using Supabase Auth, and developed the admin dashboard with reporting tools.</p>
-  </div>
-
-  <!-- Key Features -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Key Features</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Location-based clock in/out with GPS coordinate verification</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>150-meter company radius boundary enforcement</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Automatic working hours calculation from timestamps</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Real-time attendance status tracking across the workforce</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Leave request management with remaining balance tracking</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Tiered leave-change approval rules (1st free, 2nd needs approval, 3rd blocked)</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Notification system for approvals, alerts, and status changes</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Secure authentication for employees and administrators</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Admin dashboard with attendance reports and employee management</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Weekend/day-off scheduling and change management</span></div>
-    </div>
-  </div>
-
-  <!-- How It Works -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">How the System Works</h2>
-    <p class="cs-text" style="margin-bottom:14px"><strong style="color:var(--text)">For Employees:</strong></p>
-    <div class="flow" style="margin-bottom:18px">
-      <span class="flow-s">Login</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Clock In (GPS verified)</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Work</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Clock Out (GPS verified)</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Hours Calculated</span>
-    </div>
-    <p class="cs-text" style="margin-bottom:14px"><strong style="color:var(--text)">For Leave Requests:</strong></p>
-    <div class="flow" style="margin-bottom:18px">
-      <span class="flow-s">Submit Request</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Check Balance</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Approval Workflow</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Balance Updated</span>
-    </div>
-    <p class="cs-text" style="margin-bottom:14px"><strong style="color:var(--text)">For Administrators:</strong></p>
-    <div class="flow">
-      <span class="flow-s">Dashboard</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Monitor Attendance</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Manage Employees</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Review Requests</span><span class="flow-a">&rarr;</span>
-      <span class="flow-s">Reports</span>
-    </div>
-  </div>
-
-  <!-- Leave Rules -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Leave Management Rules</h2>
-    <p class="cs-text" style="margin-bottom:16px">I implemented leave-day change rules to maintain a controlled and transparent process:</p>
-    <div class="rules">
-      <div class="rule"><b>1st</b><strong>First Change</strong><small>No approval needed</small></div>
-      <div class="rule"><b>2nd</b><strong>Second Change</strong><small>Requires admin approval</small></div>
-      <div class="rule"><b>3rd</b><strong>Third Change</strong><small>Not allowed</small></div>
-    </div>
-  </div>
-
-  <!-- Technologies -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Technologies Used</h2>
-    <div class="tech-row">
-      <span class="tech"><i></i>HTML</span><span class="tech"><i></i>CSS</span><span class="tech"><i></i>JavaScript</span><span class="tech"><i></i>Supabase</span><span class="tech"><i></i>Supabase Auth</span><span class="tech"><i></i>Vercel</span>
-    </div>
-  </div>
-
-  <!-- Technical Details -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Important Technical Details</h2>
-    <p class="cs-text">The system uses the browser's Geolocation API to capture the employee's coordinates, then calculates the distance to the company location using the Haversine formula to verify they're within the 150-meter radius. Supabase Auth handles secure authentication for both employees and administrators with role-based access control. Working hours are calculated from clock-in and clock-out timestamps, with logic to handle edge cases like missed clock-outs. The leave management system tracks each employee's balance and enforces the 3-tier approval workflow programmatically. Real-time attendance status updates allow administrators to see who is currently clocked in at any moment. The notification system alerts administrators to pending leave requests and employees to approval decisions.</p>
-  </div>
-
-  <!-- Challenges -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Challenges / What I Solved</h2>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-dot"></div><span>Implemented reliable GPS verification across different browsers and devices, with error handling for denied location permissions</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Designed the 3-tier leave approval workflow with business rules that prevent abuse while maintaining flexibility</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Built a system that handles real-world edge cases: missed clock-outs, GPS signal variations, multiple clock-in attempts</span></div>
-      <div class="feat"><div class="feat-dot"></div><span>Created an admin dashboard that provides actionable workforce insights without overwhelming administrators</span></div>
-    </div>
-  </div>
-
-  <!-- Results -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Results / Purpose</h2>
-    <p class="cs-text">The attendance system is deployed and used daily by Ring Road Real Estate employees. The GPS verification ensures accurate attendance records without relying on trust-based check-ins. The leave management workflow provides a transparent and controlled process for schedule changes. The admin dashboard gives management complete visibility into workforce patterns and attendance data.</p>
-  </div>
-
-  <!-- Screenshots -->
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Screenshots</h2>
-    <div class="gal">
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Home.png" alt="Home" loading="lazy"><div class="gal-cap">Home</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Days.png" alt="Days" loading="lazy"><div class="gal-cap">Days</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Alerts.png" alt="Alerts" loading="lazy"><div class="gal-cap">Alerts</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/DashBoard.png" alt="Dashboard" loading="lazy"><div class="gal-cap">Dashboard</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Employees.png" alt="Employees" loading="lazy"><div class="gal-cap">Employees</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Employee%202.png" alt="Employee Detail" loading="lazy"><div class="gal-cap">Employee Detail</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Requests.png" alt="Requests" loading="lazy"><div class="gal-cap">Requests</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/Balances.png" alt="Balances" loading="lazy"><div class="gal-cap">Balances</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/ChangeWeekEnd.png" alt="Change Weekend" loading="lazy"><div class="gal-cap">Change Weekend</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="Attendance/ChoseWeekDay.png" alt="Choose Weekday" loading="lazy"><div class="gal-cap">Choose Weekday</div></div>
-    </div>
-  </div>
-
-  <div class="cs-div"></div>
-  <div class="cs-sec">
-    <h2 class="cs-sec-title">Links</h2>
-    <div class="cs-links">
-      <a href="https://github.com/Mostafahamada-cpu/Attendance" target="_blank" rel="noopener" class="cs-link cs-link-s"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--             CASE STUDY: AION WEBSITE (placeholder)        -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-aion-website">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('aion-website')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">AION Website</h1>
-  <div class="cs-role-badge">Developer</div>
-  <p class="cs-desc">Project details and case study content coming soon.</p>
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--             CASE STUDY: AION STORE (placeholder)          -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="cs-overlay" id="cs-aion-store">
-<div class="cs-bar"><button class="cs-back" onclick="closeCS('aion-store')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Projects</button></div>
-<div class="cs-inner">
-  <div class="cs-label">Case Study</div>
-  <h1 class="cs-title">AION Store</h1>
-  <div class="cs-role-badge">Developer</div>
-  <p class="cs-desc">Project details and case study content coming soon.</p>
-</div>
-</div>
-
 
 <!-- ══════ LIGHTBOX ══════ -->
 <div class="lb" id="lb" onclick="closeLB()">
@@ -1225,15 +426,12 @@ button{font-family:inherit}
 <script src="featured-projects.js"></script>
 
 <script>
-function openCS(id){var o=document.getElementById('cs-'+id);o.classList.remove('closing');o.classList.add('active');document.body.style.overflow='hidden';o.scrollTop=0}
-function closeCS(id){var o=document.getElementById('cs-'+id);o.classList.add('closing');setTimeout(function(){o.classList.remove('active','closing');document.body.style.overflow=''},500)}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.cs-overlay.active').forEach(function(el){closeCS(el.id.replace('cs-',''))});var featured=document.getElementById('featured-overlay');if(featured&&featured.classList.contains('active')){featured.classList.add('closing');setTimeout(function(){featured.classList.remove('active','closing');document.body.style.overflow=''},500)}closeLB()}})
-function openLB(el){var s=el.querySelector('img').src;var lb=document.getElementById('lb');document.getElementById('lb-img').src=s;lb.classList.add('active')}
 function closeLB(){document.getElementById('lb').classList.remove('active')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
 
 // Entrance animation
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.08});
-document.querySelectorAll('.project-showcase,.project-card,.skill-cat').forEach(function(el,i){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s ease '+(i*.08)+'s, transform .5s ease '+(i*.08)+'s';obs.observe(el)});
+document.querySelectorAll('.skill-cat').forEach(function(el,i){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s ease '+(i*.08)+'s, transform .5s ease '+(i*.08)+'s';obs.observe(el)});
 </script>
 </body>
 </html>
