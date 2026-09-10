@@ -1,5 +1,5 @@
 (() => {
-  const projects = [
+  const defaultProjects = [
     {
       id: 'stancepro-store',
       title: 'StancePro Store',
@@ -795,6 +795,12 @@ An attendance system evolved into a complete workforce-management platform by co
     }
   ];
 
+  const portfolioManifest = window.portfolioProjectManifest || {
+    categories: [{ id: 'legacy', title: 'Projects', note: 'Legacy portfolio projects', projects: defaultProjects }]
+  };
+  const categories = portfolioManifest.categories || [];
+  const projects = categories.flatMap(category => category.projects || []);
+
   const featuredOverlay = document.getElementById('featured-overlay');
   const featuredOverlayInner = document.getElementById('featured-overlay-inner');
   const featuredGrid = document.getElementById('featured-projects-grid');
@@ -1057,7 +1063,7 @@ An attendance system evolved into a complete workforce-management platform by co
   }
 
   function projectCard(project) {
-    const tech = extractTech(project.content).slice(0, 4);
+    const tech = (project.tech || extractTech(project.content)).slice(0, 4);
     return `
       <article class="featured-project-card" style="--brand-glow:${project.accent}">
         <div class="featured-project-top">
@@ -1067,9 +1073,22 @@ An attendance system evolved into a complete workforce-management platform by co
         </div>
         ${tech.length ? `<div class="featured-project-tags">${tech.map(item => `<span class="featured-project-tag">${escapeHtml(item)}</span>`).join('')}</div>` : ''}
         <div class="featured-project-actions">
-          <button class="card-btn" type="button" data-open-project="${escapeHtml(project.id)}">View case study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="card-btn" type="button" data-open-project="${escapeHtml(project.id)}">${escapeHtml(project.buttonLabel || 'View case study')} <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         </div>
       </article>
+    `;
+  }
+
+  function categoryMarkup(category) {
+    const cards = (category.projects || []).map(projectCard).join('');
+    return `
+      <section class="project-category">
+        <div class="project-category-head">
+          <h3 class="project-category-title">${escapeHtml(category.title)}</h3>
+          ${category.note ? `<span class="project-category-note">${escapeHtml(category.note)}</span>` : ''}
+        </div>
+        <div class="featured-projects-grid">${cards}</div>
+      </section>
     `;
   }
 
@@ -1217,6 +1236,10 @@ An attendance system evolved into a complete workforce-management platform by co
   function openProject(projectId) {
     const project = projects.find(item => item.id === projectId);
     if (!project) return;
+    if (project.existingOverlayId) {
+      if (typeof openCS === 'function') openCS(project.existingOverlayId);
+      return;
+    }
     featuredOverlayInner.innerHTML = projectOverlayMarkup(project);
     featuredOverlay.classList.remove('closing');
     featuredOverlay.classList.add('active');
@@ -1237,7 +1260,7 @@ An attendance system evolved into a complete workforce-management platform by co
   }
 
   function init() {
-    if (featuredGrid) featuredGrid.innerHTML = projects.map(projectCard).join('');
+    if (featuredGrid) featuredGrid.innerHTML = categories.map(categoryMarkup).join('');
 
     featuredGrid?.addEventListener('click', event => {
       const button = event.target.closest('[data-open-project]');
