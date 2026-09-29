@@ -15,132 +15,180 @@ window.portfolioProjectAssets = {
     },
     "images": [
       {
-        "src": "Memora/Store/Home.jpeg",
-        "w": 739,
-        "h": 1258
+        "src": "Memora/Store/01-home.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Home"
       },
       {
-        "src": "Memora/Store/Products.jpeg",
-        "w": 739,
-        "h": 1444
+        "src": "Memora/Store/02-live-demos.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Live demos"
       },
       {
-        "src": "Memora/Store/Bundles.jpeg",
-        "w": 739,
-        "h": 1411
+        "src": "Memora/Store/03-wedding-tiers.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Wedding tiers"
       },
       {
-        "src": "Memora/Store/Order step 1.jpeg",
-        "w": 739,
-        "h": 1445
+        "src": "Memora/Store/04-occasions.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Occasions"
       },
       {
-        "src": "Memora/Store/Order step 2.jpeg",
-        "w": 739,
-        "h": 1415
+        "src": "Memora/Store/05-bundles.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Bundles"
       },
       {
-        "src": "Memora/Store/Order step 3.jpeg",
-        "w": 739,
-        "h": 1416
+        "src": "Memora/Store/06-price-builder.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Price builder"
       },
       {
-        "src": "Memora/Store/Order step 4.jpeg",
-        "w": 739,
-        "h": 1283
+        "src": "Memora/Store/07-product.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Product"
       },
       {
-        "src": "Memora/Store/Order step 5.jpeg",
-        "w": 739,
-        "h": 1268
+        "src": "Memora/Store/08-order-customise.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Order customise"
       },
       {
-        "src": "Memora/Store/Order final step.jpeg",
-        "w": 739,
-        "h": 1252
+        "src": "Memora/Store/09-checkout.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Checkout"
       },
       {
-        "src": "Memora/Admin/Dashboard.png",
-        "w": 1892,
-        "h": 860
+        "src": "Memora/Store/10-arabic.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Arabic"
       },
       {
-        "src": "Memora/Admin/Products.png",
-        "w": 1902,
-        "h": 852
+        "src": "Memora/Store/11-henna-demo.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Henna demo"
       },
       {
-        "src": "Memora/Admin/Bundles.png",
-        "w": 1907,
-        "h": 858
+        "src": "Memora/Admin/01-dashboard.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Dashboard"
       },
       {
-        "src": "Memora/Admin/OrderDetails.png",
-        "w": 1880,
-        "h": 847
+        "src": "Memora/Admin/02-orders.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Orders"
       },
       {
-        "src": "Memora/Admin/Orders.png",
-        "w": 1876,
-        "h": 855
+        "src": "Memora/Admin/03-order-details.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Order details"
       },
       {
-        "src": "Memora/Admin/Analytics.png",
-        "w": 1892,
-        "h": 861
+        "src": "Memora/Admin/04-analytics.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Analytics"
+      },
+      {
+        "src": "Memora/Admin/05-products.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Products"
+      },
+      {
+        "src": "Memora/Admin/06-bundles.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Bundles"
       }
     ],
     "groups": [
       {
         "id": "store",
         "title": "Store",
-        "orientation": "portrait",
-        "aspect": 0.524,
+        "orientation": "landscape",
+        "aspect": 1.6,
         "images": [
           {
-            "src": "Memora/Store/Home.jpeg",
-            "w": 739,
-            "h": 1258
+            "src": "Memora/Store/01-home.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Home"
           },
           {
-            "src": "Memora/Store/Products.jpeg",
-            "w": 739,
-            "h": 1444
+            "src": "Memora/Store/02-live-demos.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Live demos"
           },
           {
-            "src": "Memora/Store/Bundles.jpeg",
-            "w": 739,
-            "h": 1411
+            "src": "Memora/Store/03-wedding-tiers.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Wedding tiers"
           },
           {
-            "src": "Memora/Store/Order step 1.jpeg",
-            "w": 739,
-            "h": 1445
+            "src": "Memora/Store/04-occasions.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Occasions"
           },
           {
-            "src": "Memora/Store/Order step 2.jpeg",
-            "w": 739,
-            "h": 1415
+            "src": "Memora/Store/05-bundles.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Bundles"
           },
           {
-            "src": "Memora/Store/Order step 3.jpeg",
-            "w": 739,
-            "h": 1416
+            "src": "Memora/Store/06-price-builder.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Price builder"
           },
           {
-            "src": "Memora/Store/Order step 4.jpeg",
-            "w": 739,
-            "h": 1283
+            "src": "Memora/Store/07-product.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Product"
           },
           {
-            "src": "Memora/Store/Order step 5.jpeg",
-            "w": 739,
-            "h": 1268
+            "src": "Memora/Store/08-order-customise.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Order customise"
           },
           {
-            "src": "Memora/Store/Order final step.jpeg",
-            "w": 739,
-            "h": 1252
+            "src": "Memora/Store/09-checkout.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Checkout"
+          },
+          {
+            "src": "Memora/Store/10-arabic.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Arabic"
+          },
+          {
+            "src": "Memora/Store/11-henna-demo.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Henna demo"
           }
         ]
       },
@@ -148,37 +196,43 @@ window.portfolioProjectAssets = {
         "id": "admin",
         "title": "Admin Dashboard",
         "orientation": "landscape",
-        "aspect": 2.21,
+        "aspect": 1.6,
         "images": [
           {
-            "src": "Memora/Admin/Dashboard.png",
-            "w": 1892,
-            "h": 860
+            "src": "Memora/Admin/01-dashboard.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Dashboard"
           },
           {
-            "src": "Memora/Admin/Products.png",
-            "w": 1902,
-            "h": 852
+            "src": "Memora/Admin/02-orders.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Orders"
           },
           {
-            "src": "Memora/Admin/Bundles.png",
-            "w": 1907,
-            "h": 858
+            "src": "Memora/Admin/03-order-details.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Order details"
           },
           {
-            "src": "Memora/Admin/OrderDetails.png",
-            "w": 1880,
-            "h": 847
+            "src": "Memora/Admin/04-analytics.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Analytics"
           },
           {
-            "src": "Memora/Admin/Orders.png",
-            "w": 1876,
-            "h": 855
+            "src": "Memora/Admin/05-products.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Products"
           },
           {
-            "src": "Memora/Admin/Analytics.png",
-            "w": 1892,
-            "h": 861
+            "src": "Memora/Admin/06-bundles.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Bundles"
           }
         ]
       }
@@ -199,49 +253,58 @@ window.portfolioProjectAssets = {
     },
     "images": [
       {
-        "src": "CRM/Dashboard.png",
-        "w": 1906,
-        "h": 865
+        "src": "CRM/01-dashboard.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Dashboard"
       },
       {
-        "src": "CRM/Calendar.png",
-        "w": 1907,
-        "h": 867
+        "src": "CRM/02-properties.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Properties"
       },
       {
-        "src": "CRM/Clients.png",
-        "w": 1911,
-        "h": 871
+        "src": "CRM/04-deals.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Deals"
       },
       {
-        "src": "CRM/Deals.png",
-        "w": 1907,
-        "h": 861
+        "src": "CRM/05-follow-ups.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Follow ups"
       },
       {
-        "src": "CRM/Follow-Ups.png",
-        "w": 1917,
-        "h": 858
+        "src": "CRM/06-telesales.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Telesales"
       },
       {
-        "src": "CRM/Properties.png",
-        "w": 1911,
-        "h": 862
+        "src": "CRM/07-leads.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Leads"
       },
       {
-        "src": "CRM/Sold.png",
-        "w": 1903,
-        "h": 856
+        "src": "CRM/08-calendar.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Calendar"
       },
       {
-        "src": "CRM/TeleSales.png",
-        "w": 1918,
-        "h": 867
+        "src": "CRM/09-analytics.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Analytics"
       },
       {
-        "src": "CRM/Analytics.png",
-        "w": 1907,
-        "h": 857
+        "src": "CRM/10-attendance.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Attendance"
       }
     ],
     "groups": [
@@ -249,52 +312,61 @@ window.portfolioProjectAssets = {
         "id": "main",
         "title": null,
         "orientation": "landscape",
-        "aspect": 2.215,
+        "aspect": 1.6,
         "images": [
           {
-            "src": "CRM/Dashboard.png",
-            "w": 1906,
-            "h": 865
+            "src": "CRM/01-dashboard.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Dashboard"
           },
           {
-            "src": "CRM/Calendar.png",
-            "w": 1907,
-            "h": 867
+            "src": "CRM/02-properties.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Properties"
           },
           {
-            "src": "CRM/Clients.png",
-            "w": 1911,
-            "h": 871
+            "src": "CRM/04-deals.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Deals"
           },
           {
-            "src": "CRM/Deals.png",
-            "w": 1907,
-            "h": 861
+            "src": "CRM/05-follow-ups.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Follow ups"
           },
           {
-            "src": "CRM/Follow-Ups.png",
-            "w": 1917,
-            "h": 858
+            "src": "CRM/06-telesales.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Telesales"
           },
           {
-            "src": "CRM/Properties.png",
-            "w": 1911,
-            "h": 862
+            "src": "CRM/07-leads.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Leads"
           },
           {
-            "src": "CRM/Sold.png",
-            "w": 1903,
-            "h": 856
+            "src": "CRM/08-calendar.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Calendar"
           },
           {
-            "src": "CRM/TeleSales.png",
-            "w": 1918,
-            "h": 867
+            "src": "CRM/09-analytics.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Analytics"
           },
           {
-            "src": "CRM/Analytics.png",
-            "w": 1907,
-            "h": 857
+            "src": "CRM/10-attendance.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Attendance"
           }
         ]
       }
@@ -315,172 +387,104 @@ window.portfolioProjectAssets = {
     },
     "images": [
       {
-        "src": "Attendance/Home.png",
-        "w": 1890,
-        "h": 862
+        "src": "Attendance/Employee/01-home.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Home"
       },
       {
-        "src": "Attendance/DashBoard.png",
-        "w": 1870,
-        "h": 853
+        "src": "Attendance/Employee/02-permissions.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Permissions"
       },
       {
-        "src": "Attendance/Alerts.png",
-        "w": 1432,
-        "h": 867
+        "src": "Attendance/Employee/03-apply-leave.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Apply leave"
       },
       {
-        "src": "Attendance/Balances.png",
-        "w": 1538,
-        "h": 857
+        "src": "Attendance/Admin/01-dashboard.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Dashboard"
       },
       {
-        "src": "Attendance/ChangeWeekEnd.png",
-        "w": 887,
-        "h": 862
+        "src": "Attendance/Admin/02-leave-requests.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Leave requests"
       },
       {
-        "src": "Attendance/ChoseWeekDay.png",
-        "w": 1887,
-        "h": 828
+        "src": "Attendance/Admin/03-geofence.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Geofence"
       },
       {
-        "src": "Attendance/Days.png",
-        "w": 1885,
-        "h": 593
-      },
-      {
-        "src": "Attendance/Deductions and attendance history.png",
-        "w": 1883,
-        "h": 866
-      },
-      {
-        "src": "Attendance/Employee 2.png",
-        "w": 855,
-        "h": 812
-      },
-      {
-        "src": "Attendance/Employees.png",
-        "w": 1875,
-        "h": 858
-      },
-      {
-        "src": "Attendance/LeavePermission.png",
-        "w": 1887,
-        "h": 863
-      },
-      {
-        "src": "Attendance/Permissions.png",
-        "w": 812,
-        "h": 298
-      },
-      {
-        "src": "Attendance/Requests.png",
-        "w": 1562,
-        "h": 877
-      },
-      {
-        "src": "Attendance/Salary.png",
-        "w": 1868,
-        "h": 855
-      },
-      {
-        "src": "Attendance/Salary&Rules.png",
-        "w": 1890,
-        "h": 860
-      },
-      {
-        "src": "Attendance/Analysis.png",
-        "w": 1886,
-        "h": 867
+        "src": "Attendance/Admin/04-analytics.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Analytics"
       }
     ],
     "groups": [
       {
-        "id": "main",
-        "title": null,
-        "orientation": "landscape",
-        "aspect": 2.185,
+        "id": "employee",
+        "title": "Employee App",
+        "orientation": "portrait",
+        "aspect": 0.462,
         "images": [
           {
-            "src": "Attendance/Home.png",
-            "w": 1890,
-            "h": 862
+            "src": "Attendance/Employee/01-home.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Home"
           },
           {
-            "src": "Attendance/DashBoard.png",
-            "w": 1870,
-            "h": 853
+            "src": "Attendance/Employee/02-permissions.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Permissions"
           },
           {
-            "src": "Attendance/Alerts.png",
-            "w": 1432,
-            "h": 867
+            "src": "Attendance/Employee/03-apply-leave.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Apply leave"
+          }
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "Admin Dashboard",
+        "orientation": "landscape",
+        "aspect": 1.6,
+        "images": [
+          {
+            "src": "Attendance/Admin/01-dashboard.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Dashboard"
           },
           {
-            "src": "Attendance/Balances.png",
-            "w": 1538,
-            "h": 857
+            "src": "Attendance/Admin/02-leave-requests.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Leave requests"
           },
           {
-            "src": "Attendance/ChangeWeekEnd.png",
-            "w": 887,
-            "h": 862
+            "src": "Attendance/Admin/03-geofence.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Geofence"
           },
           {
-            "src": "Attendance/ChoseWeekDay.png",
-            "w": 1887,
-            "h": 828
-          },
-          {
-            "src": "Attendance/Days.png",
-            "w": 1885,
-            "h": 593
-          },
-          {
-            "src": "Attendance/Deductions and attendance history.png",
-            "w": 1883,
-            "h": 866
-          },
-          {
-            "src": "Attendance/Employee 2.png",
-            "w": 855,
-            "h": 812
-          },
-          {
-            "src": "Attendance/Employees.png",
-            "w": 1875,
-            "h": 858
-          },
-          {
-            "src": "Attendance/LeavePermission.png",
-            "w": 1887,
-            "h": 863
-          },
-          {
-            "src": "Attendance/Permissions.png",
-            "w": 812,
-            "h": 298
-          },
-          {
-            "src": "Attendance/Requests.png",
-            "w": 1562,
-            "h": 877
-          },
-          {
-            "src": "Attendance/Salary.png",
-            "w": 1868,
-            "h": 855
-          },
-          {
-            "src": "Attendance/Salary&Rules.png",
-            "w": 1890,
-            "h": 860
-          },
-          {
-            "src": "Attendance/Analysis.png",
-            "w": 1886,
-            "h": 867
+            "src": "Attendance/Admin/04-analytics.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Analytics"
           }
         ]
       }
@@ -501,52 +505,152 @@ window.portfolioProjectAssets = {
     },
     "images": [
       {
-        "src": "RingRoad/HomePage.png",
-        "w": 1898,
-        "h": 851
+        "src": "RingRoad/Mobile/01-properties.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Properties"
       },
       {
-        "src": "RingRoad/Compare.png",
-        "w": 1915,
-        "h": 865
+        "src": "RingRoad/Mobile/02-property.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Property"
       },
       {
-        "src": "RingRoad/PropertyDetails.png",
-        "w": 1908,
-        "h": 831
+        "src": "RingRoad/Mobile/03-contact.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Contact"
       },
       {
-        "src": "RingRoad/Video.png",
-        "w": 1897,
-        "h": 860
+        "src": "RingRoad/Mobile/04-compare.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Compare"
+      },
+      {
+        "src": "RingRoad/Desktop/01-properties.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Properties"
+      },
+      {
+        "src": "RingRoad/Desktop/02-listings.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Listings"
+      },
+      {
+        "src": "RingRoad/Desktop/03-filters.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Filters"
+      },
+      {
+        "src": "RingRoad/Desktop/04-property.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Property"
+      },
+      {
+        "src": "RingRoad/Desktop/05-property-details.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Property details"
+      },
+      {
+        "src": "RingRoad/Desktop/06-compare.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Compare"
+      },
+      {
+        "src": "RingRoad/Desktop/07-favorites.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Favorites"
       }
     ],
     "groups": [
       {
-        "id": "main",
-        "title": null,
-        "orientation": "landscape",
-        "aspect": 2.222,
+        "id": "mobile",
+        "title": "Mobile",
+        "orientation": "portrait",
+        "aspect": 0.462,
         "images": [
           {
-            "src": "RingRoad/HomePage.png",
-            "w": 1898,
-            "h": 851
+            "src": "RingRoad/Mobile/01-properties.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Properties"
           },
           {
-            "src": "RingRoad/Compare.png",
-            "w": 1915,
-            "h": 865
+            "src": "RingRoad/Mobile/02-property.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Property"
           },
           {
-            "src": "RingRoad/PropertyDetails.png",
-            "w": 1908,
-            "h": 831
+            "src": "RingRoad/Mobile/03-contact.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Contact"
           },
           {
-            "src": "RingRoad/Video.png",
-            "w": 1897,
-            "h": 860
+            "src": "RingRoad/Mobile/04-compare.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Compare"
+          }
+        ]
+      },
+      {
+        "id": "desktop",
+        "title": "Desktop",
+        "orientation": "landscape",
+        "aspect": 1.6,
+        "images": [
+          {
+            "src": "RingRoad/Desktop/01-properties.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Properties"
+          },
+          {
+            "src": "RingRoad/Desktop/02-listings.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Listings"
+          },
+          {
+            "src": "RingRoad/Desktop/03-filters.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Filters"
+          },
+          {
+            "src": "RingRoad/Desktop/04-property.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Property"
+          },
+          {
+            "src": "RingRoad/Desktop/05-property-details.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Property details"
+          },
+          {
+            "src": "RingRoad/Desktop/06-compare.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Compare"
+          },
+          {
+            "src": "RingRoad/Desktop/07-favorites.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Favorites"
           }
         ]
       }
@@ -567,49 +671,52 @@ window.portfolioProjectAssets = {
     },
     "images": [
       {
-        "src": "StancePro/Store/Home.png",
-        "w": 1897,
-        "h": 786
+        "src": "StancePro/Store/01-home.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Home"
       },
       {
-        "src": "StancePro/Store/Feutared Products.png",
-        "w": 1896,
-        "h": 861
+        "src": "StancePro/Store/02-featured.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Featured"
       },
       {
-        "src": "StancePro/Store/Categories.png",
-        "w": 1913,
-        "h": 491
+        "src": "StancePro/Store/03-categories.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Categories"
       },
       {
-        "src": "StancePro/Store/Cart.png",
-        "w": 1865,
-        "h": 853
+        "src": "StancePro/Store/04-shop.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Shop"
       },
       {
-        "src": "StancePro/Store/CheckOut.png",
-        "w": 1756,
-        "h": 852
+        "src": "StancePro/Store/05-product.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Product"
       },
       {
-        "src": "StancePro/Store/Payment.png",
-        "w": 1888,
-        "h": 867
+        "src": "StancePro/Store/06-cart.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Cart"
       },
       {
-        "src": "StancePro/Store/OrderConfirmation1.png",
-        "w": 1901,
-        "h": 857
+        "src": "StancePro/Store/07-checkout.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Checkout"
       },
       {
-        "src": "StancePro/Store/OrderConfirmation2.png",
-        "w": 1882,
-        "h": 855
-      },
-      {
-        "src": "StancePro/Store/Footer.png",
-        "w": 1876,
-        "h": 857
+        "src": "StancePro/Store/08-arabic.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Arabic"
       },
       {
         "src": "StancePro/Admin/DashBoard.png",
@@ -637,52 +744,55 @@ window.portfolioProjectAssets = {
         "id": "store",
         "title": "Store",
         "orientation": "landscape",
-        "aspect": 2.201,
+        "aspect": 1.6,
         "images": [
           {
-            "src": "StancePro/Store/Home.png",
-            "w": 1897,
-            "h": 786
+            "src": "StancePro/Store/01-home.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Home"
           },
           {
-            "src": "StancePro/Store/Feutared Products.png",
-            "w": 1896,
-            "h": 861
+            "src": "StancePro/Store/02-featured.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Featured"
           },
           {
-            "src": "StancePro/Store/Categories.png",
-            "w": 1913,
-            "h": 491
+            "src": "StancePro/Store/03-categories.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Categories"
           },
           {
-            "src": "StancePro/Store/Cart.png",
-            "w": 1865,
-            "h": 853
+            "src": "StancePro/Store/04-shop.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Shop"
           },
           {
-            "src": "StancePro/Store/CheckOut.png",
-            "w": 1756,
-            "h": 852
+            "src": "StancePro/Store/05-product.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Product"
           },
           {
-            "src": "StancePro/Store/Payment.png",
-            "w": 1888,
-            "h": 867
+            "src": "StancePro/Store/06-cart.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Cart"
           },
           {
-            "src": "StancePro/Store/OrderConfirmation1.png",
-            "w": 1901,
-            "h": 857
+            "src": "StancePro/Store/07-checkout.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Checkout"
           },
           {
-            "src": "StancePro/Store/OrderConfirmation2.png",
-            "w": 1882,
-            "h": 855
-          },
-          {
-            "src": "StancePro/Store/Footer.png",
-            "w": 1876,
-            "h": 857
+            "src": "StancePro/Store/08-arabic.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Arabic"
           }
         ]
       },
@@ -731,24 +841,40 @@ window.portfolioProjectAssets = {
     },
     "images": [
       {
-        "src": "MoneyTracker/DashBoard.png",
-        "w": 1042,
-        "h": 728
+        "src": "MoneyTracker/01-dashboard.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Dashboard"
       },
       {
-        "src": "MoneyTracker/Budget.png",
-        "w": 845,
-        "h": 747
+        "src": "MoneyTracker/02-transactions.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Transactions"
       },
       {
-        "src": "MoneyTracker/BuyingList.png",
-        "w": 865,
-        "h": 827
+        "src": "MoneyTracker/03-memora-income.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Memora income"
       },
       {
-        "src": "MoneyTracker/Charts.png",
-        "w": 817,
-        "h": 691
+        "src": "MoneyTracker/04-analytics.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Analytics"
+      },
+      {
+        "src": "MoneyTracker/05-budgets.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Budgets"
+      },
+      {
+        "src": "MoneyTracker/06-buying-list.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Buying list"
       }
     ],
     "groups": [
@@ -756,105 +882,167 @@ window.portfolioProjectAssets = {
         "id": "main",
         "title": null,
         "orientation": "landscape",
-        "aspect": 1.157,
+        "aspect": 1.6,
         "images": [
           {
-            "src": "MoneyTracker/DashBoard.png",
-            "w": 1042,
-            "h": 728
+            "src": "MoneyTracker/01-dashboard.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Dashboard"
           },
           {
-            "src": "MoneyTracker/Budget.png",
-            "w": 845,
-            "h": 747
+            "src": "MoneyTracker/02-transactions.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Transactions"
           },
           {
-            "src": "MoneyTracker/BuyingList.png",
-            "w": 865,
-            "h": 827
+            "src": "MoneyTracker/03-memora-income.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Memora income"
           },
           {
-            "src": "MoneyTracker/Charts.png",
-            "w": 817,
-            "h": 691
+            "src": "MoneyTracker/04-analytics.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Analytics"
+          },
+          {
+            "src": "MoneyTracker/05-budgets.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Budgets"
+          },
+          {
+            "src": "MoneyTracker/06-buying-list.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Buying list"
           }
         ]
       }
     ]
   },
-  "to-do": {
+  "campusride": {
     "brand": {
-      "src": "ToDoList/ToDoLogo.svg",
-      "w": 64,
-      "h": 64,
+      "src": "CampusRide/CampusRideLogo.svg",
+      "w": 32,
+      "h": 32,
       "plate": null
     },
     "cover": {
-      "src": "ToDoList/ToDoLogo.svg",
-      "w": 64,
-      "h": 64,
+      "src": "CampusRide/CampusRideLogo.svg",
+      "w": 32,
+      "h": 32,
       "plate": null
     },
     "images": [
       {
-        "src": "ToDoList/Home BrightMode.png",
-        "w": 1913,
-        "h": 870
+        "src": "CampusRide/Mobile/01-home.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Home"
       },
       {
-        "src": "ToDoList/Home DarkMode.png",
-        "w": 1893,
-        "h": 857
+        "src": "CampusRide/Mobile/02-find-ride.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Find ride"
       },
       {
-        "src": "ToDoList/Categories.png",
-        "w": 1875,
-        "h": 870
+        "src": "CampusRide/Mobile/03-ride-details.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Ride details"
+      },
+      {
+        "src": "CampusRide/Mobile/04-offer-ride.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Offer ride"
+      },
+      {
+        "src": "CampusRide/Mobile/05-my-trips.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "My trips"
+      },
+      {
+        "src": "CampusRide/Mobile/06-profile.webp",
+        "w": 780,
+        "h": 1688,
+        "label": "Profile"
+      },
+      {
+        "src": "CampusRide/Desktop/01-find-ride.webp",
+        "w": 1440,
+        "h": 900,
+        "label": "Find ride"
       }
     ],
     "groups": [
       {
-        "id": "main",
-        "title": null,
-        "orientation": "landscape",
-        "aspect": 2.199,
+        "id": "mobile",
+        "title": "Mobile",
+        "orientation": "portrait",
+        "aspect": 0.462,
         "images": [
           {
-            "src": "ToDoList/Home BrightMode.png",
-            "w": 1913,
-            "h": 870
+            "src": "CampusRide/Mobile/01-home.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Home"
           },
           {
-            "src": "ToDoList/Home DarkMode.png",
-            "w": 1893,
-            "h": 857
+            "src": "CampusRide/Mobile/02-find-ride.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Find ride"
           },
           {
-            "src": "ToDoList/Categories.png",
-            "w": 1875,
-            "h": 870
+            "src": "CampusRide/Mobile/03-ride-details.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Ride details"
+          },
+          {
+            "src": "CampusRide/Mobile/04-offer-ride.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Offer ride"
+          },
+          {
+            "src": "CampusRide/Mobile/05-my-trips.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "My trips"
+          },
+          {
+            "src": "CampusRide/Mobile/06-profile.webp",
+            "w": 780,
+            "h": 1688,
+            "label": "Profile"
+          }
+        ]
+      },
+      {
+        "id": "desktop",
+        "title": "Desktop",
+        "orientation": "landscape",
+        "aspect": 1.6,
+        "images": [
+          {
+            "src": "CampusRide/Desktop/01-find-ride.webp",
+            "w": 1440,
+            "h": 900,
+            "label": "Find ride"
           }
         ]
       }
     ]
   },
-  "aion-web": {
-    "brand": {
-      "src": "AION(Wuillt)/aion-logo.png",
-      "w": 4000,
-      "h": 2250,
-      "plate": "#2F2D2E"
-    },
-    "cover": {
-      "src": "AION(Wuillt)/aion-logo.png",
-      "w": 4000,
-      "h": 2250,
-      "plate": "#2F2D2E"
-    },
-    "images": [],
-    "groups": []
-  },
-  "aion-store": {
+  "aion": {
     "brand": {
       "src": "AION(Wuillt)/aion-logo.png",
       "w": 4000,

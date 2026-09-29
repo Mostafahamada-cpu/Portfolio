@@ -42,9 +42,10 @@
 
   const html = (strings, ...values) => strings.reduce((out, part, i) => out + part + (values[i] ?? ''), '');
 
-  /* Screens are described by their role, never by their file name. */
-  const screenAlt = (project, index, total) =>
-    `${project.title} interface screenshot ${index + 1} of ${total}`;
+  /* Screens are described by what they show (their label), falling back to
+     their position when a screenshot has no label. */
+  const screenAlt = (project, image, index, total) =>
+    image.label ? `${project.title} — ${image.label}` : `${project.title} interface screenshot ${index + 1} of ${total}`;
 
   /* ───────────────────────────── slider ───────────────────────────── */
 
@@ -61,10 +62,10 @@
     const slides = images
       .map(
         (image, index) => html`
-          <figure class="slider-slide">
+          <figure class="slider-slide"${image.label ? ` data-label="${esc(image.label)}"` : ''}>
             <img
               src="${src(image.src)}"
-              alt="${esc(screenAlt(project, index, total))}"
+              alt="${esc(screenAlt(project, image, index, total))}"
               ${image.w ? `width="${image.w}" height="${image.h}"` : ''}
               loading="${index === 0 ? 'eager' : 'lazy'}"
               decoding="async"
@@ -101,6 +102,7 @@
           ? html`
               <div class="slider-foot">
                 ${useDots ? `<div class="slider-dots">${dots}</div>` : ''}
+                ${images[0].label ? `<p class="slider-caption" data-caption>${esc(images[0].label)}</p>` : ''}
                 <p class="slider-count" aria-live="polite"><span data-index>1</span> / ${total}</p>
               </div>`
           : ''}
@@ -114,6 +116,7 @@
 
     const dots = Array.from(root.querySelectorAll('.slider-dot'));
     const counter = root.querySelector('[data-index]');
+    const caption = root.querySelector('[data-caption]');
     const prev = root.querySelector('[data-prev]');
     const next = root.querySelector('[data-next]');
     let ticking = false;
@@ -125,6 +128,7 @@
       const index = clamp(indexOf());
       dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
       if (counter) counter.textContent = String(index + 1);
+      if (caption) caption.textContent = slides[index].dataset.label || '';
       if (prev) prev.disabled = index === 0;
       if (next) next.disabled = index === slides.length - 1;
     }
@@ -231,10 +235,19 @@
       </div>`;
   }
 
+  /* 'In Development' -> 'in-development' */
+  const statusTone = status => String(status).toLowerCase().replace(/[^a-z]+/g, '-');
+
+  const StatusBadge = project =>
+    project.status
+      ? `<span class="project-status status-${esc(statusTone(project.status))}">${esc(project.status)}</span>`
+      : '';
+
   function ProjectCard(project, index) {
     const hasCase = Boolean(project.caseStudy);
     const tech = (project.tech || []).slice(0, 5);
     const shots = project.images?.length || 0;
+    const focus = project.focus || [];
 
     return html`
       <article class="project${project.emphasis ? ' is-lead' : ''}${hasCase ? '' : ' is-upcoming'}" style="--project-accent:${project.accent || 'rgba(20,184,166,.1)'}">
@@ -243,15 +256,23 @@
           <div class="project-meta">
             <span class="project-num">${num(index)}</span>
             ${project.label ? `<span class="project-label tone-${esc(project.labelTone || 'default')}">${esc(project.label)}</span>` : ''}
+            ${StatusBadge(project)}
             ${shots > 1 ? `<span class="project-shots">${shots} screens</span>` : ''}
           </div>
           <h3 class="project-title">${esc(project.title)}</h3>
           ${project.tagline ? `<p class="project-tagline">${esc(project.tagline)}</p>` : ''}
           <p class="project-intro">${esc(project.intro)}</p>
+          ${focus.length
+            ? html`
+                <div class="project-focus">
+                  <p class="project-focus-title">Currently building</p>
+                  <ul>${focus.map(item => `<li>${esc(item)}</li>`).join('')}</ul>
+                </div>`
+            : ''}
           ${tech.length ? `<ul class="project-tech">${tech.map(item => `<li>${esc(item)}</li>`).join('')}</ul>` : ''}
           ${hasCase
-            ? `<button class="project-action" type="button" data-open="${esc(project.id)}">View Case Study <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>`
-            : `<span class="project-soon">${esc(project.status || 'Coming Soon')}</span>`}
+            ? `<button class="project-action" type="button" data-open="${esc(project.id)}">View Case Study <span class="sr-only">: ${esc(project.title)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>`
+            : `<span class="project-soon">${esc(project.note || 'Coming Soon')}</span>`}
         </div>
       </article>`;
   }
@@ -337,6 +358,7 @@
       <section class="cs-sec cs-gallery">
         ${sectionTitle(block.title)}
         ${Slider(project, block.images, `${project.id}-${index}`, block.orientation, block.aspect)}
+        ${block.note ? `<p class="cs-gallery-note">${esc(block.note)}</p>` : ''}
       </section>`,
 
     part: block => html`
@@ -397,6 +419,7 @@
           <div class="cs-head-meta">
             <span class="project-num">${num(index)}</span>
             ${project.label ? `<span class="project-label tone-${esc(project.labelTone || 'default')}">${esc(project.label)}</span>` : ''}
+            ${StatusBadge(project)}
           </div>
           <h1 class="cs-title">${esc(project.title)}</h1>
           ${project.tagline ? `<p class="cs-tagline">${esc(project.tagline)}</p>` : ''}

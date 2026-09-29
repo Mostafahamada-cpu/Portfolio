@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mostafa Hamada — Portfolio</title>
+<title>Mostafa Hamada — AI Student, Full-Stack Developer &amp; Founder of Memora</title>
+<meta name="description" content="Mostafa Hamada: AI student at MUST, full-stack web developer, and founder of Memora. Real products and business systems: a real-estate CRM and client portal, a workforce and payroll platform, e-commerce stores, and a finance app.">
+<meta name="author" content="Mostafa Hamada">
+<meta name="theme-color" content="#0B0B0F">
+<link rel="canonical" href="https://mostafahamadaportfolio-six.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mostafahamadaportfolio-six.vercel.app/">
+<meta property="og:title" content="Mostafa Hamada — AI Student, Full-Stack Developer &amp; Founder">
+<meta property="og:description" content="Real products and business systems: Memora, RingRoad CRM, a workforce and payroll platform, e-commerce stores and more, with case studies.">
+<meta property="og:image" content="https://mostafahamadaportfolio-six.vercel.app/profile-photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0B0F'/%3E%3Ctext x='14' y='45' font-family='Segoe UI,Arial,sans-serif' font-size='36' font-weight='700' fill='%23FFFFFF'%3EM%3C/text%3E%3Ccircle cx='52' cy='42' r='4.5' fill='%2314B8A6'/%3E%3C/svg%3E">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -45,6 +56,8 @@ button{font-family:inherit}
 .about-name{font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:4px}
 .about-role{font-size:17px;color:var(--accent);font-weight:600;margin-bottom:20px}
 .about-bio{font-size:16px;color:var(--text2);line-height:1.75;margin-bottom:28px}
+.about-bio:has(+ .about-bio){margin-bottom:14px}
+.about-bio strong{color:var(--text);font-weight:600}
 .about-info-row{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:32px}
 .about-info{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
 .about-info svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2;flex-shrink:0}
@@ -76,8 +89,8 @@ button{font-family:inherit}
 .projects-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,4vw,52px)}
 .project{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(18px,2.4vw,28px);border:1px solid var(--border);border-radius:calc(var(--r) + 4px);background:linear-gradient(150deg,var(--project-accent,transparent) 0%,transparent 46%),var(--card);transition:border-color .35s var(--ease),transform .4s var(--ease),box-shadow .4s var(--ease)}
 .project:hover{transform:translateY(-3px);border-color:var(--border-h);box-shadow:0 22px 60px rgba(0,0,0,.3)}
-.project:nth-of-type(even):not(.is-upcoming){grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
-.project:nth-of-type(even):not(.is-upcoming) .project-media{order:2}
+.project:nth-of-type(even){grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+.project:nth-of-type(even) .project-media{order:2}
 .project.is-lead{padding:clamp(22px,3vw,38px);grid-template-columns:minmax(0,1.12fr) minmax(0,1fr)}
 .project.will-reveal{opacity:0;transform:translateY(26px)}
 .project.will-reveal.is-visible{opacity:1;transform:translateY(0);transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -113,15 +126,30 @@ button{font-family:inherit}
 .project-action:hover{background:var(--accent-h);box-shadow:0 6px 22px rgba(20,184,166,.28)}
 .project-action svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform .25s var(--ease)}
 .project-action:hover svg{transform:translateX(4px)}
-.project-soon{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);padding:11px 20px;border-radius:50px}
-.project-soon::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--text3)}
+.project-soon{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);border:1px solid var(--border);padding:11px 20px;border-radius:50px}
+.project-soon::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--status-soon);animation:status-pulse 2.4s ease-in-out infinite}
 
-/* Upcoming pair */
-.project.is-upcoming{grid-column:span 1;grid-template-columns:1fr;gap:24px;align-items:stretch}
+/* Status */
+:root{--status-live:#34D399;--status-prod:#14B8A6;--status-dev:#FBBF24;--status-soon:#A5B4FC}
+.project-status{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap;color:var(--tone);border:1px solid color-mix(in srgb,var(--tone) 36%,transparent);background:color-mix(in srgb,var(--tone) 11%,transparent)}
+.project-status::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.project-status.status-live{--tone:var(--status-live)}
+.project-status.status-in-production{--tone:var(--status-prod)}
+.project-status.status-in-development{--tone:var(--status-dev)}
+.project-status.status-coming-soon{--tone:var(--status-soon)}
+.project-status.status-live::before,.project-status.status-coming-soon::before{animation:status-pulse 2.4s ease-in-out infinite}
+@keyframes status-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.project-status::before,.project-soon::before{animation:none}}
+
+/* Upcoming — no case study yet, so the card lists what is being built */
 .project.is-upcoming:hover{transform:none;box-shadow:none}
-.project.is-upcoming .project-cover:not(.is-portrait){aspect-ratio:16/9}
-.project.is-upcoming .project-title{font-size:clamp(22px,2.2vw,27px)}
-.project.is-upcoming .project-intro{font-size:14px;margin-top:12px}
+.project-focus{margin-top:20px;width:100%;max-width:52ch;padding:16px 18px;border:1px solid var(--border);border-radius:var(--rs);background:rgba(255,255,255,.015)}
+.project-focus-title{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.project-focus ul{list-style:none;display:grid;gap:8px}
+.project-focus li{position:relative;padding-left:18px;font-size:14px;line-height:1.55;color:var(--text2)}
+.project-focus li::before{content:'';position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:2px;border:1.5px solid var(--status-soon)}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ─── REUSABLE IMAGE SLIDER ─── */
 .slider{position:relative;width:100%}
@@ -142,6 +170,8 @@ button{font-family:inherit}
 .slider-dot{width:7px;height:7px;border:none;border-radius:999px;background:var(--border);cursor:pointer;padding:0;transition:width .25s var(--ease),background .25s var(--ease)}
 .slider-dot.is-active{width:24px;background:var(--accent)}
 .slider-count{margin-left:auto;font-size:12px;font-weight:600;color:var(--text3);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.slider-caption{flex:1;min-width:0;font-size:12.5px;font-weight:600;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-gallery-note{margin-top:10px;font-size:12.5px;line-height:1.6;color:var(--text3)}
 .slider.is-single .slider-nav,.slider.is-single .slider-foot{display:none}
 .slider.is-portrait .slider-stage{max-width:min(100%,460px);margin:0 auto}
 .slider.is-portrait .slider-foot{max-width:min(100%,460px);margin:0 auto}
@@ -155,7 +185,7 @@ body.is-locked{overflow:hidden}
 .featured-overlay.is-closing{transform:translateY(2.5%);opacity:0}
 .featured-overlay .cs-inner{max-width:1000px}
 .cs-head{padding-bottom:8px}
-.cs-head-meta{display:flex;align-items:center;gap:12px;margin-bottom:18px;min-height:26px}
+.cs-head-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:18px;min-height:26px}
 .cs-tagline{font-size:12px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);margin:10px 0 0}
 .cs-part{margin:clamp(44px,6vw,72px) 0 0;padding-top:clamp(26px,3vw,34px);border-top:1px solid var(--border)}
 .cs-part-title{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.6px}
@@ -263,13 +293,13 @@ body.is-locked{overflow:hidden}
 }
 @media(max-width:960px){
   .projects-list{grid-template-columns:1fr;gap:26px}
-  .project,.project.is-lead,.project.is-upcoming,.project:nth-of-type(even):not(.is-upcoming){grid-column:span 1;grid-template-columns:1fr;gap:22px;padding:16px}
-  .project:nth-of-type(even):not(.is-upcoming) .project-media{order:0}
+  .project,.project.is-lead,.project:nth-of-type(even){grid-column:span 1;grid-template-columns:1fr;gap:22px;padding:16px}
+  .project:nth-of-type(even) .project-media{order:0}
   .project-media{order:0}
   .project-copy{order:1}
-  .project-intro{max-width:none}
+  .project-intro,.project-focus{max-width:none}
   .slider-slide{max-height:min(56vh,440px)}
-  .project-cover:not(.is-portrait),.project.is-lead .project-cover:not(.is-portrait),.project.is-upcoming .project-cover:not(.is-portrait){aspect-ratio:16/10}
+  .project-cover:not(.is-portrait),.project.is-lead .project-cover:not(.is-portrait){aspect-ratio:16/10}
 }
 @media(max-width:600px){
   .project-title,.project.is-lead .project-title{font-size:clamp(24px,7vw,30px)}
@@ -299,13 +329,14 @@ body.is-locked{overflow:hidden}
   <div class="about-grid">
     <div class="about-photo-wrap">
       <img src="profile-photo.jpg" alt="Mostafa Hamada" class="about-photo">
-      <div class="about-photo-glow"></div>
+      <div class="about-photo-glow" aria-hidden="true"></div>
     </div>
     <div>
       <div class="section-label">About Me</div>
       <h1 class="about-name">Mostafa Hamada</h1>
-      <p class="about-role">Developer &middot; CEO &amp; Founder of Memora</p>
-      <p class="about-bio">I'm a 3rd-year Artificial Intelligence student at Misr University for Science and Technology (MUST). I build web applications, dashboards, online stores, and digital products. I'm also the founder of Memora, a digital wedding invitation platform where I personally design and create the invitation products.</p>
+      <p class="about-role">AI Student &middot; Full-Stack Developer &middot; Founder of Memora</p>
+      <p class="about-bio">I'm a 3rd-year Artificial Intelligence student at Misr University for Science and Technology (MUST) and a full-stack developer. I build software that businesses run on day to day: a real-estate CRM and its public property portal, an attendance and payroll platform, and e-commerce stores with their own admin dashboards. The business rules live in the database, not just the interface.</p>
+      <p class="about-bio">I'm also the founder of <strong>Memora</strong>, a digital invitation business. I design the invitations, and I built and run the platform that sells them.</p>
 
       <div class="about-info-row">
         <div class="about-info">
@@ -337,24 +368,31 @@ body.is-locked{overflow:hidden}
         <h3>Technical Skills</h3>
         <div class="skills-categories">
           <div class="skill-cat">
-            <div class="skill-cat-title">Development</div>
+            <div class="skill-cat-title">Frontend</div>
             <div class="skill-tags">
               <span class="skill-tag">HTML</span>
               <span class="skill-tag">CSS</span>
               <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Tailwind CSS</span>
               <span class="skill-tag">Responsive Design</span>
-              <span class="skill-tag">Frontend</span>
-              <span class="skill-tag">Full-Stack</span>
+              <span class="skill-tag">EN / AR (RTL)</span>
             </div>
           </div>
           <div class="skill-cat">
             <div class="skill-cat-title">Backend / Database</div>
             <div class="skill-tags">
-              <span class="skill-tag">Firebase</span>
               <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Row Level Security</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Firestore</span>
+              <span class="skill-tag">Prisma</span>
               <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">Serverless Functions</span>
               <span class="skill-tag">Auth</span>
-              <span class="skill-tag">Database Integration</span>
             </div>
           </div>
           <div class="skill-cat">
@@ -363,6 +401,9 @@ body.is-locked{overflow:hidden}
               <span class="skill-tag">Git</span>
               <span class="skill-tag">GitHub</span>
               <span class="skill-tag">Vercel</span>
+              <span class="skill-tag">Vite</span>
+              <span class="skill-tag">Vitest</span>
+              <span class="skill-tag">Cloudinary</span>
               <span class="skill-tag">Shopify</span>
             </div>
           </div>
@@ -372,6 +413,7 @@ body.is-locked{overflow:hidden}
               <span class="skill-tag">C++</span>
               <span class="skill-tag">Python</span>
               <span class="skill-tag">SQL</span>
+              <span class="skill-tag">TypeScript</span>
             </div>
           </div>
           <div class="skill-cat">
@@ -380,7 +422,8 @@ body.is-locked{overflow:hidden}
               <span class="skill-tag">AI</span>
               <span class="skill-tag">Data Analysis</span>
               <span class="skill-tag">UI/UX</span>
-              <span class="skill-tag">API Integration</span>
+              <span class="skill-tag">API &amp; Webhook Integration</span>
+              <span class="skill-tag">Product Development</span>
             </div>
           </div>
         </div>
@@ -394,7 +437,7 @@ body.is-locked{overflow:hidden}
   <div class="section-header">
     <div class="section-label">Selected Work</div>
     <h2 class="section-title">Projects &amp; Products</h2>
-    <p class="section-subtitle">Business platforms, client systems, and personal tools — each one built, shipped, and documented as a case study.</p>
+    <p class="section-subtitle">My own business, systems running at a real estate company, client stores, and tools I use myself. Each one comes with a case study of what I built and how.</p>
   </div>
   <div class="projects-list" id="featured-projects-grid"></div>
 </section>
@@ -412,8 +455,8 @@ body.is-locked{overflow:hidden}
 
 <!-- ══════ LIGHTBOX ══════ -->
 <div class="lb" id="lb" onclick="closeLB()">
-  <button class="lb-x" onclick="closeLB()">&times;</button>
-  <img src="" alt="Full view" id="lb-img">
+  <button class="lb-x" type="button" onclick="closeLB()" aria-label="Close full-size image">&times;</button>
+  <img alt="" id="lb-img">
 </div>
 
 <!-- ══════ FOOTER ══════ -->

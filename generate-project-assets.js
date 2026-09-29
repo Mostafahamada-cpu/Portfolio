@@ -27,9 +27,8 @@ const PROJECT_FOLDERS = {
   clientview: 'RingRoad',
   stancepro: 'StancePro',
   'money-tracker': 'MoneyTracker',
-  'to-do': 'ToDoList',
-  'aion-web': 'AION(Wuillt)',
-  'aion-store': 'AION(Wuillt)'
+  campusride: 'CampusRide',
+  aion: 'AION(Wuillt)'
 };
 
 const IMAGE_PATTERN = /\.(png|jpe?g|webp|gif|svg|avif)$/i;
@@ -61,14 +60,20 @@ const GROUP_LABELS = {
   website: 'Website',
   web: 'Website',
   app: 'Application',
-  mobile: 'Mobile'
+  mobile: 'Mobile',
+  employee: 'Employee App',
+  desktop: 'Desktop'
 };
 
 /* Lower weight renders first. */
 const GROUP_WEIGHTS = [
-  [/store|shop|customer|website|web/i, 0],
+  [/store|shop|customer|website|web|employee|mobile/i, 0],
   [/admin|dashboard|back\s*office/i, 2]
 ];
+
+/* "01-live-demos.webp" → order 1. A numeric prefix is an explicit order and
+   wins over the name-based weights below. */
+const ORDER_PREFIX = /^(\d+)[-_ .]+/;
 
 const IMAGE_WEIGHTS = [
   [/^(home|homepage|landing|index|welcome)/i, 0],
@@ -131,15 +136,33 @@ function measure(filePath) {
     if (buffer.slice(0, 3).toString('ascii') === 'GIF') {
       return { w: buffer.readUInt16LE(6), h: buffer.readUInt16LE(8) };
     }
+
+    if (buffer.slice(0, 4).toString('ascii') === 'RIFF' && buffer.slice(8, 12).toString('ascii') === 'WEBP') {
+      const chunk = buffer.slice(12, 16).toString('ascii');
+      if (chunk === 'VP8X') return { w: buffer.readUIntLE(24, 3) + 1, h: buffer.readUIntLE(27, 3) + 1 };
+      if (chunk === 'VP8 ') return { w: buffer.readUInt16LE(26) & 0x3fff, h: buffer.readUInt16LE(28) & 0x3fff };
+      if (chunk === 'VP8L') {
+        const bits = buffer.readUInt32LE(21);
+        return { w: (bits & 0x3fff) + 1, h: ((bits >> 14) & 0x3fff) + 1 };
+      }
+    }
   } catch (error) {
     /* Unreadable or unknown format — the page falls back to fluid sizing. */
   }
   return null;
 }
 
+/* "03-order-customise" → "Order customise". Used for alt text and the slider
+   caption, so screenshot files are named for what they show. */
+function labelOf(filePath) {
+  const name = baseName(filePath).replace(ORDER_PREFIX, '').replace(/[-_]+/g, ' ').trim();
+  return name ? name[0].toUpperCase() + name.slice(1) : null;
+}
+
 function describe(filePath) {
   const size = measure(filePath);
-  return size ? { src: filePath, w: size.w, h: size.h } : { src: filePath };
+  const label = ORDER_PREFIX.test(baseName(filePath)) ? labelOf(filePath) : null;
+  return { src: filePath, ...(size ? { w: size.w, h: size.h } : {}), ...(label ? { label } : {}) };
 }
 
 /* 'portrait' when every screen is taller than it is wide — those galleries are
@@ -172,6 +195,9 @@ function sortImages(files) {
   return files.slice().sort((a, b) => {
     const nameA = baseName(a);
     const nameB = baseName(b);
+    const orderA = ORDER_PREFIX.test(nameA);
+    const orderB = ORDER_PREFIX.test(nameB);
+    if (orderA || orderB) return orderA && orderB ? collator.compare(nameA, nameB) : orderA ? -1 : 1;
     const delta = weightFor(nameA, IMAGE_WEIGHTS, 3) - weightFor(nameB, IMAGE_WEIGHTS, 3);
     return delta !== 0 ? delta : collator.compare(nameA, nameB);
   });
